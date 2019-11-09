@@ -2,12 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MyNoSqlClient" Version="1.0.10" />
-      <PackageReference Include="SimpleTrading.Core" Version="1.0.1" />
+      <PackageReference Include="MyNoSqlClient" Version="1.0.12" />
+      <PackageReference Include="SimpleTrading.Core" Version="1.0.2" />
     </ItemGroup>
 
 </Project>
