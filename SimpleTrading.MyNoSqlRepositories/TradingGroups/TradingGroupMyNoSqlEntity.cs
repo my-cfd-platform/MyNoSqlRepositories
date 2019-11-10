@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using MyNoSqlClient;
@@ -10,7 +9,6 @@ namespace SimpleTrading.MyNoSqlRepositories.TradingGroups
     public class InstrumentGroupInfoMyNoSqlEntity : IInstrumentGroupInfo
     {
         public string Id { get; set; }
-        public int LotSize { get; set; }
         public double MinOperationVolume { get; set; }
         public double MaxOperationVolume { get; set; }
         public double MaxPositionVolume { get; set; }
@@ -24,7 +22,6 @@ namespace SimpleTrading.MyNoSqlRepositories.TradingGroups
             return new InstrumentGroupInfoMyNoSqlEntity
             {
                 Id = src.Id,
-                LotSize = src.LotSize,
                 CommissionClose = src.CommissionClose,
                 CommissionOpen = src.CommissionOpen,
                 SwapLong = src.SwapLong,
