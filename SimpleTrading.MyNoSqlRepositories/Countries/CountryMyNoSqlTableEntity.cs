@@ -7,7 +7,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
     {
         public static string GeneratePartitionKey()
         {
-            return "country";
+            return "co";
         }
 
         public static string GenerateRowKey(string asset)
