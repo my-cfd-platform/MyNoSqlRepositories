@@ -1,11 +1,11 @@
 using MyNoSqlClient;
 using MyNoSqlClient.ReadRepository;
+using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.Instruments;
 using SimpleTrading.MyNoSqlRepositories.TradingGroups;
 
 namespace SimpleTrading.MyNoSqlRepositories
 {
-
     public static class MyNoSqlServerFactory
     {
         public static BidAskMyNoSqlCache CreateBidAskMyNoSqlCache(this IMyNoSqlConnection connection)
@@ -40,6 +40,17 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(connection, TradingGroupsTable));
         }
 
+        private const string CountriesTable = "countries";
+
+        public static CountryMyNoSqlReader CreateCountryMyNoSqlReader(this IMyNoSqlConnection connection)
+        {
+            return new CountryMyNoSqlReader(connection.ToMyNoSqlReadRepository<CountryMyNoSqlTableEntity>(CountriesTable));
+        }
+
+        public static CountryMyNoSqlRepository CreateCountryMyNoSqlRepository(this IMyNoSqlConnection connection)
+        {
+            return new CountryMyNoSqlRepository(new MyNoSqlServerClient<CountryMyNoSqlTableEntity>(connection, CountriesTable));
+        }
     }
     
     public static class MyNoSqlServerUtils
