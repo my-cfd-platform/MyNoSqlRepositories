@@ -18,4 +18,4 @@ publish-nuget:
     - dotnet nuget push ./out-nuget/$projectfile.$ver.nupkg --api-key ${NUGET_PUBLISH_KEY} --source https://api.nuget.org/v3/index.json
   only:
     - master    
-  when: manual
+#  when: manual
