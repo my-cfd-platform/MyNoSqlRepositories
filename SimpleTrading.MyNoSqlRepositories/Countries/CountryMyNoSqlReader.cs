@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MyNoSqlClient.ReadRepository;
+using SimpleTrading.Common;
 using SimpleTrading.Common.Abstraction.Countries;
 
 namespace SimpleTrading.MyNoSqlRepositories.Countries
@@ -13,9 +14,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
             _readRepository = readRepository;
         }
 
-        public IReadOnlyList<ICountry> Get()
+        public IReadOnlyList<ICountry> Get(Languages lang)
         {
-            var partitionKey = CountryMyNoSqlTableEntity.GeneratePartitionKey();
+            var partitionKey = CountryMyNoSqlTableEntity.GeneratePartitionKey(lang);
 
             return _readRepository.Get(partitionKey);
         }

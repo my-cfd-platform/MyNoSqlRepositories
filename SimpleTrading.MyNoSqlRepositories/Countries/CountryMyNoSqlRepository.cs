@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlClient;
+using SimpleTrading.Common;
 using SimpleTrading.Common.Abstraction.Countries;
 
 namespace SimpleTrading.MyNoSqlRepositories.Countries
@@ -14,15 +15,15 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
             _table = table;
         }
 
-        public async Task<IEnumerable<ICountry>> GetAllAsync()
+        public async Task<IEnumerable<ICountry>> GetAllAsync(Languages lang)
         {
-            var pk = CountryMyNoSqlTableEntity.GeneratePartitionKey();
+            var pk = CountryMyNoSqlTableEntity.GeneratePartitionKey(lang);
             return await _table.GetAsync(pk);
         }
 
-        public async Task UpdateAsync(ICountry country)
+        public async Task UpdateAsync(ICountry country, Languages lang)
         {
-            var entity = CountryMyNoSqlTableEntity.Create(country);
+            var entity = CountryMyNoSqlTableEntity.Create(country, lang);
             await _table.InsertOrReplaceAsync(entity);
         }
     }
