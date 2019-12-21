@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MyNoSqlClient;
 using MyNoSqlClient.ReadRepository;
-using SimpleTrading.Core.BidsAsks;
+using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories
 {

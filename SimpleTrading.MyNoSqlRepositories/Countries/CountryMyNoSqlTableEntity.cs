@@ -1,6 +1,6 @@
 using MyNoSqlClient;
-using SimpleTrading.Common;
-using SimpleTrading.Common.Abstraction.Countries;
+using SimpleTrading.Abstraction;
+using SimpleTrading.Abstraction.Common.Countries;
 
 namespace SimpleTrading.MyNoSqlRepositories.Countries
 {
