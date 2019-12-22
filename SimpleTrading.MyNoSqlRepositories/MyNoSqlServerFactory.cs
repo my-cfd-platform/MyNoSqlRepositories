@@ -2,6 +2,7 @@ using MyNoSqlClient;
 using MyNoSqlClient.ReadRepository;
 using MyNoSqlClient.SignalR;
 using MyNoSqlClient.Tcp;
+using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
@@ -10,6 +11,7 @@ namespace SimpleTrading.MyNoSqlRepositories
 {
     public static class MyNoSqlServerFactory
     {
+        
         public static BidAskMyNoSqlCache CreateBidAskMyNoSqlCache(this MyNoSqlTcpClient connection)
         {
             return new BidAskMyNoSqlCache(connection.ToMyNoSqlReadRepository<BidAskMyNoSqlTableEntity>("quoteprofile"));
@@ -60,6 +62,21 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static TradingInstrumentsMyNoSqlRepository CreateTradingInstrumentsMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
         {
             return new TradingInstrumentsMyNoSqlRepository(new MyNoSqlServerClient<TradingInstrumentMyNoSqlEntity>(connection, InstrumentsTable));
+        }
+
+
+        private const string PriceChangesTable = "pricechanges";
+
+        public static PriceChangeWriteRepository CreatePriceChangeWriteRepository(
+            this MyNoSqlSignalRConnection connection)
+        {
+            return new PriceChangeWriteRepository(new MyNoSqlServerClient<PriceChangeMyNoSqlEntity>(connection, PriceChangesTable));
+        }
+
+        public static PriceChangeReader CreatePriceChangeReader(this MyNoSqlTcpClient client)
+        {
+            return new PriceChangeReader(
+                new MyNoSqlReadRepository<PriceChangeMyNoSqlEntity>(client, PriceChangesTable));
         }
 
     }
