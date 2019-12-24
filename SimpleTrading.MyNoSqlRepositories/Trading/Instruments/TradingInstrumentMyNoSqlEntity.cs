@@ -23,7 +23,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public int Digits { get; set; }
         public string Base { get; set; }
         public string Quote { get; set; }
-        public string TickSize { get; set; }
+        public double TickSize { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }

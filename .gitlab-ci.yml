@@ -7,6 +7,7 @@ stages:
   - publish-nuget
 
 publish-nuget:
+  tags: [monfex]
   stage: publish-nuget
   script:        
     - cd ${LIB_FOLDER}  
