@@ -23,6 +23,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public int Digits { get; set; }
         public string Base { get; set; }
         public string Quote { get; set; }
+        public string TickSize { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
@@ -38,6 +39,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 Digits = src.Digits,
                 Base = src.Base,
                 Quote = src.Quote,
+                TickSize = src.TickSize,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()
