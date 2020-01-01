@@ -31,25 +31,30 @@ namespace SimpleTrading.MyNoSqlRepositories
         
         private const string TradingGroupsTableName = "tradinggroups";
 
-        public static TradingGroupsMyNoSqlReader CreateTradingGroupsMyNoSqlReader(this MyNoSqlTcpClient connection)
+        private static string IsLivePrefix(bool isLive)
         {
-            return new TradingGroupsMyNoSqlReader(new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection, TradingGroupsTableName));
+            return isLive ? "live-" : "demo-";
+        }
+
+        public static TradingGroupsMyNoSqlReader CreateTradingGroupsMyNoSqlReader(this MyNoSqlTcpClient connection, bool isLive)
+        {
+            return new TradingGroupsMyNoSqlReader(new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingGroupsTableName));
         }
         
-        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMyNoSqlRepository(this MyNoSqlSignalRConnection connection, bool isLive)
         {
-            return new TradingGroupsMyNoSqlRepository(new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(connection, TradingGroupsTableName));
+            return new TradingGroupsMyNoSqlRepository(new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingGroupsTableName));
         }
         
         private const string TradingProfilesTableName = "tradingprofiles";
-        public static TradingProfileMyNoSqlReader CreateTradingProfileMyNoSqlReader(this MyNoSqlTcpClient connection)
+        public static TradingProfileMyNoSqlReader CreateTradingProfileMyNoSqlReader(this MyNoSqlTcpClient connection, bool isLive)
         {
-            return new TradingProfileMyNoSqlReader(new MyNoSqlReadRepository<TradingProfileMyNoSqlEntity>(connection, TradingProfilesTableName));
+            return new TradingProfileMyNoSqlReader(new MyNoSqlReadRepository<TradingProfileMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingProfilesTableName));
         }
         
-        public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(this MyNoSqlSignalRConnection connection, bool isLive)
         {
-            return new TradingProfilesMyNoSqlRepository(new MyNoSqlServerClient<TradingProfileMyNoSqlEntity>(connection, TradingProfilesTableName));
+            return new TradingProfilesMyNoSqlRepository(new MyNoSqlServerClient<TradingProfileMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingProfilesTableName));
         }
         
         private const string InstrumentsTable = "instruments";
