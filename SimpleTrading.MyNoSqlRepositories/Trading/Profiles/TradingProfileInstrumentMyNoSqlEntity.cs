@@ -11,8 +11,6 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
         public double MinOperationVolume { get; set; }
         public double MaxOperationVolume { get; set; }
         public double MaxPositionVolume { get; set; }
-        public double SwapLong { get; set; }
-        public double SwapShort { get; set; }
         public int OpenPositionMinDelayMs { get; set; }
         public int OpenPositionMaxDelayMs { get; set; }
         public bool TpSlippage { get; set; }
@@ -25,8 +23,6 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
             return new TradingProfileInstrumentMyNoSqlEntity
             {
                 Id = src.Id,
-                SwapLong = src.SwapLong,
-                SwapShort = src.SwapShort,
                 MaxOperationVolume = src.MaxOperationVolume,
                 MaxPositionVolume = src.MaxPositionVolume,
                 MinOperationVolume = src.MinOperationVolume,

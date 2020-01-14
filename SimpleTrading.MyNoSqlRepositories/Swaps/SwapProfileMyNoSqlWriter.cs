@@ -32,5 +32,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
             var entity = SwapProfileMyNoSqlEntity.Create(swapProfile);
             return new ValueTask(_myNoSqlTable.InsertOrReplaceAsync(entity));
         }
+
+        public ValueTask DeleteAsync(string id, string instrumentId)
+        {
+            var partitionKey = SwapProfileMyNoSqlEntity.GeneratePartitionKey(id);
+            var rowKey = SwapProfileMyNoSqlEntity.GenerateRowKey(instrumentId);
+            return new ValueTask(_myNoSqlTable.DeleteAsync(partitionKey, rowKey));
+        }
     }
 }
