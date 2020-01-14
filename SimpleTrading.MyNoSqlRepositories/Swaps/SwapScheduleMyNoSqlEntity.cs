@@ -1,0 +1,38 @@
+using System;
+using MyNoSqlClient;
+using SimpleTrading.Abstraction.Trading.Swaps;
+
+namespace SimpleTrading.MyNoSqlRepositories.Swaps
+{
+    public class SwapScheduleMyNoSqlEntity : MyNoSqlTableEntity, ISwapSchedule
+    {
+
+        public static string GeneratePartitionKey(string id)
+        {
+            return id;
+        }
+
+        public static string GenerateRowKey(DayOfWeek dayOfWeek, string time)
+        {
+            return SwapScheduleMappers.SwapMomentToString(dayOfWeek, time);
+        }
+        
+        
+        public string Id => PartitionKey;
+        public DayOfWeek DayOfWeek => RowKey.GetDayOfWeekFromRowKey();
+        public string Time { get; set; }
+        public int Amount { get; set; }
+
+        public static SwapScheduleMyNoSqlEntity Create(ISwapSchedule src)
+        {
+            return new SwapScheduleMyNoSqlEntity
+            {
+                PartitionKey = GeneratePartitionKey(src.Id),
+                RowKey = GenerateRowKey(src.DayOfWeek, src.Time),
+                Amount = src.Amount,
+                Time = src.Time
+            };
+        }
+        
+    }
+}

@@ -4,6 +4,7 @@ using MyNoSqlClient.SignalR;
 using MyNoSqlClient.Tcp;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
+using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
 
@@ -82,6 +83,22 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new PriceChangeReader(
                 new MyNoSqlReadRepository<PriceChangeMyNoSqlEntity>(client, PriceChangesTable));
+        }
+        
+        private const string SwapSchedule = "swap-schedule";
+        
+        
+        public static SwapScheduleMyNoSqlRepository CreateSwapScheduleMyNoSqlRepository(
+            this MyNoSqlSignalRConnection connection)
+        {
+            return new SwapScheduleMyNoSqlRepository(
+                new MyNoSqlServerClient<SwapScheduleMyNoSqlEntity>(connection, SwapSchedule));
+        }
+
+        public static SwapScheduleMyNoSqlReader CreateSwapScheduleMyNoSqlReader(this MyNoSqlTcpClient client)
+        {
+            return new SwapScheduleMyNoSqlReader(
+                new MyNoSqlReadRepository<SwapScheduleMyNoSqlEntity>(client, SwapSchedule));
         }
 
     }
