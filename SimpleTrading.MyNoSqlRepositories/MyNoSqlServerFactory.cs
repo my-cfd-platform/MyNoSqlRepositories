@@ -101,6 +101,22 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<SwapScheduleMyNoSqlEntity>(client, SwapSchedule));
         }
 
+        private const string SwapProfile = "swap-profile";
+        
+        
+        public static SwapProfileMyNoSqlWriter CreateSwapProfileMyNoSqlWriter(
+            this MyNoSqlSignalRConnection connection)
+        {
+            return new SwapProfileMyNoSqlWriter(
+                new MyNoSqlServerClient<SwapProfileMyNoSqlEntity>(connection, SwapProfile));
+        }
+
+        public static SwapProfileMyNoSqlReader CreateSwapProfileMyNoSqlReader(this MyNoSqlTcpClient client)
+        {
+            return new SwapProfileMyNoSqlReader(
+                new MyNoSqlReadRepository<SwapProfileMyNoSqlEntity>(client, SwapProfile));
+        }
+        
     }
     
     public static class MyNoSqlServerUtils
