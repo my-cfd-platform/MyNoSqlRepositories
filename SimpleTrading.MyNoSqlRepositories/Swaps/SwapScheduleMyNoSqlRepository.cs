@@ -36,7 +36,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
         public async Task DeleteAsync(string scheduleId, DayOfWeek dayOfWeek, string time)
         {
             var partitionKey = SwapScheduleMyNoSqlEntity.GeneratePartitionKey(scheduleId);
-            var rowKey = SwapScheduleMyNoSqlEntity.GenerateRowKey(dayOfWeek, time);
+            var rowKey = SwapScheduleMyNoSqlEntity.GenerateRowKey(dayOfWeek, TimeSpan.Parse(time));
             await _client.DeleteAsync(partitionKey, rowKey);
         }
     }

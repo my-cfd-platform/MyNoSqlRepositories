@@ -12,7 +12,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
             return id;
         }
 
-        public static string GenerateRowKey(DayOfWeek dayOfWeek, string time)
+        public static string GenerateRowKey(DayOfWeek dayOfWeek, TimeSpan time)
         {
             return SwapScheduleMappers.SwapMomentToString(dayOfWeek, time);
         }
@@ -20,7 +20,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
         
         public string Id => PartitionKey;
         public DayOfWeek DayOfWeek => RowKey.GetDayOfWeekFromRowKey();
-        public string Time { get; set; }
+        public TimeSpan Time { get; set; }
         public int Amount { get; set; }
 
         public static SwapScheduleMyNoSqlEntity Create(ISwapSchedule src)

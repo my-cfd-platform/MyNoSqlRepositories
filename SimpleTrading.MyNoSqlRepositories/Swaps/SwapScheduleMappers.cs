@@ -18,9 +18,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
         };
         
         
-        public static string SwapMomentToString(DayOfWeek dayOfWeek, string time)
+        public static string SwapMomentToString(DayOfWeek dayOfWeek, TimeSpan time)
         {
-            return (int) dayOfWeek + time;
+            return (int) dayOfWeek + time.ToString("c").Substring(0,8);
         }
 
         public static DayOfWeek GetDayOfWeekFromRowKey(this string rowKey)
