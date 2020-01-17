@@ -38,9 +38,9 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new InvestAmountMyNoSqlRepository(new MyNoSqlServerClient<InvestAmountMyNoSqlTableEntity>(connection, InvestAmountTable));
         }
 
-        public static IInvestAmountMyNoSqlReader CreateInvestAmountMyNoSqlReader(this MyNoSqlSignalRConnection connection)
+        public static IInvestAmountMyNoSqlReader CreateInvestAmountMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
-            return new InvestAmountMyNoSqlReader(new MyNoSqlReadRepository<InvestAmountMyNoSqlTableEntity>(connection, InvestAmountTable));
+            return new InvestAmountMyNoSqlReader(connection.ToMyNoSqlReadRepository<InvestAmountMyNoSqlTableEntity>(InvestAmountTable));
         }
         
         private const string TradingGroupsTableName = "tradinggroups";
