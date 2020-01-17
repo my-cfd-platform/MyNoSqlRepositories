@@ -9,9 +9,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
             return "invest-amount";
         }
         
-        public static string GenerateRowKey()
+        public static string GenerateRowKey(int value)
         {
-            return "ia";
+            return value.ToString();
         }
         
         public int Value { get; set; }
@@ -21,7 +21,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
             return new InvestAmountMyNoSqlTableEntity
             {
                 PartitionKey = GeneratePartitionKey(),
-                RowKey = GenerateRowKey(),
+                RowKey = GenerateRowKey(src.Value),
                 Value = src.Value
             };
         }
