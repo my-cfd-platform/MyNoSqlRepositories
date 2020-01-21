@@ -6,6 +6,7 @@ using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
+using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
 
 namespace SimpleTrading.MyNoSqlRepositories
@@ -28,6 +29,18 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static CountryMyNoSqlRepository CreateCountryMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
         {
             return new CountryMyNoSqlRepository(new MyNoSqlServerClient<CountryMyNoSqlTableEntity>(connection, CountriesTable));
+        }
+
+        private const string InvestAmountTable = "investamount";
+
+        public static InvestAmountMyNoSqlRepository CreateInvestAmountMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        {
+            return new InvestAmountMyNoSqlRepository(new MyNoSqlServerClient<InvestAmountMyNoSqlTableEntity>(connection, InvestAmountTable));
+        }
+
+        public static IInvestAmountMyNoSqlReader CreateInvestAmountMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new InvestAmountMyNoSqlReader(connection.ToMyNoSqlReadRepository<InvestAmountMyNoSqlTableEntity>(InvestAmountTable));
         }
         
         private const string TradingGroupsTableName = "tradinggroups";
