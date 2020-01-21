@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MyNoSqlClient;
+using SimpleTrading.Abstraction.Trading.Instruments;
 using SimpleTrading.Abstraction.Trading.Settings;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
@@ -24,6 +25,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public string Base { get; set; }
         public string Quote { get; set; }
         public double TickSize { get; set; }
+        public string SwapScheduleId { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
@@ -40,6 +42,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 Base = src.Base,
                 Quote = src.Quote,
                 TickSize = src.TickSize,
+                SwapScheduleId = src.SwapScheduleId,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()

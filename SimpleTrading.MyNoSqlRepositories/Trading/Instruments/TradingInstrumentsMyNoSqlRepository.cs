@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlClient;
-using SimpleTrading.Abstraction.Trading.Settings;
+using SimpleTrading.Abstraction.Trading.Instruments;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 {

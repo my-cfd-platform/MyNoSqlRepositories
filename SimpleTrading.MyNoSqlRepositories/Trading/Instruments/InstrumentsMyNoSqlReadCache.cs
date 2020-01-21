@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MyNoSqlClient.ReadRepository;
+using SimpleTrading.Abstraction.Trading.Instruments;
 using SimpleTrading.Abstraction.Trading.Settings;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
