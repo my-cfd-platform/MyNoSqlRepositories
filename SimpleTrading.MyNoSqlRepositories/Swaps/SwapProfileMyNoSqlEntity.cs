@@ -21,8 +21,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
         public string InstrumentId => RowKey;
         public double Long { get; set; }
         public double Short { get; set; }
-        public string ScheduleId { get; set; }
-
 
         public static SwapProfileMyNoSqlEntity Create(ISwapProfile src)
         {
@@ -32,7 +30,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
                 RowKey = GenerateRowKey(src.InstrumentId),
                 Long = src.Long,
                 Short = src.Short,
-                ScheduleId = src.ScheduleId
             };
         }
     }
