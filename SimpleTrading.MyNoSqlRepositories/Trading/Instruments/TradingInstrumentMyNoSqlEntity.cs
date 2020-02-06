@@ -8,7 +8,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 {
     public class TradingInstrumentMyNoSqlEntity : MyNoSqlTableEntity, ITradingInstrument
     {
-
         public static string GeneratePartitionKey()
         {
             return "i";
@@ -26,11 +25,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public string Quote { get; set; }
         public double TickSize { get; set; }
         public string SwapScheduleId { get; set; }
+        public string? GroupId { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
-
-
+        
         public static TradingInstrumentMyNoSqlEntity Create(ITradingInstrument src)
         {
             return new TradingInstrumentMyNoSqlEntity
@@ -43,6 +42,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 Quote = src.Quote,
                 TickSize = src.TickSize,
                 SwapScheduleId = src.SwapScheduleId,
+                GroupId = src.GroupId,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()
