@@ -26,6 +26,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public double TickSize { get; set; }
         public string SwapScheduleId { get; set; }
         public string? GroupId { get; set; }
+        public int? Weight { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
@@ -43,6 +44,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 TickSize = src.TickSize,
                 SwapScheduleId = src.SwapScheduleId,
                 GroupId = src.GroupId,
+                Weight = src.Weight,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()
