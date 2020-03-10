@@ -29,6 +29,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public int? Weight { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
+        
+        public string Avatar { get; set; }
+        
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
         public static TradingInstrumentMyNoSqlEntity Create(ITradingInstrument src)
