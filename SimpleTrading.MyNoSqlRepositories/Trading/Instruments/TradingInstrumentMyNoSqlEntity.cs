@@ -48,6 +48,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 SwapScheduleId = src.SwapScheduleId,
                 GroupId = src.GroupId,
                 Weight = src.Weight,
+                Avatar = src.Avatar,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()

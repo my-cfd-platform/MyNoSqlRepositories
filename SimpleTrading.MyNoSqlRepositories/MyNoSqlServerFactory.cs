@@ -4,6 +4,7 @@ using MyNoSqlClient.SignalR;
 using MyNoSqlClient.Tcp;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
+using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
@@ -69,6 +70,13 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(this MyNoSqlSignalRConnection connection, bool isLive)
         {
             return new TradingProfilesMyNoSqlRepository(new MyNoSqlServerClient<TradingProfileMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingProfilesTableName));
+        }
+
+        private const string DefaultsValuesTable = "defaultvalues";
+
+        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        {
+            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
         }
         
         private const string InstrumentsTable = "instruments";

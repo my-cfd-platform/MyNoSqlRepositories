@@ -6,11 +6,11 @@ using SimpleTrading.Abstraction.Common.Default;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
-    public class DefaultValueMyNoSqlRepository : IDefaultValuesRepository
+    public class DefaultValuesMyNoSqlRepository : IDefaultValuesRepository
     {
         private readonly IMyNoSqlServerClient<DefaultValueMyNoSqlTableEntity> _table;
 
-        public DefaultValueMyNoSqlRepository(IMyNoSqlServerClient<DefaultValueMyNoSqlTableEntity> table)
+        public DefaultValuesMyNoSqlRepository(IMyNoSqlServerClient<DefaultValueMyNoSqlTableEntity> table)
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }
