@@ -5,6 +5,7 @@ using MyNoSqlClient.Tcp;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
+using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
@@ -149,6 +150,13 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<SwapProfileMyNoSqlEntity>(client, SwapProfile));
         }
         
+        private const string InstrumetSourceMap = "instrument-sources";
+
+        public static InstrumentSourcesMapsMyNoSqlReader CreateInstrumetSourceMapMyNoSqlReader(this MyNoSqlTcpClient client)
+        {
+            return new InstrumentSourcesMapsMyNoSqlReader(
+                new MyNoSqlReadRepository<InstrumentSourcesMapsMyNoSqlTableEntity>(client, InstrumetSourceMap));
+        }
     }
     
     public static class MyNoSqlServerUtils
