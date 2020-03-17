@@ -2,13 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.0.34</Version>
+        <Version>1.0.35</Version>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="DotNetCoreDecorators" Version="1.0.18" />
       <PackageReference Include="MyNoSqlClient" Version="1.0.18" />
-      <PackageReference Include="SimpleTrading.Abstraction" Version="1.0.77" />
+      <PackageReference Include="SimpleTrading.Abstraction" Version="1.0.78" />
     </ItemGroup>
 
 </Project>

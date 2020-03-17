@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using MyNoSqlClient;
@@ -33,9 +32,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         
         public string Avatar { get; set; }
 
-        public DateTime? DayTimeout { get; set; }
+        public int? DayTimeout { get; set; }
 
-        public DateTime? NightTimeout { get; set; }
+        public int? NightTimeout { get; set; }
 
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
