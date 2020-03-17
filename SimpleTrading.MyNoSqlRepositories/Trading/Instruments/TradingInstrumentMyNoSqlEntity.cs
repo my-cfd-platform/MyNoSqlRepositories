@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MyNoSqlClient;
@@ -31,7 +32,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
         
         public string Avatar { get; set; }
-        
+
+        public DateTime? DayTimeout { get; set; }
+
+        public DateTime? NightTimeout { get; set; }
+
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
         public static TradingInstrumentMyNoSqlEntity Create(ITradingInstrument src)
@@ -49,6 +54,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 GroupId = src.GroupId,
                 Weight = src.Weight,
                 Avatar = src.Avatar,
+                DayTimeout = src.DayTimeout,
+                NightTimeout = src.NightTimeout,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()
