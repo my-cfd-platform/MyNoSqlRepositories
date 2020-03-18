@@ -1,4 +1,4 @@
-using MyNoSqlClient;
+using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk

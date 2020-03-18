@@ -1,7 +1,5 @@
-using MyNoSqlClient;
-using MyNoSqlClient.ReadRepository;
-using MyNoSqlClient.SignalR;
-using MyNoSqlClient.Tcp;
+using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.TcpClient.ReadRepository;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
@@ -28,16 +26,16 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new CountryMyNoSqlReader(connection.ToMyNoSqlReadRepository<CountryMyNoSqlTableEntity>(CountriesTable));
         }
 
-        public static CountryMyNoSqlRepository CreateCountryMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static CountryMyNoSqlRepository CreateCountryMyNoSqlRepository(string url)
         {
-            return new CountryMyNoSqlRepository(new MyNoSqlServerClient<CountryMyNoSqlTableEntity>(connection, CountriesTable));
+            return new CountryMyNoSqlRepository(new MyNoSqlServerClient<CountryMyNoSqlTableEntity>(url, CountriesTable));
         }
 
         private const string InvestAmountTable = "investamount";
 
-        public static InvestAmountMyNoSqlRepository CreateInvestAmountMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static InvestAmountMyNoSqlRepository CreateInvestAmountMyNoSqlRepository(string url)
         {
-            return new InvestAmountMyNoSqlRepository(new MyNoSqlServerClient<InvestAmountMyNoSqlTableEntity>(connection, InvestAmountTable));
+            return new InvestAmountMyNoSqlRepository(new MyNoSqlServerClient<InvestAmountMyNoSqlTableEntity>(url, InvestAmountTable));
         }
 
         public static IInvestAmountMyNoSqlReader CreateInvestAmountMyNoSqlReader(this MyNoSqlTcpClient connection)
@@ -57,9 +55,9 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new TradingGroupsMyNoSqlReader(new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingGroupsTableName));
         }
         
-        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMyNoSqlRepository(this MyNoSqlSignalRConnection connection, bool isLive)
+        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMyNoSqlRepository(string url, bool isLive)
         {
-            return new TradingGroupsMyNoSqlRepository(new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingGroupsTableName));
+            return new TradingGroupsMyNoSqlRepository(new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(url, IsLivePrefix(isLive)+TradingGroupsTableName));
         }
         
         private const string TradingProfilesTableName = "tradingprofiles";
@@ -68,16 +66,16 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new TradingProfileMyNoSqlReader(new MyNoSqlReadRepository<TradingProfileMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingProfilesTableName));
         }
         
-        public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(this MyNoSqlSignalRConnection connection, bool isLive)
+        public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(string url, bool isLive)
         {
-            return new TradingProfilesMyNoSqlRepository(new MyNoSqlServerClient<TradingProfileMyNoSqlEntity>(connection, IsLivePrefix(isLive)+TradingProfilesTableName));
+            return new TradingProfilesMyNoSqlRepository(new MyNoSqlServerClient<TradingProfileMyNoSqlEntity>(url, IsLivePrefix(isLive)+TradingProfilesTableName));
         }
 
         private const string DefaultsValuesTable = "defaultvalues";
 
-        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(string url)
         {
-            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
+            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(url, DefaultsValuesTable));
         }
 
         public static DefaultValuesNoMySqlReader CreateDefaultValuesNoMySqlReader(this MyNoSqlTcpClient connection)
@@ -92,16 +90,16 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new InstrumentsMyNoSqlReadCache(new MyNoSqlReadRepository<TradingInstrumentMyNoSqlEntity>(connection, InstrumentsTable));
         }
         
-        public static TradingInstrumentsMyNoSqlRepository CreateTradingInstrumentsMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static TradingInstrumentsMyNoSqlRepository CreateTradingInstrumentsMyNoSqlRepository(string url)
         {
-            return new TradingInstrumentsMyNoSqlRepository(new MyNoSqlServerClient<TradingInstrumentMyNoSqlEntity>(connection, InstrumentsTable));
+            return new TradingInstrumentsMyNoSqlRepository(new MyNoSqlServerClient<TradingInstrumentMyNoSqlEntity>(url, InstrumentsTable));
         }
 
         private const string InstrumentGroupsTable = "instrumentsgroups";
 
-        public static InstrumentGroupsMyNoSqlRepository CreateInstrumentGroupsMyNoSqlRepository(this MyNoSqlSignalRConnection connection)
+        public static InstrumentGroupsMyNoSqlRepository CreateInstrumentGroupsMyNoSqlRepository(string url)
         {
-            return new InstrumentGroupsMyNoSqlRepository(new MyNoSqlServerClient<InstrumentGroupMyNoSqlEntity>(connection, InstrumentGroupsTable));
+            return new InstrumentGroupsMyNoSqlRepository(new MyNoSqlServerClient<InstrumentGroupMyNoSqlEntity>(url, InstrumentGroupsTable));
         }
 
         public static InstrumentGroupsMyNoSqlReadCache CreateInstrumentGroupsMyNoSqlReadCache(this MyNoSqlTcpClient connection)
@@ -112,9 +110,9 @@ namespace SimpleTrading.MyNoSqlRepositories
         private const string PriceChangesTable = "pricechanges";
 
         public static PriceChangeWriteRepository CreatePriceChangeWriteRepository(
-            this MyNoSqlSignalRConnection connection)
+            string url)
         {
-            return new PriceChangeWriteRepository(new MyNoSqlServerClient<PriceChangeMyNoSqlEntity>(connection, PriceChangesTable));
+            return new PriceChangeWriteRepository(new MyNoSqlServerClient<PriceChangeMyNoSqlEntity>(url, PriceChangesTable));
         }
 
         public static PriceChangeReader CreatePriceChangeReader(this MyNoSqlTcpClient client)
@@ -127,10 +125,10 @@ namespace SimpleTrading.MyNoSqlRepositories
         
         
         public static SwapScheduleMyNoSqlRepository CreateSwapScheduleMyNoSqlRepository(
-            this MyNoSqlSignalRConnection connection)
+            string url)
         {
             return new SwapScheduleMyNoSqlRepository(
-                new MyNoSqlServerClient<SwapScheduleMyNoSqlEntity>(connection, SwapSchedule));
+                new MyNoSqlServerClient<SwapScheduleMyNoSqlEntity>(url, SwapSchedule));
         }
 
         public static SwapScheduleMyNoSqlReader CreateSwapScheduleMyNoSqlReader(this MyNoSqlTcpClient client)
@@ -143,10 +141,10 @@ namespace SimpleTrading.MyNoSqlRepositories
         
         
         public static SwapProfileMyNoSqlWriter CreateSwapProfileMyNoSqlWriter(
-            this MyNoSqlSignalRConnection connection)
+            string url)
         {
             return new SwapProfileMyNoSqlWriter(
-                new MyNoSqlServerClient<SwapProfileMyNoSqlEntity>(connection, SwapProfile));
+                new MyNoSqlServerClient<SwapProfileMyNoSqlEntity>(url, SwapProfile));
         }
 
         public static SwapProfileMyNoSqlReader CreateSwapProfileMyNoSqlReader(this MyNoSqlTcpClient client)

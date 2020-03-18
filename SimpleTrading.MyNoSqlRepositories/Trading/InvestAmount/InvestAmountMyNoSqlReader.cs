@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MyNoSqlClient.ReadRepository;
+using MyNoSqlServer.TcpClient.ReadRepository;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
 {

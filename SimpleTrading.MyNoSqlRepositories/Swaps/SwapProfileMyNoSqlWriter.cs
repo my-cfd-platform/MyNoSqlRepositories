@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlClient;
-using MyNoSqlClient.ReadRepository;
+using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps

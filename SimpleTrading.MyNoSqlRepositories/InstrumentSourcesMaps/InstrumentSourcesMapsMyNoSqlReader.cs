@@ -1,4 +1,5 @@
-using MyNoSqlClient.ReadRepository;
+
+using MyNoSqlServer.TcpClient.ReadRepository;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {

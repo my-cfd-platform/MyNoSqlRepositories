@@ -1,4 +1,5 @@
-using MyNoSqlClient;
+
+using MyNoSqlServer.TcpClient;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlClient;
+using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Common.Countries;
 

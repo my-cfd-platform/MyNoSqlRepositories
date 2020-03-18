@@ -1,5 +1,5 @@
 using System;
-using MyNoSqlClient;
+using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlClient;
+using MyNoSqlServer.TcpClient;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
 {

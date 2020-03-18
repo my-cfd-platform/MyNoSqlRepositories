@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using MyNoSqlClient;
-using MyNoSqlClient.ReadRepository;
+using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk

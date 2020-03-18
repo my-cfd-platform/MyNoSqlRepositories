@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using MyNoSqlClient;
+using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.Trading.Profiles;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Profiles
