@@ -32,9 +32,10 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         
         public string Avatar { get; set; }
 
-        public int? DayTimeout { get; set; }
+        // TODO Remove default values
+        public int? DayTimeout { get; set; } = 30;
 
-        public int? NightTimeout { get; set; }
+        public int? NightTimeout { get; set; } = 30;
 
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
