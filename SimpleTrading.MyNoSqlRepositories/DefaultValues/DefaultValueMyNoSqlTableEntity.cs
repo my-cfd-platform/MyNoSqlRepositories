@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.Common.Default;
 
@@ -18,6 +19,8 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
         public DefaultValueTypes Type { get; set; }
         
         public string Value { get; set; }
+        
+        public List<string> Values { get; set; }
 
         public static DefaultValueMyNoSqlTableEntity Create(IDefaultValue src)
         {
