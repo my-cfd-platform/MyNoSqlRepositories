@@ -29,7 +29,8 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.Type),
                 Type = src.Type,
-                Value = src.Value
+                Value = src.Value,
+                Values = src.Values
             };
         }
     }
