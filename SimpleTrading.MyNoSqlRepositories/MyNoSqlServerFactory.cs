@@ -73,14 +73,14 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string DefaultsValuesTable = "defaultvalues";
 
-        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(string url)
+        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(string url, bool isLive)
         {
-            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(url, DefaultsValuesTable));
+            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(url, IsLivePrefix(isLive)+DefaultsValuesTable));
         }
 
-        public static DefaultValuesNoMySqlReader CreateDefaultValuesNoMySqlReader(this MyNoSqlTcpClient connection)
+        public static DefaultValuesNoMySqlReader CreateDefaultValuesNoMySqlReader(this MyNoSqlTcpClient connection, bool isLive)
         {
-            return new DefaultValuesNoMySqlReader(new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
+            return new DefaultValuesNoMySqlReader(new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, IsLivePrefix(isLive)+DefaultsValuesTable));
         }
         
         private const string InstrumentsTable = "instruments";
