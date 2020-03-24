@@ -5,6 +5,7 @@ using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
+using SimpleTrading.MyNoSqlRepositories.Trading.FavoritesInstruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
@@ -73,14 +74,26 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string DefaultsValuesTable = "defaultvalues";
 
-        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(string url, bool isLive)
+        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(string url)
         {
-            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(url, IsLivePrefix(isLive)+DefaultsValuesTable));
+            return new DefaultValuesMyNoSqlRepository(new MyNoSqlServerClient<DefaultValueMyNoSqlTableEntity>(url, DefaultsValuesTable));
         }
 
-        public static DefaultValuesNoMySqlReader CreateDefaultValuesNoMySqlReader(this MyNoSqlTcpClient connection, bool isLive)
+        public static DefaultValuesNoMySqlReader CreateDefaultValuesNoMySqlReader(this MyNoSqlTcpClient connection)
         {
-            return new DefaultValuesNoMySqlReader(new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, IsLivePrefix(isLive)+DefaultsValuesTable));
+            return new DefaultValuesNoMySqlReader(new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
+        }
+
+        private const string FavoriteInstrumentsTable = "favoriteinstruments";
+
+        public static FavoriteInstrumentsMyNoSqlRepository CreateFavoriteInstrumentsMyNoSqlRepository(string url, bool isLive)
+        {
+            return new FavoriteInstrumentsMyNoSqlRepository(new MyNoSqlServerClient<FavoriteInstrumentMyNoSqlEntity>(url, IsLivePrefix(isLive)+FavoriteInstrumentsTable));
+        }
+
+        public static FavoriteInstrumentsMyNoSqlReadCache FavoriteInstrumentsMyNoSqlReader(this MyNoSqlTcpClient connection, bool isLive)
+        {
+            return new FavoriteInstrumentsMyNoSqlReadCache(new MyNoSqlReadRepository<FavoriteInstrumentMyNoSqlEntity>(connection, IsLivePrefix(isLive)+FavoriteInstrumentsTable));
         }
         
         private const string InstrumentsTable = "instruments";

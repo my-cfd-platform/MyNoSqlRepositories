@@ -15,8 +15,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Profiles
         }
         
         public string Id => RowKey;
+        
         public string Name { get; set; }
+        
         public string TradingProfileId { get; set; }
+        
+        public bool TradingDisabled { get; set; }
 
         public static TradingGroupMyNoSqlEntity Create(ITradingGroup src)
         {
@@ -25,9 +29,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Profiles
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.Id),
                 Name = src.Name,
-                TradingProfileId = src.TradingProfileId
+                TradingProfileId = src.TradingProfileId,
+                TradingDisabled = src.TradingDisabled
             };
-                
         } 
     }
 }
