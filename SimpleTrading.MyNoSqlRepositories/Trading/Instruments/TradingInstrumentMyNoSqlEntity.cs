@@ -29,10 +29,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public int? Weight { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
-        
-        public string Avatar { get; set; }
-        
-        public string AvatarPng { get; set; }
 
         // TODO Remove default values
         public int? DayTimeout { get; set; } = 30;
@@ -57,8 +53,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 SwapScheduleId = src.SwapScheduleId,
                 GroupId = src.GroupId,
                 Weight = src.Weight,
-                Avatar = src.Avatar,
-                AvatarPng = src.AvatarPng,
                 DayTimeout = src.DayTimeout,
                 NightTimeout = src.NightTimeout,
                 TradingDisabled = src.TradingDisabled,
