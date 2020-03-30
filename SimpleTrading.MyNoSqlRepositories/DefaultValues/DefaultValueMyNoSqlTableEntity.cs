@@ -20,6 +20,8 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
         
         public string Value { get; set; }
         
+        public bool IsLive { get; set; }
+
         public List<string> Values { get; set; }
 
         public static DefaultValueMyNoSqlTableEntity Create(IDefaultValue src)
@@ -30,7 +32,8 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
                 RowKey = GenerateRowKey(src.Type),
                 Type = src.Type,
                 Value = src.Value,
-                Values = src.Values
+                Values = src.Values,
+                IsLive = src.IsLive
             };
         }
     }
