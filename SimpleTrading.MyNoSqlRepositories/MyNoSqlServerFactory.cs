@@ -5,7 +5,6 @@ using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
-using SimpleTrading.MyNoSqlRepositories.Trading.FavoritesInstruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
@@ -86,16 +85,6 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string FavoriteInstrumentsTable = "favoriteinstruments";
 
-        public static FavoriteInstrumentsMyNoSqlRepository CreateFavoriteInstrumentsMyNoSqlRepository(string url, bool isLive)
-        {
-            return new FavoriteInstrumentsMyNoSqlRepository(new MyNoSqlServerClient<FavoriteInstrumentMyNoSqlEntity>(url, IsLivePrefix(isLive)+FavoriteInstrumentsTable));
-        }
-
-        public static FavoriteInstrumentsMyNoSqlReadCache FavoriteInstrumentsMyNoSqlReader(this MyNoSqlTcpClient connection, bool isLive)
-        {
-            return new FavoriteInstrumentsMyNoSqlReadCache(new MyNoSqlReadRepository<FavoriteInstrumentMyNoSqlEntity>(connection, IsLivePrefix(isLive)+FavoriteInstrumentsTable));
-        }
-        
         private const string InstrumentsTable = "instruments";
         
         public static InstrumentsMyNoSqlReadCache CreateInstrumentsMyNoSqlReadCache(this MyNoSqlTcpClient connection)
