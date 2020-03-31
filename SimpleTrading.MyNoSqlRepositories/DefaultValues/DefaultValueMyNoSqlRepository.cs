@@ -24,7 +24,7 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
         public async Task UpdateAsync(IDefaultValue defaultValue)
         {
             var entity = DefaultValueMyNoSqlTableEntity.Create(defaultValue);
-            await _table.InsertAsync(entity);
+            await _table.InsertOrReplaceAsync(entity);
         }
 
         public async Task<IDefaultValue> GetByTypeAsync(DefaultValueTypes type)
