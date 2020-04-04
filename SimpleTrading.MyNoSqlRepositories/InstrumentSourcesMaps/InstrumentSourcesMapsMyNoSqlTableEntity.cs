@@ -18,5 +18,15 @@ namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
         public string InstrumentId => RowKey;
         
         public string SourceId { get; set; }
+
+        public static InstrumentSourcesMapsMyNoSqlTableEntity Create(IQuoteFeedSource src)
+        {
+            return new InstrumentSourcesMapsMyNoSqlTableEntity
+            {
+                PartitionKey = GeneratePartitionKey(),
+                RowKey = GenerateRowKey(src.InstrumentId),
+                SourceId = src.SourceId
+            };
+        }
     }
 }
