@@ -13,10 +13,10 @@ namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
             _readRepository = readRepository;
         }
         
-        public InstrumentSourcesMapsMyNoSqlTableEntity Get(string instrumetId)
+        public InstrumentSourcesMapsMyNoSqlTableEntity Get(string instrumentId)
         {
             var partitionKey = InstrumentSourcesMapsMyNoSqlTableEntity.GeneratePartitionKey();
-            var rowKey = InstrumentSourcesMapsMyNoSqlTableEntity.GenerateRowKey(instrumetId);
+            var rowKey = InstrumentSourcesMapsMyNoSqlTableEntity.GenerateRowKey(instrumentId);
 
             return _readRepository.Get(partitionKey, rowKey);
         } 
