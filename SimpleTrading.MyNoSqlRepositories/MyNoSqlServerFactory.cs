@@ -4,6 +4,7 @@ using MyNoSqlServer.TcpClient.ReadRepository;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
+using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
@@ -177,17 +178,36 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new SwapProfileMyNoSqlReader(
                 new MyNoSqlReadRepository<SwapProfileMyNoSqlEntity>(client, SwapProfile));
         }
+        
+        private const string InstrumentSourceMap = "instrument-sources";
+
+        public static InstrumentSourcesMapsMyNoSqlReader CreateInstrumentSourceMapMyNoSqlReader(
+            this MyNoSqlTcpClient client)
+        {
+            return new InstrumentSourcesMapsMyNoSqlReader(
+                new MyNoSqlReadRepository<InstrumentSourcesMapsMyNoSqlTableEntity>(client, InstrumentSourceMap));
+
+        }
+
+        public static InstrumentSourcesMapsMyNoSqlRepository CreateInstrumentSourcesMapsNoSqlRepository(
+            Func<string> getUrl)
+        {
+            return new InstrumentSourcesMapsMyNoSqlRepository(
+                new MyNoSqlServerClient<InstrumentSourcesMapsMyNoSqlTableEntity>(getUrl, InstrumentSourceMap));
+
+        }
+        
 
         private const string MarkupProfiles = "markup-profiles";
 
-        public static MarkupProfilesMyNoSqlReader CreateInstrumentSourceMapMyNoSqlReader(
+        public static MarkupProfilesMyNoSqlReader CreateMarkupProfilesMyNoSqlReader(
             this MyNoSqlTcpClient client)
         {
             return new MarkupProfilesMyNoSqlReader(
                 new MyNoSqlReadRepository<MarkupProfileMyNoSqlTableEntity>(client, MarkupProfiles));
         }
 
-        public static MarkupProfilesMyNoSqlRepository CreateInstrumentSourcesMapsNoSqlRepository(Func<string> getUrl)
+        public static MarkupProfilesMyNoSqlRepository CreateMarkupProfilesNoSqlRepository(Func<string> getUrl)
         {
             return new MarkupProfilesMyNoSqlRepository(
                 new MyNoSqlServerClient<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles));
