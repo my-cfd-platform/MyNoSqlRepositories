@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using MyNoSqlServer.TcpClient;
 using SimpleTrading.Abstraction.Markups;
@@ -26,7 +25,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
 
         public string ProfileId => RowKey;
 
-        public List<IMarkupItem> MarkupInstruments { get; set; }
+        public IReadOnlyList<IMarkupItem> MarkupInstruments { get; set; }
 
         public static MarkupProfileMyNoSqlTableEntity Create(IMarkupProfile src)
         {
