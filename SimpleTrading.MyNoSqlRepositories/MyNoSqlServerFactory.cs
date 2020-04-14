@@ -4,7 +4,7 @@ using MyNoSqlServer.TcpClient.ReadRepository;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
-using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
+using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
@@ -178,19 +178,19 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<SwapProfileMyNoSqlEntity>(client, SwapProfile));
         }
 
-        private const string InstrumetSourceMap = "instrument-sources";
+        private const string MarkupProfiles = "markup-profiles";
 
-        public static InstrumentSourcesMapsMyNoSqlReader CreateInstrumetSourceMapMyNoSqlReader(
+        public static MarkupProfilesMyNoSqlReader CreateInstrumentSourceMapMyNoSqlReader(
             this MyNoSqlTcpClient client)
         {
-            return new InstrumentSourcesMapsMyNoSqlReader(
-                new MyNoSqlReadRepository<InstrumentSourcesMapsMyNoSqlTableEntity>(client, InstrumetSourceMap));
+            return new MarkupProfilesMyNoSqlReader(
+                new MyNoSqlReadRepository<MarkupProfileMyNoSqlTableEntity>(client, MarkupProfiles));
         }
 
-        public static InstrumentSourcesMapsMyNoSqlRepository CreateInstrumentSourcesMapsNoSqlRepository(Func<string> getUrl)
+        public static MarkupProfilesMyNoSqlRepository CreateInstrumentSourcesMapsNoSqlRepository(Func<string> getUrl)
         {
-            return new InstrumentSourcesMapsMyNoSqlRepository(
-                new MyNoSqlServerClient<InstrumentSourcesMapsMyNoSqlTableEntity>(getUrl, InstrumetSourceMap));
+            return new MarkupProfilesMyNoSqlRepository(
+                new MyNoSqlServerClient<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles));
         }
     }
 
