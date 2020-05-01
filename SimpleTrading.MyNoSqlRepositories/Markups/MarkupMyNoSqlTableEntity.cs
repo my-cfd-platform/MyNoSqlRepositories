@@ -38,7 +38,27 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
         public string ProfileId => RowKey;
 
         public List<MarkupItem> MarkupInstruments { get; set; }
-        IReadOnlyList<IMarkupItem> IMarkupProfile.MarkupInstruments => (IReadOnlyList<IMarkupItem>)MarkupInstruments ?? Array.Empty<IMarkupItem>();
+
+        
+        private static readonly IReadOnlyDictionary<string, IMarkupItem> Empty  = new Dictionary<string, IMarkupItem>();
+
+        private IReadOnlyDictionary<string, IMarkupItem> _item;
+        private IReadOnlyDictionary<string, IMarkupItem> GetMarkupInstrument()
+        {
+            if (MarkupInstruments == null)
+                return Empty;
+            
+            var result = new Dictionary<string, IMarkupItem>();
+
+            foreach (var markupItem in MarkupInstruments)
+                result.Add(markupItem.InstrumentId, markupItem);
+
+            _item = result;
+
+            return result;
+        }
+        
+        IReadOnlyDictionary<string, IMarkupItem> IMarkupProfile.MarkupInstruments => _item ?? GetMarkupInstrument();
 
         public static MarkupProfileMyNoSqlTableEntity Create(IMarkupProfile src)
         {
@@ -46,7 +66,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
             {
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.ProfileId),
-                MarkupInstruments = src.MarkupInstruments.Select(MarkupItem.Create).ToList()
+                MarkupInstruments = src.MarkupInstruments.Values.Select(MarkupItem.Create).ToList()
             };
         }
     }
