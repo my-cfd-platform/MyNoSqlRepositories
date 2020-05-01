@@ -1,10 +1,10 @@
 ﻿using System;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk
 {
-    public class BidAskMyNoSqlTableEntity : MyNoSqlTableEntity, IBidAsk
+    public class BidAskMyNoSqlTableEntity : MyNoSqlEntity, IBidAsk
     {
         
         public static string GeneratePartitionKey()

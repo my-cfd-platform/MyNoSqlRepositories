@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DotNetCoreDecorators;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
     public class SwapScheduleMyNoSqlRepository : ISwapScheduleWriter
     {
-        private readonly IMyNoSqlServerClient<SwapScheduleMyNoSqlEntity> _client;
+        private readonly IMyNoSqlServerDataWriter<SwapScheduleMyNoSqlEntity> _client;
 
-        public SwapScheduleMyNoSqlRepository(IMyNoSqlServerClient<SwapScheduleMyNoSqlEntity> client)
+        public SwapScheduleMyNoSqlRepository(IMyNoSqlServerDataWriter<SwapScheduleMyNoSqlEntity> client)
         {
             _client = client;
         }

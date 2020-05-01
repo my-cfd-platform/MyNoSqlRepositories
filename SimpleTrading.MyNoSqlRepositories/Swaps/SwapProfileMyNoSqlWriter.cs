@@ -1,19 +1,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
     public class SwapProfileMyNoSqlWriter : ISwapProfileWriter
     {
-        private readonly IMyNoSqlServerClient<SwapProfileMyNoSqlEntity> _myNoSqlTable;
+        private readonly IMyNoSqlServerDataWriter<SwapProfileMyNoSqlEntity> _myNoSqlTable;
 
-        public SwapProfileMyNoSqlWriter(IMyNoSqlServerClient<SwapProfileMyNoSqlEntity> myNoSqlTable)
+        public SwapProfileMyNoSqlWriter(IMyNoSqlServerDataWriter<SwapProfileMyNoSqlEntity> myNoSqlTable)
         {
             _myNoSqlTable = myNoSqlTable;
         }
-
 
         public async ValueTask<IEnumerable<ISwapProfile>> GetAllAsync()
         {
@@ -26,17 +25,17 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
             return await _myNoSqlTable.GetAsync(partitionKey);
         }
 
-        public ValueTask AddOrUpdate(ISwapProfile swapProfile)
+        public async ValueTask AddOrUpdate(ISwapProfile swapProfile)
         {
             var entity = SwapProfileMyNoSqlEntity.Create(swapProfile);
-            return new ValueTask(_myNoSqlTable.InsertOrReplaceAsync(entity));
+            await _myNoSqlTable.InsertOrReplaceAsync(entity);
         }
 
-        public ValueTask DeleteAsync(string id, string instrumentId)
+        public async ValueTask DeleteAsync(string id, string instrumentId)
         {
             var partitionKey = SwapProfileMyNoSqlEntity.GeneratePartitionKey(id);
             var rowKey = SwapProfileMyNoSqlEntity.GenerateRowKey(instrumentId);
-            return new ValueTask(_myNoSqlTable.DeleteAsync(partitionKey, rowKey));
+            await _myNoSqlTable.DeleteAsync(partitionKey, rowKey);
         }
     }
 }

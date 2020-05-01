@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient;
+using System.Runtime.ConstrainedExecution;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Markups;
 
 namespace SimpleTrading.MyNoSqlRepositories.Markups
@@ -11,7 +13,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
         public int MarkupAsk { get; set; }
     }
 
-    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlTableEntity, IMarkupProfile
+    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlEntity, IMarkupProfile
     {
         public static string GeneratePartitionKey()
         {

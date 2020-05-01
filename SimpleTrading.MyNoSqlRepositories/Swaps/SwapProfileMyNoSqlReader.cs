@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
     public class SwapProfileMyNoSqlReader : ISwapProfileReader
     {
-        private readonly IMyNoSqlReadRepository<SwapProfileMyNoSqlEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<SwapProfileMyNoSqlEntity> _readRepository;
 
-        public SwapProfileMyNoSqlReader(IMyNoSqlReadRepository<SwapProfileMyNoSqlEntity> readRepository)
+        public SwapProfileMyNoSqlReader(IMyNoSqlServerDataReader<SwapProfileMyNoSqlEntity> readRepository)
         {
             _readRepository = readRepository;
         }

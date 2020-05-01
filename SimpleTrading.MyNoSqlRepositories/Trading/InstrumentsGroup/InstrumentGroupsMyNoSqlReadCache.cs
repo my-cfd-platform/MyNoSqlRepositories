@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.InstrumentsGroup;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
 {
     public class InstrumentGroupsMyNoSqlReadCache : IInstrumentGroupsCache
     {
-        private readonly IMyNoSqlReadRepository<InstrumentGroupMyNoSqlEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<InstrumentGroupMyNoSqlEntity> _readRepository;
 
-        public InstrumentGroupsMyNoSqlReadCache(IMyNoSqlReadRepository<InstrumentGroupMyNoSqlEntity> readRepository)
+        public InstrumentGroupsMyNoSqlReadCache(IMyNoSqlServerDataReader<InstrumentGroupMyNoSqlEntity> readRepository)
         {
             _readRepository = readRepository;
         }

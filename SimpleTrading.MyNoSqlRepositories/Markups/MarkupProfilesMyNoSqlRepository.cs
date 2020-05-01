@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
-using SimpleTrading.Abstraction.Common.Default;
+using MyNoSqlServer.Abstractions;
+using MyNoSqlServer.DataWriter;
 using SimpleTrading.Abstraction.Markups;
 
 namespace SimpleTrading.MyNoSqlRepositories.Markups
 {
     public class MarkupProfilesMyNoSqlRepository : IMarkupProfilesRepository
     {
-        private readonly IMyNoSqlServerClient<MarkupProfileMyNoSqlTableEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity> _table;
 
-        public MarkupProfilesMyNoSqlRepository(IMyNoSqlServerClient<MarkupProfileMyNoSqlTableEntity> table)
+        public MarkupProfilesMyNoSqlRepository(MyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity> table)
         {
             _table = table;
         }

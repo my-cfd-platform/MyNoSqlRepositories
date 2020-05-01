@@ -1,9 +1,9 @@
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {
-    public class InstrumentSourcesMapsMyNoSqlTableEntity : MyNoSqlTableEntity, IQuoteFeedSource
+    public class InstrumentSourcesMapsMyNoSqlTableEntity : MyNoSqlEntity, IQuoteFeedSource
     {
         public static string GeneratePartitionKey()
         {

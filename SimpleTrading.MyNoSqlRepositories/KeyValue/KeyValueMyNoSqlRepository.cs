@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue
 {
     public class KeyValueMyNoSqlRepository
     {
-        private readonly IMyNoSqlServerClient<KeyValueMyNoSqlTableEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<KeyValueMyNoSqlTableEntity> _table;
 
-        public KeyValueMyNoSqlRepository(IMyNoSqlServerClient<KeyValueMyNoSqlTableEntity> repository)
+        public KeyValueMyNoSqlRepository(IMyNoSqlServerDataWriter<KeyValueMyNoSqlTableEntity> repository)
         {
             _table = repository ?? throw new ArgumentNullException(nameof(repository));
         }

@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk
 {
     public class BidAskMyNoSqlCache: IBidAskCache
     {
-        private readonly IMyNoSqlReadRepository<BidAskMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<BidAskMyNoSqlTableEntity> _readRepository;
 
-        public BidAskMyNoSqlCache(IMyNoSqlReadRepository<BidAskMyNoSqlTableEntity> readRepository)
+        public BidAskMyNoSqlCache(IMyNoSqlServerDataReader<BidAskMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository;
             _readRepository.SubscribeToChanges(items =>

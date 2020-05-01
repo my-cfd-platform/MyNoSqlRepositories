@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Common.Default;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
-    public class DefaultValueMyNoSqlTableEntity : MyNoSqlTableEntity, IDefaultValue
+    public class DefaultValueMyNoSqlTableEntity : MyNoSqlEntity, IDefaultValue
     {
         public static string GeneratePartitionKey()
         {

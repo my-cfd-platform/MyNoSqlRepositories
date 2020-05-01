@@ -1,10 +1,10 @@
 using System;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
-    public class SwapScheduleMyNoSqlEntity : MyNoSqlTableEntity, ISwapSchedule
+    public class SwapScheduleMyNoSqlEntity : MyNoSqlEntity, ISwapSchedule
     {
 
         public static string GeneratePartitionKey(string id)

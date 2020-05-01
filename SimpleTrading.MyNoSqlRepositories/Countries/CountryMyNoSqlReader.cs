@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Common.Countries;
 
@@ -7,9 +7,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
 {
     public class CountryMyNoSqlReader : ICountryReader
     {
-        private readonly IMyNoSqlReadRepository<CountryMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<CountryMyNoSqlTableEntity> _readRepository;
 
-        public CountryMyNoSqlReader(IMyNoSqlReadRepository<CountryMyNoSqlTableEntity> readRepository)
+        public CountryMyNoSqlReader(IMyNoSqlServerDataReader<CountryMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository;
         }

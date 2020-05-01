@@ -1,14 +1,14 @@
 using System;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Common.Default;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
     public class DefaultValuesNoMySqlReader : IDefaultValuesReader
     {
-        private readonly IMyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<DefaultValueMyNoSqlTableEntity> _readRepository;
 
-        public DefaultValuesNoMySqlReader(IMyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity> readRepository)
+        public DefaultValuesNoMySqlReader(IMyNoSqlServerDataReader<DefaultValueMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository ?? throw new ArgumentNullException(nameof(readRepository));
         }

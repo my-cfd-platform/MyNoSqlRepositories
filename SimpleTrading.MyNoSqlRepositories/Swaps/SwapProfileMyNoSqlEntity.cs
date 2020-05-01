@@ -1,9 +1,9 @@
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
-    public class SwapProfileMyNoSqlEntity : MyNoSqlTableEntity, ISwapProfile
+    public class SwapProfileMyNoSqlEntity : MyNoSqlEntity, ISwapProfile
     {
 
         public static string GeneratePartitionKey(string id)

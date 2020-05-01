@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Instruments;
 using SimpleTrading.Abstraction.Trading.Settings;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 {
-    public class TradingInstrumentMyNoSqlEntity : MyNoSqlTableEntity, ITradingInstrument
+    public class TradingInstrumentMyNoSqlEntity : MyNoSqlEntity, ITradingInstrument
     {
         public static string GeneratePartitionKey()
         {

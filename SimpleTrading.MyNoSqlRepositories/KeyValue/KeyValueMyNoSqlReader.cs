@@ -1,13 +1,13 @@
 using System;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue
 {
     public class KeyValueMyNoSqlReader
     {
-        private readonly IMyNoSqlReadRepository<KeyValueMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<KeyValueMyNoSqlTableEntity> _readRepository;
 
-        public KeyValueMyNoSqlReader(IMyNoSqlReadRepository<KeyValueMyNoSqlTableEntity> repository)
+        public KeyValueMyNoSqlReader(IMyNoSqlServerDataReader<KeyValueMyNoSqlTableEntity> repository)
         {
             _readRepository = repository ?? throw new ArgumentNullException(nameof(repository));
         }

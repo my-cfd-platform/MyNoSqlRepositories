@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk
@@ -7,9 +7,9 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
     public class PriceChangeReader : IPriceChangeReader
     {
         
-        private readonly IMyNoSqlReadRepository<PriceChangeMyNoSqlEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<PriceChangeMyNoSqlEntity> _readRepository;
 
-        public PriceChangeReader(IMyNoSqlReadRepository<PriceChangeMyNoSqlEntity> readRepository)
+        public PriceChangeReader(IMyNoSqlServerDataReader<PriceChangeMyNoSqlEntity> readRepository)
         {
             _readRepository = readRepository;
         }

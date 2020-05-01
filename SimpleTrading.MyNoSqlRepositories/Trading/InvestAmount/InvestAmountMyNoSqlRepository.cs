@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.DataWriter;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
 {
@@ -13,9 +13,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
     
     public class InvestAmountMyNoSqlRepository : IInvestAmountMyNoSqlRepository
     {
-        private readonly IMyNoSqlServerClient<InvestAmountMyNoSqlTableEntity> _table;
+        private readonly MyNoSqlServerDataWriter<InvestAmountMyNoSqlTableEntity> _table;
 
-        public InvestAmountMyNoSqlRepository(IMyNoSqlServerClient<InvestAmountMyNoSqlTableEntity> table)
+        public InvestAmountMyNoSqlRepository(MyNoSqlServerDataWriter<InvestAmountMyNoSqlTableEntity> table)
         {
             _table = table;
         }

@@ -1,9 +1,9 @@
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.InstrumentsGroup;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
 {
-    public class InstrumentGroupMyNoSqlEntity : MyNoSqlTableEntity, IInstrumentGroup
+    public class InstrumentGroupMyNoSqlEntity : MyNoSqlEntity, IInstrumentGroup
     {
         public static string GeneratePartitionKey()
         {

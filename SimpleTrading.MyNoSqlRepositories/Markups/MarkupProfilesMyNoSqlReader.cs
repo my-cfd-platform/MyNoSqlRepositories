@@ -1,4 +1,5 @@
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
+using MyNoSqlServer.DataReader;
 using SimpleTrading.Abstraction.Markups;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 
@@ -6,10 +7,10 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
 {
     public class MarkupProfilesMyNoSqlReader : IMarkupProfilesReader
     {
-        private readonly IMyNoSqlReadRepository<MarkupProfileMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<MarkupProfileMyNoSqlTableEntity> _readRepository;
 
         public MarkupProfilesMyNoSqlReader(
-            IMyNoSqlReadRepository<MarkupProfileMyNoSqlTableEntity> readRepository)
+            MyNoSqlReadRepository<MarkupProfileMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository;
         }

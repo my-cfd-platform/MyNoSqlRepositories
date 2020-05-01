@@ -1,10 +1,10 @@
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Common.Countries;
 
 namespace SimpleTrading.MyNoSqlRepositories.Countries
 {
-    public class CountryMyNoSqlTableEntity : MyNoSqlTableEntity, ICountry
+    public class CountryMyNoSqlTableEntity : MyNoSqlEntity, ICountry
     {
         public static string GeneratePartitionKey(Languages lang)
         {

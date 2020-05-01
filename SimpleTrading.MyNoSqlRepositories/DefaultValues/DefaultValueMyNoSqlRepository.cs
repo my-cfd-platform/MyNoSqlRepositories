@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Common.Default;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
     public class DefaultValuesMyNoSqlRepository : IDefaultValuesRepository
     {
-        private readonly IMyNoSqlServerClient<DefaultValueMyNoSqlTableEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> _table;
 
-        public DefaultValuesMyNoSqlRepository(IMyNoSqlServerClient<DefaultValueMyNoSqlTableEntity> table)
+        public DefaultValuesMyNoSqlRepository(IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> table)
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }

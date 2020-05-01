@@ -1,9 +1,9 @@
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk
 {
-    public class PriceChangeMyNoSqlEntity : MyNoSqlTableEntity, IPriceChange
+    public class PriceChangeMyNoSqlEntity : MyNoSqlEntity, IPriceChange
     {
         public static string GeneratePartitionKey()
         {

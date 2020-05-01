@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Common.Images;
 using SimpleTrading.Abstraction.Trading.Instruments;
 
@@ -8,9 +8,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 {
     public class TradingInstrumentsMyNoSqlRepository : ITradingInstrumentsRepository
     {
-        private readonly IMyNoSqlServerClient<TradingInstrumentMyNoSqlEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<TradingInstrumentMyNoSqlEntity> _table;
 
-        public TradingInstrumentsMyNoSqlRepository(IMyNoSqlServerClient<TradingInstrumentMyNoSqlEntity> table)
+        public TradingInstrumentsMyNoSqlRepository(IMyNoSqlServerDataWriter<TradingInstrumentMyNoSqlEntity> table)
         {
             _table = table;
         }

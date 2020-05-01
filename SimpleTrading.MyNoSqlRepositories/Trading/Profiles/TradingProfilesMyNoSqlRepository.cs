@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Profiles;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Profiles
 {
     public class TradingProfilesMyNoSqlRepository : ITradingProfileRepository
     {
-        private readonly IMyNoSqlServerClient<TradingProfileMyNoSqlEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<TradingProfileMyNoSqlEntity> _table;
 
-        public TradingProfilesMyNoSqlRepository(IMyNoSqlServerClient<TradingProfileMyNoSqlEntity> table)
+        public TradingProfilesMyNoSqlRepository(IMyNoSqlServerDataWriter<TradingProfileMyNoSqlEntity> table)
         {
             _table = table;
         }

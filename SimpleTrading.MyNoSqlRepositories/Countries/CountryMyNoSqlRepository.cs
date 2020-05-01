@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Common.Countries;
 
@@ -8,9 +8,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
 {
     public class CountryMyNoSqlRepository : ICountryRepository
     {
-        private readonly IMyNoSqlServerClient<CountryMyNoSqlTableEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<CountryMyNoSqlTableEntity> _table;
 
-        public CountryMyNoSqlRepository(IMyNoSqlServerClient<CountryMyNoSqlTableEntity> table)
+        public CountryMyNoSqlRepository(IMyNoSqlServerDataWriter<CountryMyNoSqlTableEntity> table)
         {
             _table = table;
         }

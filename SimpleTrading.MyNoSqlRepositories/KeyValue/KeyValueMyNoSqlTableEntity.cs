@@ -1,8 +1,8 @@
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue
 {
-    public class KeyValueMyNoSqlTableEntity : MyNoSqlTableEntity
+    public class KeyValueMyNoSqlTableEntity : MyNoSqlEntity
     {
         public static string GeneratePartitionKey(string traderId)
         {

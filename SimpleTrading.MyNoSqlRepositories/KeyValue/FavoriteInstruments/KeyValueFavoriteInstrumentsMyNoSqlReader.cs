@@ -1,14 +1,14 @@
 using System;
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.FavoritesInstruments;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue.FavoriteInstruments
 {
     public class KeyValueFavoriteInstrumentsMyNoSqlReader
     {
-        private readonly IMyNoSqlReadRepository<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> _readRepository;
 
-        public KeyValueFavoriteInstrumentsMyNoSqlReader(IMyNoSqlReadRepository<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> repository)
+        public KeyValueFavoriteInstrumentsMyNoSqlReader(IMyNoSqlServerDataReader<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> repository)
         {
             _readRepository = repository ?? throw new ArgumentNullException(nameof(repository));
         }

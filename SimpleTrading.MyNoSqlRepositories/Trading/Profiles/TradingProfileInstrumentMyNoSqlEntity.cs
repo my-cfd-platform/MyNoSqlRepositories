@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Profiles;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Profiles
@@ -38,7 +38,7 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
     }
 
 
-    public class TradingProfileMyNoSqlEntity : MyNoSqlTableEntity, ITradingProfile
+    public class TradingProfileMyNoSqlEntity : MyNoSqlEntity, ITradingProfile
     {
 
         public static string GeneratePartitionKey()

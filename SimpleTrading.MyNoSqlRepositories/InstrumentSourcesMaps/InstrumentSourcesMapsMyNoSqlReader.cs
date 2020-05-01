@@ -1,14 +1,13 @@
-
-using MyNoSqlServer.TcpClient.ReadRepository;
+using MyNoSqlServer.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {
     public class InstrumentSourcesMapsMyNoSqlReader
     {
-        private readonly IMyNoSqlReadRepository<InstrumentSourcesMapsMyNoSqlTableEntity> _readRepository;
+        private readonly IMyNoSqlServerDataReader<InstrumentSourcesMapsMyNoSqlTableEntity> _readRepository;
 
         public InstrumentSourcesMapsMyNoSqlReader(
-            IMyNoSqlReadRepository<InstrumentSourcesMapsMyNoSqlTableEntity> readRepository)
+            IMyNoSqlServerDataReader<InstrumentSourcesMapsMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository;
         }

@@ -1,9 +1,8 @@
-
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount
 {
-    public class InvestAmountMyNoSqlTableEntity : MyNoSqlTableEntity, IInvestAmount
+    public class InvestAmountMyNoSqlTableEntity : MyNoSqlEntity, IInvestAmount
     {
         public static string GeneratePartitionKey()
         {

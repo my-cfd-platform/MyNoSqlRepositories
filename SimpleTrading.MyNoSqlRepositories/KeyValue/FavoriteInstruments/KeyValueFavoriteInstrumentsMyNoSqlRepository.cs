@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.FavoritesInstruments;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue.FavoriteInstruments
 {
     public class KeyValueFavoriteInstrumentsMyNoSqlRepository
     {
-        private readonly IMyNoSqlServerClient<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> _table;
 
-        public KeyValueFavoriteInstrumentsMyNoSqlRepository(IMyNoSqlServerClient<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> repository)
+        public KeyValueFavoriteInstrumentsMyNoSqlRepository(IMyNoSqlServerDataWriter<KeyValueFavoriteInstrumentsMyNoSqlTableEntity> repository)
         {
             _table = repository ?? throw new ArgumentNullException(nameof(repository));
         }

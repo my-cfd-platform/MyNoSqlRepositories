@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyNoSqlServer.TcpClient;
+using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.InstrumentsGroup;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
 {
     public class InstrumentGroupsMyNoSqlRepository : IInstrumentGroupsRepository
     {
-        private readonly IMyNoSqlServerClient<InstrumentGroupMyNoSqlEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<InstrumentGroupMyNoSqlEntity> _table;
 
-        public InstrumentGroupsMyNoSqlRepository(IMyNoSqlServerClient<InstrumentGroupMyNoSqlEntity> table)
+        public InstrumentGroupsMyNoSqlRepository(IMyNoSqlServerDataWriter<InstrumentGroupMyNoSqlEntity> table)
         {
             _table = table;
         }
