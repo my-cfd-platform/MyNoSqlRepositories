@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MyNoSqlServer.Abstractions;
@@ -36,8 +37,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
 
         public string ProfileId => RowKey;
 
-        public List<MarkupItem> MarkupInstruments = new List<MarkupItem>();
-        IReadOnlyList<IMarkupItem> IMarkupProfile.MarkupInstruments => MarkupInstruments;
+        public List<MarkupItem> MarkupInstruments { get; set; }
+        IReadOnlyList<IMarkupItem> IMarkupProfile.MarkupInstruments => (IReadOnlyList<IMarkupItem>)MarkupInstruments ?? Array.Empty<IMarkupItem>();
 
         public static MarkupProfileMyNoSqlTableEntity Create(IMarkupProfile src)
         {
