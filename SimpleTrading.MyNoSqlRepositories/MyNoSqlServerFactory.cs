@@ -5,6 +5,8 @@ using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
+using SimpleTrading.MyNoSqlRepositories.KeyValue;
+using SimpleTrading.MyNoSqlRepositories.KeyValue.FavoriteInstruments;
 using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
@@ -64,10 +66,12 @@ namespace SimpleTrading.MyNoSqlRepositories
                     IsLivePrefix(isLive) + TradingGroupsTableName));
         }
 
-        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMyNoSqlRepository(Func<string> getUrl, bool isLive)
+        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMyNoSqlRepository(Func<string> getUrl,
+            bool isLive)
         {
             return new TradingGroupsMyNoSqlRepository(
-                new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(getUrl, IsLivePrefix(isLive) + TradingGroupsTableName));
+                new MyNoSqlServerClient<TradingGroupMyNoSqlEntity>(getUrl,
+                    IsLivePrefix(isLive) + TradingGroupsTableName));
         }
 
         private const string TradingProfilesTableName = "tradingprofiles";
@@ -80,7 +84,8 @@ namespace SimpleTrading.MyNoSqlRepositories
                     IsLivePrefix(isLive) + TradingProfilesTableName));
         }
 
-        public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(Func<string> getUrl, bool isLive)
+        public static TradingProfilesMyNoSqlRepository CreateTradingProfilesMyNoSqlRepository(Func<string> getUrl,
+            bool isLive)
         {
             return new TradingProfilesMyNoSqlRepository(
                 new MyNoSqlServerClient<TradingProfileMyNoSqlEntity>(getUrl,
@@ -178,7 +183,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new SwapProfileMyNoSqlReader(
                 new MyNoSqlReadRepository<SwapProfileMyNoSqlEntity>(client, SwapProfile));
         }
-        
+
         private const string InstrumentSourceMap = "instrument-sources";
 
         public static InstrumentSourcesMapsMyNoSqlReader CreateInstrumentSourceMapMyNoSqlReader(
@@ -186,7 +191,6 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new InstrumentSourcesMapsMyNoSqlReader(
                 new MyNoSqlReadRepository<InstrumentSourcesMapsMyNoSqlTableEntity>(client, InstrumentSourceMap));
-
         }
 
         public static InstrumentSourcesMapsMyNoSqlRepository CreateInstrumentSourcesMapsNoSqlRepository(
@@ -194,9 +198,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new InstrumentSourcesMapsMyNoSqlRepository(
                 new MyNoSqlServerClient<InstrumentSourcesMapsMyNoSqlTableEntity>(getUrl, InstrumentSourceMap));
-
         }
-        
 
         private const string MarkupProfiles = "markup-profiles";
 
@@ -211,6 +213,39 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new MarkupProfilesMyNoSqlRepository(
                 new MyNoSqlServerClient<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles));
+        }
+
+        private const string KeyValue = "key-value";
+
+        public static KeyValueMyNoSqlReader CreateKeyValueMyNoSqlReader(
+            this MyNoSqlTcpClient client)
+        {
+            return new KeyValueMyNoSqlReader(
+                new MyNoSqlReadRepository<KeyValueMyNoSqlTableEntity>(client, KeyValue));
+        }
+
+        public static KeyValueMyNoSqlRepository CreateKeyValueNoSqlRepository(Func<string> getUrl)
+        {
+            return new KeyValueMyNoSqlRepository(
+                new MyNoSqlServerClient<KeyValueMyNoSqlTableEntity>(getUrl, MarkupProfiles));
+        }
+
+        private const string KeyValueFavoriteInstruments = "key-value-favorite-instruments";
+
+        public static KeyValueFavoriteInstrumentsMyNoSqlReader CreateKeyValueFavoriteInstrumentsMyNoSqlReader(
+            this MyNoSqlTcpClient client)
+        {
+            return new KeyValueFavoriteInstrumentsMyNoSqlReader(
+                new MyNoSqlReadRepository<KeyValueFavoriteInstrumentsMyNoSqlTableEntity>(client,
+                    KeyValueFavoriteInstruments));
+        }
+
+        public static KeyValueFavoriteInstrumentsMyNoSqlRepository CreateKeyValueFavoriteInstrumentsNoSqlRepository(
+            Func<string> getUrl)
+        {
+            return new KeyValueFavoriteInstrumentsMyNoSqlRepository(
+                new MyNoSqlServerClient<KeyValueFavoriteInstrumentsMyNoSqlTableEntity>(getUrl,
+                    KeyValueFavoriteInstruments));
         }
     }
 
