@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
+using System.Linq;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Markups;
 
@@ -11,6 +10,16 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
         public string InstrumentId { get; set; }
         public int MarkupBid { get; set; }
         public int MarkupAsk { get; set; }
+
+        public static MarkupItem Create(IMarkupItem src)
+        {
+            return new MarkupItem
+            {
+                InstrumentId = src.InstrumentId,
+                MarkupAsk = src.MarkupAsk,
+                MarkupBid = src.MarkupBid
+            };
+        }
     }
 
     public class MarkupProfileMyNoSqlTableEntity : MyNoSqlEntity, IMarkupProfile
@@ -27,7 +36,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
 
         public string ProfileId => RowKey;
 
-        public IReadOnlyList<IMarkupItem> MarkupInstruments { get; set; }
+        public List<MarkupItem> MarkupInstruments = new List<MarkupItem>();
+        IReadOnlyList<IMarkupItem> IMarkupProfile.MarkupInstruments => MarkupInstruments;
 
         public static MarkupProfileMyNoSqlTableEntity Create(IMarkupProfile src)
         {
@@ -35,7 +45,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
             {
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.ProfileId),
-                MarkupInstruments = src.MarkupInstruments
+                MarkupInstruments = src.MarkupInstruments.Select(MarkupItem.Create).ToList()
             };
         }
     }
