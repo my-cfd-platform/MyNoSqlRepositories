@@ -3,6 +3,7 @@ using MyNoSqlServer.Abstractions;
 using MyNoSqlServer.DataReader;
 using MyNoSqlServer.DataWriter;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
+using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
@@ -212,6 +213,15 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new MarkupProfilesMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles));
+        }
+        
+        private const string AccountCache = "engine-accounts-cache";
+
+        public static AccountsCacheNoSqlWriter CreateAccountsCacheNoSqlWriter(Func<string> getUrl, string prefix)
+        {
+            return new AccountsCacheNoSqlWriter(
+                new MyNoSqlServerDataWriter<AccountsCacheNoSqlEntity>(getUrl,
+                    $"{AccountCache}-{prefix}"));
         }
     }
 
