@@ -10,6 +10,7 @@ using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
+using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
@@ -106,8 +107,20 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
         }
 
-        private const string FavoriteInstrumentsTable = "favoriteinstruments";
+        private const string InstrumentsAvatarTable = "instrumentsavatar";
 
+        public static TradingInstrumentMyNoSqlRepository CreateTradingInstrumentMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new TradingInstrumentMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<TradingInstrumentAvatarMyNoSqlEntity>(getUrl, InstrumentsAvatarTable));
+        }
+
+        public static TradingInstrumentMyNoSqlReadCache CreateTradingInstrumentMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new TradingInstrumentMyNoSqlReadCache(
+                new MyNoSqlReadRepository<TradingInstrumentAvatarMyNoSqlEntity>(connection, InstrumentsAvatarTable));
+        }
+        
         private const string InstrumentsTable = "instruments";
 
         public static InstrumentsMyNoSqlReadCache CreateInstrumentsMyNoSqlReadCache(this MyNoSqlTcpClient connection)
