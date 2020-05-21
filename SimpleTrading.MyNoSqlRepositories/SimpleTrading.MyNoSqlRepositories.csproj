@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <PackageReference Include="DotNetCoreDecorators" Version="1.0.20" />
-      <PackageReference Include="MyNoSqlServer.DataReader" Version="1.0.1" />
+      <PackageReference Include="MyNoSqlServer.DataReader" Version="1.1.1-rc-00001" />
       <PackageReference Include="MyNoSqlServer.DataWriter" Version="1.0.1" />
       <PackageReference Include="SimpleTrading.Abstraction" Version="1.1.32" />
     </ItemGroup>
