@@ -15,18 +15,18 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }
 
-        public async Task UpdateAsync(ITradingInstrumentsAvatar item, ImageTypes imageType)
+        public async Task UpdateAsync(string id, string avatar, ImageTypes imageType)
         {
-            var entity = TradingInstrumentAvatarMyNoSqlEntity.Create(item, imageType);
+            var entity = TradingInstrumentAvatarMyNoSqlEntity.Create(id, avatar, imageType);
             await _table.InsertOrReplaceAsync(entity);
         }
 
-        public async Task GetInstrumentsAvatarAsync(string id, ImageTypes imageType)
+        public async Task<ITradingInstrumentsAvatar> GetInstrumentsAvatarAsync(string id, ImageTypes imageType)
         {
             var pk = TradingInstrumentAvatarMyNoSqlEntity.GeneratePartitionKey(id);
             var rk = TradingInstrumentAvatarMyNoSqlEntity.GenerateRowKey(imageType);
 
-            await _table.GetAsync(pk, rk);
+            return await _table.GetAsync(pk, rk);
         }
     }
 }

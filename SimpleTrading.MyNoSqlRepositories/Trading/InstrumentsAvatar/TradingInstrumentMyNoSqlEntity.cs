@@ -20,13 +20,13 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar
 
         public string Avatar { get; set; }
 
-        public static TradingInstrumentAvatarMyNoSqlEntity Create(ITradingInstrumentsAvatar src, ImageTypes type)
+        public static TradingInstrumentAvatarMyNoSqlEntity Create(string id, string avatar, ImageTypes type)
         {
             return new TradingInstrumentAvatarMyNoSqlEntity
             {
-                PartitionKey = GeneratePartitionKey(src.Id),
+                PartitionKey = GeneratePartitionKey(id),
                 RowKey = GenerateRowKey(type),
-                Avatar = src.Avatar
+                Avatar = avatar
             };
         }
     }
