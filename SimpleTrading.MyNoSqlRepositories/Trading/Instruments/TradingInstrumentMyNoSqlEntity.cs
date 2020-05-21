@@ -37,10 +37,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 
         public bool TradingDisabled { get; set; }
 
-        public string? AvatarSvg { get; set; } = "";
-
-        public string? AvatarPng { get; set; } = "";
-
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
         public static TradingInstrumentMyNoSqlEntity Create(ITradingInstrument src)
@@ -60,8 +56,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 DayTimeout = src.DayTimeout,
                 NightTimeout = src.NightTimeout,
                 TradingDisabled = src.TradingDisabled,
-                AvatarSvg = src.AvatarSvg,
-                AvatarPng = src.AvatarPng,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
                     src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()
