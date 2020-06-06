@@ -6,7 +6,7 @@ using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
 {
-    public class ReportActivePositionMyNoSqlReader : IActivePositionsReader
+    public class ReportActivePositionMyNoSqlReader : IReportActivePositionsReader
     {
         private readonly IMyNoSqlServerDataReader<ReportActivePositionMyNoSqlEntity> _readRepository;
 

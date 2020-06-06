@@ -8,7 +8,7 @@ using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
 {
-    public class ReportActivePositionMyNoSqlRepository : IActivePositionsRepository
+    public class ReportActivePositionMyNoSqlRepository : IReportActivePositionsRepository
     {
         private readonly IMyNoSqlServerDataWriter<ReportActivePositionMyNoSqlEntity> _table;
 
