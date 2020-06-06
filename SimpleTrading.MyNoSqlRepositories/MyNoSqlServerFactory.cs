@@ -8,6 +8,7 @@ using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Markups;
+using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar;
@@ -75,6 +76,27 @@ namespace SimpleTrading.MyNoSqlRepositories
                     IsLivePrefix(isLive) + TradingGroupsTableName));
         }
 
+        private const string ReportActivePositionsTableName = "reportactivepositions";
+
+        public static ReportActivePositionMyNoSqlRepository CreateReportActivePositionMyNoSqlRepository(Func<string> getUrl,
+            bool isLive)
+        {
+            return new ReportActivePositionMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<ReportActivePositionMyNoSqlEntity>(
+                    getUrl,
+                    IsLivePrefix(isLive) + ReportActivePositionsTableName
+                    )
+                );
+        }
+        
+        public static ReportActivePositionMyNoSqlReader CreateReportActivePositionMyNoSqlReader(this MyNoSqlTcpClient connection,
+            bool isLive)
+        {
+            return new ReportActivePositionMyNoSqlReader(
+                new MyNoSqlReadRepository<ReportActivePositionMyNoSqlEntity>(connection,
+                    IsLivePrefix(isLive) + ReportActivePositionsTableName));
+        }
+        
         private const string TradingProfilesTableName = "tradingprofiles";
 
         public static TradingProfileMyNoSqlReader CreateTradingProfileMyNoSqlReader(this MyNoSqlTcpClient connection,
