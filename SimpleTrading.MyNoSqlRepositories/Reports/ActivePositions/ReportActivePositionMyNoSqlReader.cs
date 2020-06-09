@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DotNetCoreDecorators;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Reports.ActivePositions;
 using SimpleTrading.Abstraction.Trading.Positions;
@@ -15,9 +16,21 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
             _readRepository = readRepository ?? throw new ArgumentNullException(nameof(readRepository));
         }
 
-        public IReadOnlyList<ITradeOrder> Get()
+
+        public IReadOnlyList<ITradeOrder> Get(string accountId)
         {
             var pk = ReportActivePositionMyNoSqlEntity.GeneratePartitionKey();
+            var rk = ReportActivePositionMyNoSqlEntity.GenerateRowKey(accountId);
+
+            var entity = _readRepository.Get(pk, rk);
+
+            return entity.ActivePositions.AsReadOnlyList();
+        }
+
+        public IReadOnlyList<IActivePositionsSnapshot> Get()
+        {
+            var pk = ReportActivePositionMyNoSqlEntity.GeneratePartitionKey();
+
             return _readRepository.Get(pk);
         }
     }

@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Reports.ActivePositions;
-using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
 {
@@ -17,17 +14,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }
 
-        public async Task<IEnumerable<ITradeOrder>> GetAllAsync()
+        public async Task SaveAsync(IActivePositionsSnapshot snapshot)
         {
-            var pk = ReportActivePositionMyNoSqlEntity.GeneratePartitionKey();
+            var entity = ReportActivePositionMyNoSqlEntity.Create(snapshot);
 
-            return await _table.GetAsync(pk);
-        }
-
-        public async Task SaveAsync(IEnumerable<ITradeOrder> orders)
-        {
-            var myNoSqlEntities = orders.Select(ReportActivePositionMyNoSqlEntity.Create);
-            await _table.CleanAndBulkInsertAsync(myNoSqlEntities);
+            await _table.InsertOrReplaceAsync(entity);
         }
     }
 }
