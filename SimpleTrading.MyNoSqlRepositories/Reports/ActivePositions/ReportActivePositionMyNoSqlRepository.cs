@@ -27,7 +27,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
         public async Task SaveAsync(IEnumerable<ITradeOrder> orders)
         {
             var myNoSqlEntities = orders.Select(ReportActivePositionMyNoSqlEntity.Create);
-            await _table.BulkInsertOrReplaceAsync(myNoSqlEntities);
+            await _table.CleanAndBulkInsertAsync(myNoSqlEntities);
         }
     }
 }
