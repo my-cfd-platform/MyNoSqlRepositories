@@ -4,7 +4,7 @@ using SimpleTrading.Abstraction.Common.Countries;
 
 namespace SimpleTrading.MyNoSqlRepositories.Countries
 {
-    public class CountryMyNoSqlTableEntity : MyNoSqlEntity, ICountry
+    public class CountryMyNoSqlTableEntity : MyNoSqlDbEntity, ICountry
     {
         public static string GeneratePartitionKey(Languages lang)
         {

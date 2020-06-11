@@ -38,7 +38,7 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
     }
 
 
-    public class TradingProfileMyNoSqlEntity : MyNoSqlEntity, ITradingProfile
+    public class TradingProfileMyNoSqlEntity : MyNoSqlDbEntity, ITradingProfile
     {
 
         public static string GeneratePartitionKey()

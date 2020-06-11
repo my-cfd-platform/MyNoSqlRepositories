@@ -4,7 +4,7 @@ using SimpleTrading.Abstraction.Common.Default;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
-    public class DefaultValueMyNoSqlTableEntity : MyNoSqlEntity, IDefaultValue
+    public class DefaultValueMyNoSqlTableEntity : MyNoSqlDbEntity, IDefaultValue
     {
         public static string GeneratePartitionKey()
         {

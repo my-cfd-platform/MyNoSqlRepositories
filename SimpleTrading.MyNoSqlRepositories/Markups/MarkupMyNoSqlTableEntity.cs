@@ -23,7 +23,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
         }
     }
 
-    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlEntity, IMarkupProfile
+    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlDbEntity, IMarkupProfile
     {
         public static string GeneratePartitionKey()
         {

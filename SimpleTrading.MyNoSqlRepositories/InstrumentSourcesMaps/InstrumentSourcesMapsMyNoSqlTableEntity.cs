@@ -3,7 +3,7 @@ using SimpleTrading.Abstraction.Trading;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {
-    public class InstrumentSourcesMapsMyNoSqlTableEntity : MyNoSqlEntity, IQuoteFeedSource
+    public class InstrumentSourcesMapsMyNoSqlTableEntity : MyNoSqlDbEntity, IQuoteFeedSource
     {
         public static string GeneratePartitionKey()
         {
