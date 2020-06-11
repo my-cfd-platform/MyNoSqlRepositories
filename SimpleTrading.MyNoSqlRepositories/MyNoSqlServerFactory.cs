@@ -264,7 +264,7 @@ namespace SimpleTrading.MyNoSqlRepositories
     {
         public static IMyNoSqlServerDataReader<T> ToMyNoSqlReadRepository<T>(this IMyNoSqlSubscriber connection,
             string tableName)
-            where T : IMyNoSqlDbEntity
+            where T : IMyNoSqlEntity
         {
             return new MyNoSqlReadRepository<T>(connection, tableName);
         }

@@ -3,7 +3,7 @@ using SimpleTrading.Abstraction.BidAsk;
 
 namespace SimpleTrading.MyNoSqlRepositories.BidAsk
 {
-    public class PriceChangeMyNoSqlEntity : MyNoSqlDbEntity, IPriceChange
+    public class PriceChangeMyNoSqlEntity : MyNoSqlEntity, IPriceChange
     {
         public static string GeneratePartitionKey()
         {

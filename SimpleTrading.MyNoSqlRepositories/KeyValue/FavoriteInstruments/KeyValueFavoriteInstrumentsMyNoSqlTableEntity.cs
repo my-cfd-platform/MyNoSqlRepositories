@@ -3,7 +3,7 @@ using SimpleTrading.Abstraction.Trading.FavoritesInstruments;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue.FavoriteInstruments
 {
-    public class KeyValueFavoriteInstrumentsMyNoSqlTableEntity : MyNoSqlDbEntity
+    public class KeyValueFavoriteInstrumentsMyNoSqlTableEntity : MyNoSqlEntity
     {
         public static string GeneratePartitionKey(string traderId)
         {

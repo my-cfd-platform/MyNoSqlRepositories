@@ -6,7 +6,7 @@ using SimpleTrading.Abstraction.Trading.Settings;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 {
-    public class TradingInstrumentMyNoSqlEntity : MyNoSqlDbEntity, ITradingInstrument
+    public class TradingInstrumentMyNoSqlEntity : MyNoSqlEntity, ITradingInstrument
     {
         public static string GeneratePartitionKey()
         {

@@ -4,7 +4,7 @@ using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
-    public class SwapScheduleMyNoSqlEntity : MyNoSqlDbEntity, ISwapSchedule
+    public class SwapScheduleMyNoSqlEntity : MyNoSqlEntity, ISwapSchedule
     {
 
         public static string GeneratePartitionKey(string id)

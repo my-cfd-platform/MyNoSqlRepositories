@@ -2,7 +2,7 @@ using MyNoSqlServer.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.KeyValue
 {
-    public class KeyValueMyNoSqlTableEntity : MyNoSqlDbEntity
+    public class KeyValueMyNoSqlTableEntity : MyNoSqlEntity
     {
         public static string GeneratePartitionKey(string traderId)
         {

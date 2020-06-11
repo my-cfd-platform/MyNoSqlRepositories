@@ -6,7 +6,7 @@ using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
 {
-    public class ReportActivePositionMyNoSqlEntity : MyNoSqlDbEntity, IActivePositionsSnapshot
+    public class ReportActivePositionMyNoSqlEntity : MyNoSqlEntity, IActivePositionsSnapshot
     {
         public static string GeneratePartitionKey()
         {

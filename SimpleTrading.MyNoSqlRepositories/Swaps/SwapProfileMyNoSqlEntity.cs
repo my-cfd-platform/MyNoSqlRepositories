@@ -3,7 +3,7 @@ using SimpleTrading.Abstraction.Trading.Swaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Swaps
 {
-    public class SwapProfileMyNoSqlEntity : MyNoSqlDbEntity, ISwapProfile
+    public class SwapProfileMyNoSqlEntity : MyNoSqlEntity, ISwapProfile
     {
 
         public static string GeneratePartitionKey(string id)

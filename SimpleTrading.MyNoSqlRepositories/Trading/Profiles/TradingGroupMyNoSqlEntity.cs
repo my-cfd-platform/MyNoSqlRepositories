@@ -3,7 +3,7 @@ using SimpleTrading.Abstraction.Trading;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.Profiles
 {
-    public class TradingGroupMyNoSqlEntity : MyNoSqlDbEntity, ITradingGroup
+    public class TradingGroupMyNoSqlEntity : MyNoSqlEntity, ITradingGroup
     {
         public static string GeneratePartitionKey()
         {

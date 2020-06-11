@@ -4,7 +4,7 @@ using SimpleTrading.Abstraction.Trading.InstrumentsAvatar;
 
 namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar
 {
-    public class TradingInstrumentAvatarMyNoSqlEntity : MyNoSqlDbEntity, ITradingInstrumentsAvatar
+    public class TradingInstrumentAvatarMyNoSqlEntity : MyNoSqlEntity, ITradingInstrumentsAvatar
     {
         public static string GeneratePartitionKey(string id)
         {
