@@ -32,8 +32,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
         public double ClosePrice { get; set; }
         
         public ClosePositionReason CloseReason { get; set; }
-        public IBidAsk CloseBidAsk { get; set; }
-        public IBidAsk OpenBidAsk { get; set; }
+        public BidAskEntity CloseBidAsk { get; set; }
+        public BidAskEntity OpenBidAsk { get; set; }
+
+        IBidAsk ITradeOrder.CloseBidAsk => CloseBidAsk;
+        IBidAsk ITradeOrder.OpenBidAsk => OpenBidAsk;
+        
         public PositionOperation Operation { get; set; }
         public PositionOrderType PositionOrderType { get; set; }
         
@@ -67,6 +71,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
                 CloseDate = src.CloseDate,
                 ClosePrice = src.ClosePrice,
                 
+                CloseBidAsk = BidAskEntity.Create(src.CloseBidAsk),
+                OpenBidAsk = BidAskEntity.Create(src.OpenBidAsk),
                 Commissions = src.Commissions.Select(CommissionsEntity.Create).ToList(),
                 Swaps = src.Swaps.Select(PositionSwapEntity.Create).ToList()
             };
