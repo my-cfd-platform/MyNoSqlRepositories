@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Reports.ActivePositions;
 using SimpleTrading.Abstraction.Trading.Positions;
+using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder;
 
 namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
 {
@@ -24,7 +26,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
         
         public DateTime DateTime { get; set; }
         
-        public IEnumerable<ITradeOrder> ActivePositions { get; set; }
+        public List<TradeOrderReportEntity> ActivePositions { get; set; }
+
+        IEnumerable<ITradeOrder> IActivePositionsSnapshot.ActivePositions => ActivePositions;
 
         public static ReportActivePositionMyNoSqlEntity Create(IActivePositionsSnapshot src)
         {
@@ -34,7 +38,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
                 RowKey = GenerateRowKey(src.AccountId),
                 TraderId = src.TraderId,
                 DateTime = src.DateTime,
-                ActivePositions = src.ActivePositions
+                ActivePositions = src.ActivePositions.Select(TradeOrderReportEntity.Create).ToList()
             };
         }
     }
