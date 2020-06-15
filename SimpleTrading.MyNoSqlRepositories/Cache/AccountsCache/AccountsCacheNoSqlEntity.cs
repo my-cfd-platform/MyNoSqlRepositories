@@ -4,7 +4,7 @@ using SimpleTrading.Abstraction.Accounts;
 
 namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
 {
-    public class AccountsCacheNoSqlEntity : MyNoSqlEntity, ITradingAccount
+    public class AccountsCacheNoSqlEntity : MyNoSqlDbEntity, ITradingAccount
     {
         public static string GeneratePartitionKey(string traderId)
         {
@@ -27,7 +27,10 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
         public string CommissionGroup { get; set; }
         public string ExecutionGroup { get; set; }
         public string LeverageGroup { get; set; }
+        
         public DateTime CreatedAt { get; set; }
+        
+        public DateTime TimeStamp { get; set; }
         public bool TradingDisabled { get; set; }
 
         public static AccountsCacheNoSqlEntity Create(ITradingAccount src)
@@ -47,7 +50,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
                 ExecutionGroup = src.ExecutionGroup,
                 LeverageGroup = src.LeverageGroup,
                 TraderId = src.TraderId,
-                TradingDisabled = src.TradingDisabled
+                TradingDisabled = src.TradingDisabled,
+                CreatedAt = src.CreatedAt,
+                TimeStamp = src.TimeStamp
             };
         }
     }

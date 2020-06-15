@@ -8,7 +8,7 @@ using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder;
 
 namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
 {
-    public class ReportActivePositionMyNoSqlEntity : MyNoSqlEntity, IActivePositionsSnapshot
+    public class ReportActivePositionMyNoSqlEntity : MyNoSqlDbEntity, IActivePositionsSnapshot
     {
         public static string GeneratePartitionKey()
         {
