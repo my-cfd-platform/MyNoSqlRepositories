@@ -2,6 +2,7 @@ using System;
 using MyNoSqlServer.Abstractions;
 using MyNoSqlServer.DataReader;
 using MyNoSqlServer.DataWriter;
+using SimpleTrading.MyNoSqlRepositories.Auth.Restriction;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
 using SimpleTrading.MyNoSqlRepositories.Countries;
@@ -95,6 +96,15 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new ReportActivePositionMyNoSqlReader(
                 new MyNoSqlReadRepository<ReportActivePositionMyNoSqlEntity>(connection,
                     IsLivePrefix(isLive) + ReportActivePositionsTableName));
+        }
+
+        private const string AuthRestrictionTableName = "auth-restriction";
+        
+        public static AuthRestrictionMyNoSqlTableRepository CreateAuthRestrictionMyNoSqlTableRepository(Func<string> getUrl)
+        {
+            return new AuthRestrictionMyNoSqlTableRepository(
+                new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlTableEntity>(getUrl, AuthRestrictionTableName)
+                );
         }
         
         private const string TradingProfilesTableName = "tradingprofiles";
