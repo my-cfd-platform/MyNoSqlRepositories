@@ -17,8 +17,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
 
         public IMarkupProfile Get(string profileId)
         {
-            var partitionKey = InstrumentSourcesMapsMyNoSqlTableEntity.GeneratePartitionKey();
-            var rowKey = InstrumentSourcesMapsMyNoSqlTableEntity.GenerateRowKey(profileId);
+            var partitionKey = MarkupProfileMyNoSqlTableEntity.GeneratePartitionKey();
+            var rowKey = MarkupProfileMyNoSqlTableEntity.GenerateRowKey(profileId);
 
             return _readRepository.Get(partitionKey, rowKey);
         }
