@@ -71,6 +71,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
                 CloseDate = src.CloseDate,
                 ClosePrice = src.ClosePrice,
                 
+                Operation = src.Operation,
+                PositionOrderType = src.PositionOrderType,
                 CloseBidAsk = BidAskEntity.Create(src.CloseBidAsk),
                 OpenBidAsk = BidAskEntity.Create(src.OpenBidAsk),
                 Commissions = src.Commissions.Select(CommissionsEntity.Create).ToList(),
