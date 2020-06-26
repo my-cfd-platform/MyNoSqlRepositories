@@ -6,7 +6,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
     public static class SwapScheduleMappers
     {
         
-        private static readonly Dictionary<char, DayOfWeek> _mapperDayOfWeek = new Dictionary<char, DayOfWeek>
+        private static readonly Dictionary<char, DayOfWeek> MapperDayOfWeek = new Dictionary<char, DayOfWeek>
         {
             ['0'] = DayOfWeek.Sunday,
             ['1'] = DayOfWeek.Monday,
@@ -25,7 +25,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Swaps
 
         public static DayOfWeek GetDayOfWeekFromRowKey(this string rowKey)
         {
-            return _mapperDayOfWeek[rowKey[0]];
+            return MapperDayOfWeek[rowKey[0]];
         }
         
         public static string GetTimeFromRowKey(this string rowKey)
