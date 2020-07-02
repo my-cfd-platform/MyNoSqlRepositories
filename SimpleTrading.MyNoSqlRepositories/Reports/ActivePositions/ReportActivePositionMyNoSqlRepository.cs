@@ -25,7 +25,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
         public async Task<IEnumerable<IActivePositionsSnapshot>> GetAsync(string accountId)
         {
             var pk = ReportActivePositionMyNoSqlEntity.GeneratePartitionKey();
-            var rk = ReportActivePositionMyNoSqlEntity.GenerateRowKey(accountId);
 
             return await _table.GetAsync(pk);        
         }

@@ -1,7 +1,6 @@
 using MyNoSqlServer.Abstractions;
 using MyNoSqlServer.DataReader;
 using SimpleTrading.Abstraction.Markups;
-using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 
 namespace SimpleTrading.MyNoSqlRepositories.Markups
 {
