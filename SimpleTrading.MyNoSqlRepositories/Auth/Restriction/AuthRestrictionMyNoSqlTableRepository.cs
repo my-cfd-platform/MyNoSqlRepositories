@@ -14,30 +14,33 @@ namespace SimpleTrading.MyNoSqlRepositories.Auth.Restriction
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }
         
-        public async Task AddAsync(string email, string ip)
+        public async Task<IAuthRestriction> AddAsync(string email, string ip, DateTime dateTime)
         {
-            var entity = AuthRestrictionMyNoSqlTableEntity.Create(email, ip, 0, DateTime.Now);
+            var entity = AuthRestrictionMyNoSqlTableEntity.Create(email, ip, 0, dateTime);
 
             await _table.InsertOrReplaceAsync(entity);
+
+            return entity;
         }
 
-        public async Task<IAuthRestriction> GetAsync(string email, string ip)
-        {
-            var pk = AuthRestrictionMyNoSqlTableEntity.GeneratePartitionKey(email);
-            var rk = AuthRestrictionMyNoSqlTableEntity.GenerateRowKey(ip);
-
-            return await _table.GetAsync(pk, rk);
-        }
-
-        public async Task UpdateAsync(string email, string ip, int count, DateTime dt)
+        public async Task<IAuthRestriction> GetAsync(string email, string ip, DateTime dateTime)
         {
             var pk = AuthRestrictionMyNoSqlTableEntity.GeneratePartitionKey(email);
             var rk = AuthRestrictionMyNoSqlTableEntity.GenerateRowKey(ip);
 
             var entity = await _table.GetAsync(pk, rk);
+            
+            if (entity != null)
+                return entity;
 
-            entity.Counter = count;
-            entity.DateTime = dt;
+            var createdEntity = await AddAsync(email, ip, dateTime);
+            
+            return createdEntity;
+        }
+
+        public async Task UpdateAsync(IAuthRestriction restriction)
+        {
+            var entity = AuthRestrictionMyNoSqlTableEntity.Create(restriction);
             
             await _table.InsertOrReplaceAsync(entity);
         }

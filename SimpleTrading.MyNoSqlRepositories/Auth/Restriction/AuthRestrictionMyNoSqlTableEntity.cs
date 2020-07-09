@@ -34,5 +34,16 @@ namespace SimpleTrading.MyNoSqlRepositories.Auth.Restriction
                 Counter = counter
             };
         }
+
+        public static AuthRestrictionMyNoSqlTableEntity Create(IAuthRestriction src)
+        {
+            return new AuthRestrictionMyNoSqlTableEntity
+            {
+                PartitionKey = GeneratePartitionKey(src.Ip),
+                RowKey = GenerateRowKey(src.Email),
+                DateTime = src.DateTime,
+                Counter = src.Counter
+            };
+        }
     }
 }
