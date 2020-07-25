@@ -12,9 +12,13 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
         public BidAskMyNoSqlCache(IMyNoSqlServerDataReader<BidAskMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository;
-            _readRepository.SubscribeToChanges(items =>
+            _readRepository.SubscribeToUpdateEvents(items =>
             {
                 foreach (var sub in _subscribersOnChanges)
+                    sub(items);
+            }, items =>
+            {
+                foreach (var sub in _subscribersOnDelete)
                     sub(items);
             });
         }
@@ -39,6 +43,14 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
             = new List<Action<IReadOnlyList<IBidAsk>>>();
 
         public void SubscribeOnChanges(Action<IReadOnlyList<IBidAsk>> bidAskChanges)
+        {
+            _subscribersOnChanges.Add(bidAskChanges);
+        }
+        
+        private readonly List<Action<IReadOnlyList<IBidAsk>>> _subscribersOnDelete 
+            = new List<Action<IReadOnlyList<IBidAsk>>>();
+
+        public void SubscribeOnDelete(Action<IReadOnlyList<IBidAsk>> bidAskChanges)
         {
             _subscribersOnChanges.Add(bidAskChanges);
         }
