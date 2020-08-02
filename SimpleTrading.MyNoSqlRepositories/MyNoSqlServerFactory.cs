@@ -7,6 +7,7 @@ using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
+using SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
@@ -151,6 +152,18 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new TradingInstrumentMyNoSqlReadCache(
                 new MyNoSqlReadRepository<TradingInstrumentAvatarMyNoSqlEntity>(connection, InstrumentsAvatarTable));
+        }
+
+        private const string EmailTemplatesTable = "emailtemplates";
+
+        public static EmailTemplatesMyNoSqlReader CreateEmailTemplatesMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new EmailTemplatesMyNoSqlReader(new MyNoSqlReadRepository<EmailTemplatesMyNoSqlEntity>(connection, EmailTemplatesTable));
+        }
+        
+        public static EmailTemplatesMyNoSqlRepository CreateEmailTemplatesMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new EmailTemplatesMyNoSqlRepository(new MyNoSqlServerDataWriter<EmailTemplatesMyNoSqlEntity>(getUrl, EmailTemplatesTable));
         }
         
         private const string InstrumentsTable = "instruments";
