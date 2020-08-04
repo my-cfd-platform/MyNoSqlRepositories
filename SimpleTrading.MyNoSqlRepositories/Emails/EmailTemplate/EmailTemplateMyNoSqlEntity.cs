@@ -26,8 +26,10 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         public string TemplateId { get; set; }
         
         public string Subject { get; set; }
+        
+        public string Expires { get; set; }
 
-        public static EmailTemplatesMyNoSqlEntity Create(string brandId, EmailTypes emailType, Languages language, string templateId, string subject)
+        public static EmailTemplatesMyNoSqlEntity Create(string brandId, EmailTypes emailType, Languages language, string templateId, string subject, string expires)
         {
             return new EmailTemplatesMyNoSqlEntity
             {
@@ -36,7 +38,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
                 EmailType = emailType,
                 Language = language,
                 TemplateId = templateId,
-                Subject = subject
+                Subject = subject,
+                Expires = expires
             };
         }
     }
