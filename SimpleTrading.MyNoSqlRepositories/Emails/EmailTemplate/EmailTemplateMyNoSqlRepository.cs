@@ -16,9 +16,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
             _table = table;
         }
         
-        public async Task SaveAsync(string brandId, EmailTypes emailType, Languages language, string templateId)
+        public async Task SaveAsync(string brandId, EmailTypes emailType, Languages language, string templateId, string subject)
         {
-            var entity = EmailTemplatesMyNoSqlEntity.Create(brandId, emailType, language, templateId);
+            var entity = EmailTemplatesMyNoSqlEntity.Create(brandId, emailType, language, templateId, subject);
 
             await _table.InsertOrReplaceAsync(entity);
         }

@@ -24,8 +24,10 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         public Languages Language { get; set; }
         
         public string TemplateId { get; set; }
+        
+        public string Subject { get; set; }
 
-        public static EmailTemplatesMyNoSqlEntity Create(string brandId, EmailTypes emailType, Languages language, string templateId)
+        public static EmailTemplatesMyNoSqlEntity Create(string brandId, EmailTypes emailType, Languages language, string templateId, string subject)
         {
             return new EmailTemplatesMyNoSqlEntity
             {
@@ -33,7 +35,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
                 PartitionKey = GeneratePartitionKey(emailType, language),
                 EmailType = emailType,
                 Language = language,
-                TemplateId = templateId
+                TemplateId = templateId,
+                Subject = subject
             };
         }
     }
