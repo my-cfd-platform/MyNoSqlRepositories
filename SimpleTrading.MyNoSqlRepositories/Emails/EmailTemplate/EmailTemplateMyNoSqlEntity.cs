@@ -19,6 +19,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         
         public string BrandId => RowKey;
         
+        public string RedirectUrl { get; set; }
+
         public EmailTypes EmailType { get; set; }
         
         public Languages Language { get; set; }
@@ -29,7 +31,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         
         public string TokenExpires { get; set; }
 
-        public static EmailTemplatesMyNoSqlEntity Create(string brandId, EmailTypes emailType, Languages language, string templateId, string subject, string tokenExpires)
+        public static EmailTemplatesMyNoSqlEntity Create(string brandId, EmailTypes emailType, Languages language, string templateId, string subject, string tokenExpires, string redirectUrl)
         {
             return new EmailTemplatesMyNoSqlEntity
             {
@@ -39,7 +41,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
                 Language = language,
                 TemplateId = templateId,
                 Subject = subject,
-                TokenExpires = tokenExpires
+                TokenExpires = tokenExpires,
+                RedirectUrl = redirectUrl
             };
         }
     }
