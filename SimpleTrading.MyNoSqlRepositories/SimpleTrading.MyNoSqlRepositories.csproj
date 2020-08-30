@@ -2,12 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.2.25</Version>
+        <Version>1.2.26</Version>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="DotNetCoreDecorators" Version="1.0.20" />
-      <PackageReference Include="MyNoSqlServer.DataReader" Version="1.2.14" />
+      <PackageReference Include="MyNoSqlServer.DataReader" Version="1.2.16" />
       <PackageReference Include="MyNoSqlServer.DataWriter" Version="1.2.6" />
       <PackageReference Include="SimpleTrading.Abstraction" Version="1.1.90" />
     </ItemGroup>
