@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Common.Default;
@@ -14,25 +13,166 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }
-        
-        public async Task<IEnumerable<IDefaultValue>> GetAllAsync()
+
+
+        public ValueTask SetTradingInstrumentAvatarSvgAsync(string value)
         {
-            var partitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
-            return await _table.GetAsync(partitionKey);
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsTradingInstrumentAvatarSvg(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
         }
 
-        public async Task UpdateAsync(IDefaultValue defaultValue)
+        public async ValueTask<string> GetTradingInstrumentAvatarSvgAsync()
         {
-            var entity = DefaultValueMyNoSqlTableEntity.Create(defaultValue);
-            await _table.InsertOrReplaceAsync(entity);
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsTradingInstrumentAvatarSvg();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
         }
 
-        public async Task<IDefaultValue> GetByTypeAsync(DefaultValueTypes type)
+        public ValueTask SetTradingInstrumentAvatarPngAsync(string value)
         {
-            var partitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
-            var rowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKey(type);
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsTradingInstrumentAvatarPng(),
+                Value = value
+            };
 
-            return await _table.GetAsync(partitionKey, rowKey);
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetTradingInstrumentAvatarPngAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsTradingInstrumentAvatarPng();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+
+        public ValueTask SetPaymentMethodSvgAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsPaymentMethodSvg(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetPaymentMethodSvgAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsPaymentMethodSvg();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+
+        public ValueTask SetPaymentMethodPngAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsPaymentMethodPng(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetPaymentMethodPngAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsPaymentMethodPng();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+
+        public ValueTask SetLiquidityProviderIdAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetLiquidityProviderIdAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+
+        public ValueTask SetDefaultLanguageAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsDefaultLanguage(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetDefaultLanguageAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsDefaultLanguage();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+
+        public ValueTask SetCountryOfRegistrationAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsCountryOfRegistration(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetCountryOfRegistrationAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsCountryOfRegistration();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+
+        public ValueTask SetMarkupProfileAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsMarkupProfile(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async ValueTask<string> GetMarkupProfileAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsMarkupProfile();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
         }
     }
 }
