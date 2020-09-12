@@ -1,15 +1,15 @@
 using System;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Common.Default;
+using SimpleTrading.Abstraction.DefaultValues;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
-    public class DefaultValuesMyNoSqlRepository : IDefaultValuesRepository
+    public class DefaultValuesMyNoSqlWriter : IDefaultValuesRepository, ILiquidityProviderWriter, IMarkupProfileWriter
     {
         private readonly IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> _table;
 
-        public DefaultValuesMyNoSqlRepository(IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> table)
+        public DefaultValuesMyNoSqlWriter(IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> table)
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
         }
@@ -95,25 +95,6 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             return (await _table.GetAsync(pk, rk))?.Value;
         }
 
-        public ValueTask SetLiquidityProviderIdAsync(string value)
-        {
-            var entity = new DefaultValueMyNoSqlTableEntity
-            {
-                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
-                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId(),
-                Value = value
-            };
-
-            return _table.InsertOrReplaceAsync(entity);
-        }
-
-        public async ValueTask<string> GetLiquidityProviderIdAsync()
-        {
-            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
-            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId();
-
-            return (await _table.GetAsync(pk, rk))?.Value;
-        }
 
         public ValueTask SetDefaultLanguageAsync(string value)
         {
@@ -155,7 +136,28 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             return (await _table.GetAsync(pk, rk))?.Value;
         }
 
-        public ValueTask SetMarkupProfileAsync(string value)
+
+        ValueTask ILiquidityProviderWriter.SetAsync(string value)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId(),
+                Value = value
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+
+        async ValueTask<string> ILiquidityProviderWriter.GetAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId();
+
+            return (await _table.GetAsync(pk, rk))?.Value;
+        }
+        
+        ValueTask IMarkupProfileWriter.SetAsync(string value)
         {
             var entity = new DefaultValueMyNoSqlTableEntity
             {
@@ -167,7 +169,7 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             return _table.InsertOrReplaceAsync(entity);
         }
 
-        public async ValueTask<string> GetMarkupProfileAsync()
+        async ValueTask<string> IMarkupProfileWriter.GetAsync()
         {
             var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
             var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsMarkupProfile();

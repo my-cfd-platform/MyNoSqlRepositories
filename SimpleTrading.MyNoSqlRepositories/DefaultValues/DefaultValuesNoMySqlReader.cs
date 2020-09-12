@@ -1,27 +1,19 @@
 using System;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Common.Default;
+using SimpleTrading.Abstraction.DefaultValues;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
-    public class DefaultValuesNoMySqlReader : IDefaultValuesReader
+    public class DefaultValuesMyNoSqlReader : IDefaultValuesReader, ILiquidityProviderReader, IMarkupProfileReader
     {
         private readonly IMyNoSqlServerDataReader<DefaultValueMyNoSqlTableEntity> _readRepository;
 
-        public DefaultValuesNoMySqlReader(IMyNoSqlServerDataReader<DefaultValueMyNoSqlTableEntity> readRepository)
+        public DefaultValuesMyNoSqlReader(IMyNoSqlServerDataReader<DefaultValueMyNoSqlTableEntity> readRepository)
         {
             _readRepository = readRepository ?? throw new ArgumentNullException(nameof(readRepository));
         }
 
-        /*
-        public IDefaultValue Get(DefaultValueTypes type)
-        {
-            var partitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
-            var rowKey = DefaultValueMyNoSqlTableEntity.GenerateRowKey(type);
 
-            return _readRepository.Get(partitionKey, rowKey);
-        }
-        */
         public string GetTradingInstrumentAvatarSvg()
         {
             var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
@@ -49,13 +41,7 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsPaymentMethodPng();
             return _readRepository.Get(pk, rk)?.Value;
         }
-
-        public string GetLiquidityProviderId()
-        {
-            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
-            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId();
-            return _readRepository.Get(pk, rk)?.Value;
-        }
+        
 
         public string GetDefaultLanguage()
         {
@@ -71,7 +57,14 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             return _readRepository.Get(pk, rk)?.Value;
         }
 
-        public string GetMarkupProfile()
+        string ILiquidityProviderReader.Get()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId();
+            return _readRepository.Get(pk, rk)?.Value;
+        }
+
+        string IMarkupProfileReader.Get()
         {
             var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
             var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsMarkupProfile();

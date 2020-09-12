@@ -128,15 +128,15 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string DefaultsValuesTable = "defaultvalues";
 
-        public static DefaultValuesMyNoSqlRepository CreateDefaultValueMyNoSqlRepository(Func<string> getUrl)
+        public static DefaultValuesMyNoSqlWriter CreateDefaultValueMyNoSqlRepository(Func<string> getUrl)
         {
-            return new DefaultValuesMyNoSqlRepository(
+            return new DefaultValuesMyNoSqlWriter(
                 new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable));
         }
 
-        public static DefaultValuesNoMySqlReader CreateDefaultValuesNoMySqlReader(this MyNoSqlTcpClient connection)
+        public static DefaultValuesMyNoSqlReader CreateDefaultValuesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
-            return new DefaultValuesNoMySqlReader(
+            return new DefaultValuesMyNoSqlReader(
                 new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
         }
 
