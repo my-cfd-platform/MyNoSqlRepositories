@@ -1,8 +1,8 @@
 using System;
 using MyDependencies;
 using MyNoSqlServer.DataReader;
-using SimpleTrading.Abstraction.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
+using SimpleTrading.QuotesFeedRouter.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories
 {
@@ -18,17 +18,29 @@ namespace SimpleTrading.MyNoSqlRepositories
             _reader = reader;
         }
 
-        public DefaultValueReaderBinderHelper BindMarkupProfiles()
+        public DefaultValueReaderBinderHelper BindDefaultMarkupProfiles()
         {
-            _sr.Register<IMarkupProfileReader>(_reader);
+            _sr.Register<IDefaultMarkupProfileReader>(_reader);
             return this;
         }
         
-        public DefaultValueReaderBinderHelper BindLiquidityProviders()
+        public DefaultValueReaderBinderHelper BindDefaultLiquidityProviders()
         {
-            _sr.Register<ILiquidityProviderReader>(_reader);
+            _sr.Register<IDefaultLiquidityProviderReader>(_reader);
             return this;
         }
+        
+        public DefaultValueReaderBinderHelper BindDefaultBackupLiquidityProvidersReader()
+        {
+            _sr.Register<IDefaultBackupLiquidityProvidersReader>(_reader);
+            return this;
+        }
+        
+        public DefaultValueReaderBinderHelper BindQuotesFeedRouterBackupTimeoutReader()
+        {
+            _sr.Register<IQuotesFeedRouterBackupTimeoutReader>(_reader);
+            return this;
+        }        
 
         public IServiceRegistrator Build()
         {
@@ -49,15 +61,28 @@ namespace SimpleTrading.MyNoSqlRepositories
         
         public DefaultValueWriterBinderHelper BindMarkupProfiles()
         {
-            _sr.Register<IMarkupProfileWriter>(_writer);
+            _sr.Register<IDefaultMarkupProfileWriter>(_writer);
             return this;
         }
         
         public DefaultValueWriterBinderHelper BindLiquidityProviders()
         {
-            _sr.Register<ILiquidityProviderWriter>(_writer);
+            _sr.Register<IDefaultLiquidityProviderWriter>(_writer);
             return this;
         }
+        
+        public DefaultValueWriterBinderHelper BindDefaultBackupLiquidityProvidersReaderWriter()
+        {
+            _sr.Register<IDefaultBackupLiquidityProvidersWriter>(_writer);
+            return this;
+        }
+        
+        public DefaultValueWriterBinderHelper BindQuotesFeedRouterBackupTimeoutWriter()
+        {
+            _sr.Register<IQuotesFeedRouterBackupTimeoutWriter>(_writer);
+            return this;
+        }        
+
 
         public IServiceRegistrator Build()
         {

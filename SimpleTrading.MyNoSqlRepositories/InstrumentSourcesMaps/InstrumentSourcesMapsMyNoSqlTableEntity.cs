@@ -1,5 +1,5 @@
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Trading;
+using SimpleTrading.QuotesFeedRouter.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {

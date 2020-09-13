@@ -1,17 +1,25 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.DefaultValues;
+using SimpleTrading.QuotesFeedRouter.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
 {
-    public class DefaultValuesMyNoSqlWriter : IDefaultValuesRepository, ILiquidityProviderWriter, IMarkupProfileWriter
+    public class DefaultValuesMyNoSqlWriter : IDefaultValuesRepository, IDefaultLiquidityProviderWriter, 
+        IDefaultMarkupProfileWriter, IDefaultBackupLiquidityProvidersWriter,
+        IQuotesFeedRouterBackupTimeoutWriter
     {
         private readonly IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> _table;
+        private readonly IMyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity> _tableTimeSpan;
 
-        public DefaultValuesMyNoSqlWriter(IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> table)
+        public DefaultValuesMyNoSqlWriter(IMyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity> table,
+            IMyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity> tableTimeSpan)
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
+            _tableTimeSpan = tableTimeSpan;
         }
 
 
@@ -137,7 +145,7 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
         }
 
 
-        ValueTask ILiquidityProviderWriter.SetAsync(string value)
+        ValueTask IDefaultLiquidityProviderWriter.SetAsync(string value)
         {
             var entity = new DefaultValueMyNoSqlTableEntity
             {
@@ -149,15 +157,18 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             return _table.InsertOrReplaceAsync(entity);
         }
 
-        async ValueTask<string> ILiquidityProviderWriter.GetAsync()
+
+        async ValueTask<string> IDefaultLiquidityProviderWriter.GetAsync()
         {
             var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
             var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsLiquidityProviderId();
 
             return (await _table.GetAsync(pk, rk))?.Value;
         }
-        
-        ValueTask IMarkupProfileWriter.SetAsync(string value)
+
+
+
+        ValueTask IDefaultMarkupProfileWriter.SetAsync(string value)
         {
             var entity = new DefaultValueMyNoSqlTableEntity
             {
@@ -169,12 +180,51 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
             return _table.InsertOrReplaceAsync(entity);
         }
 
-        async ValueTask<string> IMarkupProfileWriter.GetAsync()
+        async ValueTask<string> IDefaultMarkupProfileWriter.GetAsync()
         {
             var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
             var rk = DefaultValueMyNoSqlTableEntity.GenerateRowKeyAsMarkupProfile();
 
             return (await _table.GetAsync(pk, rk))?.Value;
         }
+
+        
+        ValueTask IDefaultBackupLiquidityProvidersWriter.SetAsync(IEnumerable<string> values)
+        {
+            var entity = new DefaultValueMyNoSqlTableEntity
+            {
+                PartitionKey = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey(),
+                RowKey = DefaultValueMyNoSqlTableEntity.GetRowKeyAsBackupLiquidityProviders(),
+                Values = values.ToArray()
+            };
+
+            return _table.InsertOrReplaceAsync(entity);
+        }
+        
+        async ValueTask<IReadOnlyList<string>> IDefaultBackupLiquidityProvidersWriter.GetAsync()
+        {
+            var pk = DefaultValueMyNoSqlTableEntity.GeneratePartitionKey();
+            var rk = DefaultValueMyNoSqlTableEntity.GetRowKeyAsBackupLiquidityProviders();
+            return (await _table.GetAsync(pk, rk))?.Values ?? Array.Empty<string>();
+        }
+
+        ValueTask IQuotesFeedRouterBackupTimeoutWriter.SetAsync(TimeSpan value)
+        {
+            var entity = new QuotesFeedRouterBackupTimeoutEntity
+            {
+                PartitionKey = QuotesFeedRouterBackupTimeoutEntity.GeneratePartitionKey(),
+                RowKey = QuotesFeedRouterBackupTimeoutEntity.GenerateRowKey(),
+                Value = value
+            };
+
+            return _tableTimeSpan.InsertOrReplaceAsync(entity);
+        }
+
+        async ValueTask<TimeSpan?> IQuotesFeedRouterBackupTimeoutWriter.GetAsync()
+        {
+            var pk = QuotesFeedRouterBackupTimeoutEntity.GeneratePartitionKey();
+            var rk = QuotesFeedRouterBackupTimeoutEntity.GenerateRowKey();
+            return (await _tableTimeSpan.GetAsync(pk, rk))?.Value;
+        }        
     }
 }

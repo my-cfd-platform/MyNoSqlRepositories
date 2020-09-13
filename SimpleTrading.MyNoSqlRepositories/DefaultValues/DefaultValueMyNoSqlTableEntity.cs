@@ -49,8 +49,15 @@ namespace SimpleTrading.MyNoSqlRepositories.DefaultValues
         {
             return "MarkupProfile";
         }
+        
+        public static string GetRowKeyAsBackupLiquidityProviders()
+        {
+            return "BackupLiquidityProviders";
+        }
 
         public string Value { get; set; }
+        
+        public string[] Values { get; set; }
 
     }
 }

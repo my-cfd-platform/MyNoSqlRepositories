@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Trading;
+using SimpleTrading.QuotesFeedRouter.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {

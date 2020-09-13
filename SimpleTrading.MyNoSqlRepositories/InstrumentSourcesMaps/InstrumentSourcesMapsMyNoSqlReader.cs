@@ -1,8 +1,9 @@
 using MyNoSqlServer.Abstractions;
+using SimpleTrading.QuotesFeedRouter.Abstractions;
 
 namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
 {
-    public class InstrumentSourcesMapsMyNoSqlReader
+    public class InstrumentSourcesMapsMyNoSqlReader : IInstrumentSourceMapReader
     {
         private readonly IMyNoSqlServerDataReader<InstrumentSourcesMapsMyNoSqlTableEntity> _readRepository;
 
@@ -18,6 +19,11 @@ namespace SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps
             var rowKey = InstrumentSourcesMapsMyNoSqlTableEntity.GenerateRowKey(instrumentId);
 
             return _readRepository.Get(partitionKey, rowKey);
-        } 
+        }
+
+        IQuoteFeedSource IInstrumentSourceMapReader.Get(string instrumentId)
+        {
+            return Get(instrumentId);
+        }
     }
 }

@@ -131,13 +131,15 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static DefaultValuesMyNoSqlWriter CreateDefaultValueMyNoSqlRepository(Func<string> getUrl)
         {
             return new DefaultValuesMyNoSqlWriter(
-                new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable));
+                new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable),
+                new MyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity>(getUrl, DefaultsValuesTable));
         }
 
         public static DefaultValuesMyNoSqlReader CreateDefaultValuesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
             return new DefaultValuesMyNoSqlReader(
-                new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable));
+                new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable),
+                new MyNoSqlReadRepository<QuotesFeedRouterBackupTimeoutEntity>(connection, DefaultsValuesTable));
         }
 
         private const string InstrumentsAvatarTable = "instrumentsavatar";
