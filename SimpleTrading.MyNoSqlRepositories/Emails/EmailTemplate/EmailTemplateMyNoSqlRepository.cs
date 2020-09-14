@@ -17,7 +17,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
             _table = table;
         }
         
-        public async Task SaveAsync(string brandId, EmailTypes emailType, Languages language, PlatformTypes platform, string templateId, string subject, string expires, string redirectUrl)
+        public async Task SaveOrUpdateAsync(string brandId, EmailTypes emailType, Languages language, PlatformTypes platform, string templateId, string subject, string expires, string redirectUrl)
         {
             var entity = EmailTemplatesMyNoSqlEntity.Create(brandId, emailType, language, templateId, subject, expires, redirectUrl, platform);
 
@@ -27,6 +27,14 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         public async Task<IEnumerable<IEmailTemplate>> GetAsync()
         {
             return await _table.GetAsync();
+        }
+
+        public async Task Delete(string brandId, EmailTypes emailType, Languages lang, PlatformTypes platform)
+        {
+            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(emailType, lang, platform);
+            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(brandId);
+
+            await _table.DeleteAsync(pk, rk);
         }
 
         public async Task<IEmailTemplate> GetAsync(string brandId, EmailTypes emailType, Languages language, PlatformTypes platform)
