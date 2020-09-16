@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Emails;
 using SimpleTrading.Abstraction.Emails.EmailTemplate;
 using SimpleTrading.Abstraction.Platforms;
@@ -17,7 +16,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
             _table = table;
         }
         
-        public async Task SaveOrUpdateAsync(string brandId, EmailTypes emailType, Languages language, PlatformTypes platform, string templateId, string subject, string expires, string redirectUrl)
+        public async Task SaveOrUpdateAsync(string brandId, EmailTypes emailType, string language, PlatformTypes platform, string templateId, string subject, string expires, string redirectUrl)
         {
             var entity = EmailTemplatesMyNoSqlEntity.Create(brandId, emailType, language, templateId, subject, expires, redirectUrl, platform);
 
@@ -29,18 +28,25 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
             return await _table.GetAsync();
         }
 
-        public async Task Delete(string brandId, EmailTypes emailType, Languages lang, PlatformTypes platform)
+        public async Task<IEnumerable<IEmailTemplate>> GetByBrandAsync(string brandId)
         {
-            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(emailType, lang, platform);
-            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(brandId);
+            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(brandId);
+
+            return await _table.GetAsync(pk);
+        }
+
+        public async Task DeleteAsync(string brandId, EmailTypes emailType, string language, PlatformTypes platform)
+        {
+            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(brandId);
+            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(emailType, language, platform);
 
             await _table.DeleteAsync(pk, rk);
         }
 
-        public async Task<IEmailTemplate> GetAsync(string brandId, EmailTypes emailType, Languages language, PlatformTypes platform)
+        public async Task<IEmailTemplate> GetAsync(string brandId, EmailTypes emailType, string language, PlatformTypes platform)
         {
-            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(emailType, language, platform);
-            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(brandId);
+            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(brandId);
+            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(emailType, language, platform);
 
             return await _table.GetAsync(pk, rk);
         }

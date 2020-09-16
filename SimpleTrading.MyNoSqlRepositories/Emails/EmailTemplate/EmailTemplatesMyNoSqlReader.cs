@@ -20,11 +20,18 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         {
             return _reader.Get();
         }
-        
-        public IEmailTemplate Get(string brandId, EmailTypes emailType, Languages language, PlatformTypes platform)
+
+        public IEnumerable<IEmailTemplate> GetByBrand(string brandId)
         {
-            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(emailType, language, platform);
-            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(brandId);
+            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(brandId);
+
+            return _reader.Get(pk);
+        }
+        
+        public IEmailTemplate Get(string brandId, EmailTypes emailType, string language, PlatformTypes platform)
+        {
+            var pk = EmailTemplatesMyNoSqlEntity.GeneratePartitionKey(brandId);
+            var rk = EmailTemplatesMyNoSqlEntity.GenerateRowKey(emailType, language, platform);
             
             return _reader.Get(pk, rk);
         }
