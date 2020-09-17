@@ -17,7 +17,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
             return $"{emailType.ToString()}-{lang}-{platform.ToString()}";;
         }
         
-        public string BrandId => RowKey;
+        public string BrandId => PartitionKey;
         
         public string EmailUrl { get; set; }
 
