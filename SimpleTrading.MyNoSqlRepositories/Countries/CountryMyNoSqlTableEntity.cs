@@ -6,9 +6,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
 {
     public class CountryMyNoSqlTableEntity : MyNoSqlDbEntity, ICountry
     {
-        public static string GeneratePartitionKey(Languages lang)
+        public static string GeneratePartitionKey(string lang)
         {
-            return lang.ToString();
+            return lang;
         }
 
         public static string GenerateRowKey(string asset)
@@ -22,7 +22,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
 
         public string Dial { get; set; }
 
-        public static CountryMyNoSqlTableEntity Create(ICountry src, Languages lang)
+        public static CountryMyNoSqlTableEntity Create(ICountry src, string lang)
         {
             return new CountryMyNoSqlTableEntity
             {

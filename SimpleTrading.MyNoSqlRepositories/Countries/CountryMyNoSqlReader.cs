@@ -14,7 +14,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
             _readRepository = readRepository;
         }
 
-        public IReadOnlyList<ICountry> Get(Languages lang)
+        public IReadOnlyList<ICountry> Get(string lang)
         {
             var partitionKey = CountryMyNoSqlTableEntity.GeneratePartitionKey(lang);
 

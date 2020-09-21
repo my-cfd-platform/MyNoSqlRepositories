@@ -15,13 +15,13 @@ namespace SimpleTrading.MyNoSqlRepositories.Countries
             _table = table;
         }
 
-        public async Task<IEnumerable<ICountry>> GetAllAsync(Languages lang)
+        public async Task<IEnumerable<ICountry>> GetAllAsync(string lang)
         {
             var pk = CountryMyNoSqlTableEntity.GeneratePartitionKey(lang);
             return await _table.GetAsync(pk);
         }
 
-        public async Task UpdateAsync(ICountry country, Languages lang)
+        public async Task UpdateAsync(ICountry country, string lang)
         {
             var entity = CountryMyNoSqlTableEntity.Create(country, lang);
             await _table.InsertOrReplaceAsync(entity);
