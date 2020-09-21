@@ -10,6 +10,7 @@ using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
+using SimpleTrading.MyNoSqlRepositories.Languages;
 using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
@@ -157,6 +158,18 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<TradingInstrumentAvatarMyNoSqlEntity>(connection, InstrumentsAvatarTable));
         }
 
+        private const string LanguagesTable = "languages";
+
+        public static LanguageMyNoSqlReader CreateLanguagesMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new LanguageMyNoSqlReader(new MyNoSqlReadRepository<LanguageMyNoSqlEntity>(connection, LanguagesTable));
+        }
+
+        public static LanguageMyNoSqlRepository CreateLanguageMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new LanguageMyNoSqlRepository(new MyNoSqlServerDataWriter<LanguageMyNoSqlEntity>(getUrl, LanguagesTable));
+        }
+        
         private const string BrandsTable = "brands";
 
         public static BrandMyNoSqlReader CreateBrandMyNoSqlReader(this MyNoSqlTcpClient connection)
