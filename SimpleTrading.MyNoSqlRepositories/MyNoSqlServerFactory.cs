@@ -4,6 +4,7 @@ using MyNoSqlServer.DataReader;
 using MyNoSqlServer.DataWriter;
 using SimpleTrading.MyNoSqlRepositories.Auth.Restriction;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
+using SimpleTrading.MyNoSqlRepositories.Brand;
 using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
@@ -156,6 +157,18 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<TradingInstrumentAvatarMyNoSqlEntity>(connection, InstrumentsAvatarTable));
         }
 
+        private const string BrandsTable = "brands";
+
+        public static BrandMyNoSqlReader CreateBrandMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new BrandMyNoSqlReader(new MyNoSqlReadRepository<BrandMyNoSqlEntity>(connection, BrandsTable));
+        }
+        
+        public static BrandMyNoSqlRepository CreateBrandMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new BrandMyNoSqlRepository(new MyNoSqlServerDataWriter<BrandMyNoSqlEntity>(getUrl, BrandsTable));
+        }
+        
         private const string EmailTemplatesTable = "emailtemplates";
 
         public static EmailTemplatesMyNoSqlReader CreateEmailTemplatesMyNoSqlReader(this MyNoSqlTcpClient connection)
