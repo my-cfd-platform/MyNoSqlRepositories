@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Common.Countries;
 
 namespace SimpleTrading.MyNoSqlRepositories.Countries

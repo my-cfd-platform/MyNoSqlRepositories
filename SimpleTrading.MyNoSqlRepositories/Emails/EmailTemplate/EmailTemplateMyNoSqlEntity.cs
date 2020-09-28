@@ -14,7 +14,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate
         
         public static string GenerateRowKey(EmailTypes emailType, string lang, PlatformTypes platform)
         {
-            return $"{emailType.ToString()}-{lang}-{platform.ToString()}";;
+            return $"{emailType.ToString()}-{lang}-{platform.ToString()}";
         }
         
         public string BrandId => PartitionKey;

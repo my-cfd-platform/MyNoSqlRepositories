@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Brand;
 
@@ -23,9 +22,13 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
         {
             var brands = _reader.Get();
 
-            var brand = brands.FirstOrDefault(x => x.Id.Contains(brandId));
-
-            return brand != null ? brand.Id : string.Empty;
+            foreach (var brand in brands)
+            {
+                if (brandId.Contains(brand.Id))
+                    return brand.Id;
+            }
+            
+            return string.Empty;
         }
 
         public IBrand Get(string brandId)

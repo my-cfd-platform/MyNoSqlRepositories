@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction;
 using SimpleTrading.Abstraction.Emails;
 using SimpleTrading.Abstraction.Emails.EmailTemplate;
 using SimpleTrading.Abstraction.Platforms;
