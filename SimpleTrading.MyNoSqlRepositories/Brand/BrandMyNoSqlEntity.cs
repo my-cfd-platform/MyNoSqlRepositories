@@ -16,12 +16,15 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
         }
         
         public string Id => PartitionKey;
+        
+        public string Url { get; set; }
 
-        public static BrandMyNoSqlEntity Create(string brandId)
+        public static BrandMyNoSqlEntity Create(string brandId, string url)
         {
             return new BrandMyNoSqlEntity
             {
                 PartitionKey = GeneratePartitionKey(brandId),
+                Url = url,
                 RowKey = GenerateRowKey()
             };
         }

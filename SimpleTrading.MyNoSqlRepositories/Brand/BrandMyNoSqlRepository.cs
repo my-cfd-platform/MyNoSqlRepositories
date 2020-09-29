@@ -27,9 +27,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             return await _table.GetAsync(pk, rk);
         }
 
-        public async Task SaveOrUpdateAsync(string brandId)
+        public async Task SaveOrUpdateAsync(string brandId, string url)
         {
-            var entity = BrandMyNoSqlEntity.Create(brandId);
+            var entity = BrandMyNoSqlEntity.Create(brandId, url);
             await _table.InsertOrReplaceAsync(entity);
         }
     }
