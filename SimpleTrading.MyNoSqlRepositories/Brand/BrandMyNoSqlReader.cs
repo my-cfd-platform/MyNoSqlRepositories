@@ -51,5 +51,18 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             
             return _reader.Get(pk, rk);
         }
+
+        public IBrand GetByName(string name)
+        {
+            var brands = _reader.Get();
+
+            foreach (var brand in brands)
+            {
+                if (name.Contains(brand.Name))
+                    return brand;
+            }
+
+            return null;
+        }
     }
 }
