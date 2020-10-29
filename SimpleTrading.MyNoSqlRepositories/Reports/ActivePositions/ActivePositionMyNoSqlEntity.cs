@@ -38,7 +38,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions
                 RowKey = GenerateRowKey(src.AccountId),
                 TraderId = src.TraderId,
                 DateTime = src.DateTime,
-                ActivePositions = src.ActivePositions.Select(TradeOrderReportEntity.Create).ToList()
+                ActivePositions = src.ActivePositions?.Select(TradeOrderReportEntity.Create).ToList()
             };
         }
     }
