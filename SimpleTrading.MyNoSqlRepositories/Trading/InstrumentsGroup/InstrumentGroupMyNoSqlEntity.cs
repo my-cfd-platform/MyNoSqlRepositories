@@ -18,6 +18,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
         public string Id => RowKey;
         
         public string Name { get; set; }
+        public int Weight { get; set; }
 
         public static InstrumentGroupMyNoSqlEntity Create(IInstrumentGroup src)
         {
@@ -25,7 +26,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
             {
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.Id),
-                Name = src.Name
+                Name = src.Name,
+                Weight = src.Weight
             };
         }
     }
