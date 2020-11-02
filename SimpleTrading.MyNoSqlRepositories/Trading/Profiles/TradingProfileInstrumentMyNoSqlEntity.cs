@@ -15,6 +15,8 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
         public int OpenPositionMaxDelayMs { get; set; }
         public bool TpSlippage { get; set; }
         public bool SlSlippage { get; set; }
+        
+        public bool IsTrending { get; set; }
         public bool OpenPositionSlippage { get; set; }
         public int[] Leverages { get; set; }
 

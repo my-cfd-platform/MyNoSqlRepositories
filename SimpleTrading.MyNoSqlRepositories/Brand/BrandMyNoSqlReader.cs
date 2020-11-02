@@ -44,6 +44,19 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             return string.Empty;
         }
 
+        public string GetName(string brandId)
+        {
+            var brands = _reader.Get();
+
+            foreach (var brand in brands)
+            {
+                if (brandId.Contains(brand.Id))
+                    return brand.Name;
+            }
+            
+            return string.Empty;        
+        }
+
         public IBrand Get(string brandId)
         {
             var pk = BrandMyNoSqlEntity.GeneratePartitionKey(brandId);
