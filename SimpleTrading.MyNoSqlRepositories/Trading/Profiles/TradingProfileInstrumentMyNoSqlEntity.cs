@@ -15,6 +15,7 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
         public int OpenPositionMaxDelayMs { get; set; }
         public bool TpSlippage { get; set; }
         public bool SlSlippage { get; set; }
+        public bool IsTrending { get; set; }
         public bool OpenPositionSlippage { get; set; }
         public int[] Leverages { get; set; }
 
@@ -31,8 +32,8 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
                 TpSlippage = src.TpSlippage,
                 OpenPositionSlippage = src.OpenPositionSlippage,
                 OpenPositionMaxDelayMs = src.OpenPositionMaxDelayMs,
-                OpenPositionMinDelayMs = src.OpenPositionMinDelayMs
-                
+                OpenPositionMinDelayMs = src.OpenPositionMinDelayMs,
+                IsTrending = src.IsTrending
             };
         }
     }
