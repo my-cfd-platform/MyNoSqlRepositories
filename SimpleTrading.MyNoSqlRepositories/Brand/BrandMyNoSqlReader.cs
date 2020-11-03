@@ -7,12 +7,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
     public class BrandMyNoSqlReader : IBrandReader
     {
         private readonly IMyNoSqlServerDataReader<BrandMyNoSqlEntity> _reader;
-        
+
         public BrandMyNoSqlReader(IMyNoSqlServerDataReader<BrandMyNoSqlEntity> reader)
         {
             _reader = reader;
         }
-        
+
         public IEnumerable<IBrand> Get()
         {
             return _reader.Get();
@@ -27,7 +27,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
                 if (brandId.Contains(brand.Id))
                     return brand.Id;
             }
-            
+
             return string.Empty;
         }
 
@@ -40,20 +40,28 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
                 if (brandId.Contains(brand.Id))
                     return brand.Url;
             }
-            
+
             return string.Empty;
         }
 
         public string GetName(string brandId)
         {
-            throw new System.NotImplementedException();
+            var brands = _reader.Get();
+
+            foreach (var brand in brands)
+            {
+                if (brandId.Contains(brand.Id))
+                    return brand.Name;
+            }
+
+            return string.Empty;
         }
 
         public IBrand Get(string brandId)
         {
             var pk = BrandMyNoSqlEntity.GeneratePartitionKey(brandId);
             var rk = BrandMyNoSqlEntity.GenerateRowKey();
-            
+
             return _reader.Get(pk, rk);
         }
 
