@@ -129,19 +129,20 @@ namespace SimpleTrading.MyNoSqlRepositories
         }
 
         private const string DefaultsValuesTable = "defaultvalues";
+        private const string QuotesFeedRouterBackupTimeoutTable = "quotesfeedrouterbackuptimeouttable";
 
         public static DefaultValuesMyNoSqlWriter CreateDefaultValueMyNoSqlRepository(Func<string> getUrl)
         {
             return new DefaultValuesMyNoSqlWriter(
                 new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable),
-                new MyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity>(getUrl, DefaultsValuesTable));
+                new MyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity>(getUrl, QuotesFeedRouterBackupTimeoutTable));
         }
 
         public static DefaultValuesMyNoSqlReader CreateDefaultValuesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
             return new DefaultValuesMyNoSqlReader(
                 new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable),
-                new MyNoSqlReadRepository<QuotesFeedRouterBackupTimeoutEntity>(connection, DefaultsValuesTable));
+                new MyNoSqlReadRepository<QuotesFeedRouterBackupTimeoutEntity>(connection, QuotesFeedRouterBackupTimeoutTable));
         }
 
         private const string InstrumentsAvatarTable = "instrumentsavatar";
