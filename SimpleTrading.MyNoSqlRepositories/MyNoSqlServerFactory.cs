@@ -13,6 +13,7 @@ using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Languages;
 using SimpleTrading.MyNoSqlRepositories.Markups;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
+using SimpleTrading.MyNoSqlRepositories.Reports.Exposure;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar;
@@ -92,7 +93,7 @@ namespace SimpleTrading.MyNoSqlRepositories
                     )
                 );
         }
-        
+
         public static ReportActivePositionMyNoSqlReader CreateReportActivePositionMyNoSqlReader(this MyNoSqlTcpClient connection,
             bool isLive)
         {
@@ -102,14 +103,14 @@ namespace SimpleTrading.MyNoSqlRepositories
         }
 
         private const string AuthRestrictionTableName = "auth-restriction";
-        
+
         public static AuthRestrictionMyNoSqlTableRepository CreateAuthRestrictionMyNoSqlTableRepository(Func<string> getUrl)
         {
             return new AuthRestrictionMyNoSqlTableRepository(
                 new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlTableEntity>(getUrl, AuthRestrictionTableName)
                 );
         }
-        
+
         private const string TradingProfilesTableName = "tradingprofiles";
 
         public static TradingProfileMyNoSqlReader CreateTradingProfileMyNoSqlReader(this MyNoSqlTcpClient connection,
@@ -170,31 +171,31 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new LanguageMyNoSqlRepository(new MyNoSqlServerDataWriter<LanguageMyNoSqlEntity>(getUrl, LanguagesTable));
         }
-        
+
         private const string BrandsTable = "brands";
 
         public static BrandMyNoSqlReader CreateBrandMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
             return new BrandMyNoSqlReader(new MyNoSqlReadRepository<BrandMyNoSqlEntity>(connection, BrandsTable));
         }
-        
+
         public static BrandMyNoSqlRepository CreateBrandMyNoSqlRepository(Func<string> getUrl)
         {
             return new BrandMyNoSqlRepository(new MyNoSqlServerDataWriter<BrandMyNoSqlEntity>(getUrl, BrandsTable));
         }
-        
+
         private const string EmailTemplatesTable = "emailtemplates";
 
         public static EmailTemplatesMyNoSqlReader CreateEmailTemplatesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
             return new EmailTemplatesMyNoSqlReader(new MyNoSqlReadRepository<EmailTemplatesMyNoSqlEntity>(connection, EmailTemplatesTable));
         }
-        
+
         public static EmailTemplatesMyNoSqlRepository CreateEmailTemplatesMyNoSqlRepository(Func<string> getUrl)
         {
             return new EmailTemplatesMyNoSqlRepository(new MyNoSqlServerDataWriter<EmailTemplatesMyNoSqlEntity>(getUrl, EmailTemplatesTable));
         }
-        
+
         private const string InstrumentsTable = "instruments";
 
         public static InstrumentsMyNoSqlReadCache CreateInstrumentsMyNoSqlReadCache(this MyNoSqlTcpClient connection)
@@ -301,7 +302,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new MarkupProfilesMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles));
         }
-        
+
         private const string AccountCache = "engine-accounts-cache";
 
         public static AccountsCacheNoSqlWriter CreateAccountsCacheNoSqlWriter(Func<string> getUrl, string prefix)
@@ -309,6 +310,24 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new AccountsCacheNoSqlWriter(
                 new MyNoSqlServerDataWriter<AccountsCacheNoSqlEntity>(getUrl,
                     $"{AccountCache}-{prefix}"));
+        }
+
+        private const string ExposureReportTableName = "exposure-report";
+
+        public static ExposureReportMyNoSqlRepository CreateExposureReporMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new ExposureReportMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<InstrumentExposureMyNoSqlEntity>(
+                    getUrl,
+                    ExposureReportTableName));
+        }
+
+        public static ExposureReportMyNoSqlReader CreateExposureReporMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new ExposureReportMyNoSqlReader(
+                new MyNoSqlReadRepository<InstrumentExposureMyNoSqlEntity>(
+                    connection,
+                    ExposureReportTableName));
         }
     }
 
