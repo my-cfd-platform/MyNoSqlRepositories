@@ -36,6 +36,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public int? NightTimeout { get; set; } = 30;
 
         public bool TradingDisabled { get; set; }
+        
+        public double StopOutPercent { get; set; }
 
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
@@ -58,7 +60,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 TradingDisabled = src.TradingDisabled,
                 DaysOff = src.DaysOff == null 
                     ? new List<TradingInstrumentDayOffMyNoSqlEntity>() :
-                    src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList()
+                    src.DaysOff.Select(TradingInstrumentDayOffMyNoSqlEntity.Create).ToList(),
+                StopOutPercent = src.StopOutPercent
             };
         }
     }
