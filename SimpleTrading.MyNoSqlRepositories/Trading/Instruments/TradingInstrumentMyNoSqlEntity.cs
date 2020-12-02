@@ -37,7 +37,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
 
         public bool TradingDisabled { get; set; }
         
-        public double StopOutPercent { get; set; }
+        public double? StopOutPercent { get; set; }
 
         public List<TradingInstrumentDayOffMyNoSqlEntity> DaysOff { get; set; }
         
