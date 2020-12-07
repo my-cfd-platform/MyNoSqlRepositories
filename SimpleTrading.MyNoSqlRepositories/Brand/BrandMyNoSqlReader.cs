@@ -18,64 +18,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             return _reader.Get();
         }
 
-        public string GetId(string brandId)
-        {
-            var brands = _reader.Get();
-
-            foreach (var brand in brands)
-            {
-                if (brandId.Contains(brand.Id))
-                    return brand.Id;
-            }
-
-            return string.Empty;
-        }
-
-        public string GetUrl(string brandId)
-        {
-            var brands = _reader.Get();
-
-            foreach (var brand in brands)
-            {
-                if (brandId.Contains(brand.Id))
-                    return brand.Url;
-            }
-
-            return string.Empty;
-        }
-
-        public string GetName(string brandId)
-        {
-            var brands = _reader.Get();
-
-            foreach (var brand in brands)
-            {
-                if (brandId.Contains(brand.Id))
-                    return brand.Name;
-            }
-
-            return string.Empty;
-        }
-
-        public IBrand Get(string brandId)
+        public IBrand Get(string brandId, string name)
         {
             var pk = BrandMyNoSqlEntity.GeneratePartitionKey(brandId);
-            var rk = BrandMyNoSqlEntity.GenerateRowKey();
+            var rk = BrandMyNoSqlEntity.GenerateRowKey(name);
 
             return _reader.Get(pk, rk);
-        }
-
-        public IBrand GetByName(string name)
-        {
-            var brands = _reader.Get();
-
-            foreach (var brand in brands)
-            {
-                if (name.Contains(brand.Name))
-                    return brand;
-            }
-
-            return null;
         }
     }
 }

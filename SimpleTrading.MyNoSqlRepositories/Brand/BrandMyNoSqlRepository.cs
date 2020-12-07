@@ -19,18 +19,26 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             return await _table.GetAsync();
         }
 
-        public async Task<IBrand> GetAsync(string brandId)
+        public async Task<IBrand> GetAsync(string brandId, string name)
         {
             var pk = BrandMyNoSqlEntity.GeneratePartitionKey(brandId);
-            var rk = BrandMyNoSqlEntity.GenerateRowKey();
+            var rk = BrandMyNoSqlEntity.GenerateRowKey(name);
             
             return await _table.GetAsync(pk, rk);
         }
 
-        public async Task SaveOrUpdateAsync(string brandId, string url, string name)
+        public async Task SaveOrUpdateAsync(string brandId, string url, string name, string lpUrl)
         {
-            var entity = BrandMyNoSqlEntity.Create(brandId, url, name);
+            var entity = BrandMyNoSqlEntity.Create(brandId, url, name, lpUrl);
             await _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async Task DeleteAsync(string brandId, string name)
+        {
+            var pk = BrandMyNoSqlEntity.GeneratePartitionKey(brandId);
+            var rk = BrandMyNoSqlEntity.GenerateRowKey(name);
+
+            await _table.DeleteAsync(pk, rk);
         }
     }
 }
