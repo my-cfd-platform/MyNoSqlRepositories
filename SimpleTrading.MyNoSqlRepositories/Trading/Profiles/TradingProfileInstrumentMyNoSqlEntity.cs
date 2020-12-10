@@ -68,6 +68,8 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
         public string Id => RowKey;
         public double MarginCallPercent { get; set; }
         public double StopOutPercent { get; set; }
+        
+        public double PositionToppingUpPercent { get; set; }
 
         IEnumerable<ITradingProfileInstrument> ITradingProfile.Instruments => Instruments;
         public List<TradingProfileInstrumentMyNoSqlEntity> Instruments { get; set; }
@@ -80,6 +82,7 @@ public class TradingProfileInstrumentMyNoSqlEntity : ITradingProfileInstrument
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.Id),
                 MarginCallPercent = src.MarginCallPercent,
+                PositionToppingUpPercent = src.PositionToppingUpPercent,
                 StopOutPercent = src.StopOutPercent,
                 Instruments = src.Instruments.Select(TradingProfileInstrumentMyNoSqlEntity.Create).ToList()
             };
