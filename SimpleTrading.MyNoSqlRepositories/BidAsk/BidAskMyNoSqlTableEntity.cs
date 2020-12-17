@@ -24,9 +24,5 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
         public double Bid { get; set; }
         
         public double Ask { get; set; }
-
     }
-
-    
-
 }

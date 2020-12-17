@@ -5,32 +5,28 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
 {
     public class BrandMyNoSqlEntity : MyNoSqlDbEntity, IBrand
     {
-        public static string GeneratePartitionKey(string brandId)
+        private const string Pk = "brand";
+        
+        public static string GeneratePartitionKey()
         {
-            return brandId;
+            return Pk;
         }
         
-        public static string GenerateRowKey(string name)
+        public static string GenerateRowKey(string id)
         {
-            return name;
+            return id;
         }
-        
-        public string Id => PartitionKey;
-        
-        public string Name => RowKey;
 
-        public string Url { get; set; }
-        
-        public string LpUrl { get; set; }
+        public string Id => RowKey;
+        public string BaseDomain { get; set; }
 
-        public static BrandMyNoSqlEntity Create(string brandId, string url, string name, string lpUrl)
+        public static BrandMyNoSqlEntity Create(IBrand src)
         {
             return new BrandMyNoSqlEntity
             {
-                PartitionKey = GeneratePartitionKey(brandId),
-                RowKey = GenerateRowKey(name),
-                Url = url,
-                LpUrl = lpUrl
+                PartitionKey = GeneratePartitionKey(),
+                RowKey = GenerateRowKey(src.Id),
+                BaseDomain = src.BaseDomain
             };
         }
     }
