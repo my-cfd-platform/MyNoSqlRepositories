@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Platform;
 using SimpleTrading.Abstraction.Platforms;
@@ -15,18 +14,18 @@ namespace SimpleTrading.MyNoSqlRepositories.Platform
             _reader = reader;
         }
         
-        public async Task<IEnumerable<IPlatform>> GetAsync()
+        public IEnumerable<IPlatform> Get()
         {
             return _reader.Get();
         }
 
-        public async Task<IEnumerable<IPlatform>> GetAsync(string brandId)
+        public IEnumerable<IPlatform> Get(string brandId)
         {
             var pk = PlatformMyNoSqlEntity.GeneratePartitionKey(brandId);
             return _reader.Get(pk);
         }
 
-        public async Task<IPlatform> GetAsync(string brandId, PlatformTypes platformType)
+        public IPlatform Get(string brandId, PlatformTypes platformType)
         {
             var pk = PlatformMyNoSqlEntity.GeneratePartitionKey(brandId);
             var rk = PlatformMyNoSqlEntity.GenerateRowKey(platformType);

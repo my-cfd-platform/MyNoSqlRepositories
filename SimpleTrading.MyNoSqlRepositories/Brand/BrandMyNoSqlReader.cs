@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Brand;
 
@@ -14,12 +13,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             _reader = reader;
         }
         
-        public async Task<IEnumerable<IBrand>> GetAsync()
+        public IEnumerable<IBrand> Get()
         {
             return _reader.Get();
         }
 
-        public async Task<IBrand> GetAsync(string id)
+        public IBrand Get(string id)
         {
             var pk = BrandMyNoSqlEntity.GeneratePartitionKey();
             var rk = BrandMyNoSqlEntity.GenerateRowKey(id);
