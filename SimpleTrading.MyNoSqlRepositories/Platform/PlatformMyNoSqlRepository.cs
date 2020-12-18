@@ -7,11 +7,11 @@ using SimpleTrading.Abstraction.Platforms;
 
 namespace SimpleTrading.MyNoSqlRepositories.Platform
 {
-    public class PlatformRepository : IPlatformRepository
+    public class PlatformMyNoSqlRepository : IPlatformRepository
     {
         private readonly IMyNoSqlServerDataWriter<PlatformMyNoSqlEntity> _table;
 
-        public PlatformRepository(MyNoSqlServerDataWriter<PlatformMyNoSqlEntity> table)
+        public PlatformMyNoSqlRepository(MyNoSqlServerDataWriter<PlatformMyNoSqlEntity> table)
         {
             _table = table;
         }

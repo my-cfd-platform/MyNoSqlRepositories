@@ -12,6 +12,7 @@ using SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Languages;
 using SimpleTrading.MyNoSqlRepositories.Markups;
+using SimpleTrading.MyNoSqlRepositories.Platform;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
 using SimpleTrading.MyNoSqlRepositories.Reports.Exposure;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
@@ -172,7 +173,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new LanguageMyNoSqlRepository(new MyNoSqlServerDataWriter<LanguageMyNoSqlEntity>(getUrl, LanguagesTable));
         }
 
-        private const string BrandsTable = "brands";
+        private const string BrandsTable = "brand";
 
         public static BrandMyNoSqlReader CreateBrandMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
@@ -182,6 +183,18 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static BrandMyNoSqlRepository CreateBrandMyNoSqlRepository(Func<string> getUrl)
         {
             return new BrandMyNoSqlRepository(new MyNoSqlServerDataWriter<BrandMyNoSqlEntity>(getUrl, BrandsTable));
+        }
+        
+        private const string PlatformsTable = "platforms";
+
+        public static PlatformMyNoSqlReader CreatePlatformsMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new PlatformMyNoSqlReader(new MyNoSqlReadRepository<PlatformMyNoSqlEntity>(connection, PlatformsTable));
+        }
+
+        public static PlatformMyNoSqlRepository CreatePlatformsMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new PlatformMyNoSqlRepository(new MyNoSqlServerDataWriter<PlatformMyNoSqlEntity>(getUrl, PlatformsTable));
         }
 
         private const string EmailTemplatesTable = "emailtemplates";
