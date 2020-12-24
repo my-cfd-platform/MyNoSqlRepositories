@@ -105,11 +105,17 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string AuthRestrictionTableName = "auth-restriction";
 
-        public static AuthRestrictionMyNoSqlTableRepository CreateAuthRestrictionMyNoSqlTableRepository(Func<string> getUrl)
+        public static AuthRestrictionMyNoSqlRepository CreateAuthRestrictionMyNoSqlTableRepository(Func<string> getUrl)
         {
-            return new AuthRestrictionMyNoSqlTableRepository(
-                new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlTableEntity>(getUrl, AuthRestrictionTableName)
+            return new AuthRestrictionMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlEntity>(getUrl, AuthRestrictionTableName)
                 );
+        }
+
+        public static AuthRestrictionMyNoSqlReader CreateAuthRestrictionMyNoSqlReader(this MyNoSqlTcpClient connection)
+        {
+            return new AuthRestrictionMyNoSqlReader(
+                new MyNoSqlReadRepository<AuthRestrictionMyNoSqlEntity>(connection, AuthRestrictionTableName));
         }
 
         private const string TradingProfilesTableName = "tradingprofiles";
