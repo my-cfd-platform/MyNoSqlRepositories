@@ -25,6 +25,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Platform
             return _reader.Get(pk);
         }
 
+        public IPlatform GetByName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IPlatform Get(string brandId, PlatformTypes platformType)
         {
             var pk = PlatformMyNoSqlEntity.GeneratePartitionKey(brandId);

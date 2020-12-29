@@ -19,6 +19,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Platform
 
         public string BrandId => PartitionKey;
         public PlatformTypes Platform => Enum.Parse<PlatformTypes>(RowKey);
+        public string Name => $"{PartitionKey}-{RowKey}";
         public string BasePlatformUrl { get; set;}
         public string BaseAuthUrl { get; set;}
         public string BaseAutoLoginUrl { get; set;}
