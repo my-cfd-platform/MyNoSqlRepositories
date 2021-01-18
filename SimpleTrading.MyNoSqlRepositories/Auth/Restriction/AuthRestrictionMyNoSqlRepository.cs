@@ -16,7 +16,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Auth.Restriction
         
         public async Task<IAuthRestriction> AddAsync(string emailHash, string ip, string brand, DateTime dt)
         {
-            var entity = AuthRestrictionMyNoSqlEntity.Create(emailHash, ip, brand, 0, dt);
+            var entity = AuthRestrictionMyNoSqlEntity.Create(emailHash, ip, brand, 1, dt);
 
             await _table.InsertOrReplaceAsync(entity);
 
