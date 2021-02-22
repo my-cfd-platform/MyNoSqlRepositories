@@ -43,7 +43,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
         
         IEnumerable<IPositionCommission> ITradeOrder.Commissions => Commissions;
         IEnumerable<IPositionSwap> ITradeOrder.Swaps => Swaps;
-        public IEnumerable<IPositionToppingUpOperation> ToppingUpOperations { get; set; }
         public double ToppingUpPercent { get; set; }
         public double ReservedFundsForToppingUp { get; set;}
         public List<CommissionsEntity> Commissions { get; set; }
@@ -78,7 +77,6 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
                 OpenBidAsk = BidAskEntity.Create(src.OpenBidAsk),
                 Commissions = src.Commissions.Select(CommissionsEntity.Create).ToList(),
                 Swaps = src.Swaps.Select(PositionSwapEntity.Create).ToList(),
-                ToppingUpOperations = src.ToppingUpOperations,
                 ToppingUpPercent = src.ToppingUpPercent,
                 ReservedFundsForToppingUp = src.ReservedFundsForToppingUp
             };
