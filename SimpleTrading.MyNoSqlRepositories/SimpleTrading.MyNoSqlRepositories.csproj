@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.2.59</Version>
+        <Version>1.2.60</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,7 +10,7 @@
       <PackageReference Include="MyDependencies" Version="1.0.1" />
       <PackageReference Include="MyNoSqlServer.DataReader" Version="1.2.17" />
       <PackageReference Include="MyNoSqlServer.DataWriter" Version="1.2.6" />
-      <PackageReference Include="SimpleTrading.Abstraction" Version="1.2.47" />
+      <PackageReference Include="SimpleTrading.Abstraction" Version="1.2.48" />
       <PackageReference Include="SimpleTrading.QuotesFeedRouter.Abstractions" Version="1.0.2" />
     </ItemGroup>
 
