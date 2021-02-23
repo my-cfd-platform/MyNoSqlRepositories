@@ -26,7 +26,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
             {
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.Id),
-                BaseDomain = src.BaseDomain
+                BaseDomain = src.BaseDomain,
+                CakeRegistrationId = src.CakeRegistrationId
             };
         }
     }
