@@ -19,6 +19,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
 
         public string Id => RowKey;
         public string BaseDomain { get; set; }
+        public string CakeRegistrationId { get; set; }
 
         public static BrandMyNoSqlEntity Create(IBrand src)
         {
