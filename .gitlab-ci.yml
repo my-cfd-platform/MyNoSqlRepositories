@@ -8,7 +8,7 @@ stages:
 
 publish:
   tags: [monfex]
-  stage: publish-myservicebus
+  stage: publish
   script:
     - cd ${LIB_FOLDER}
     - projectfile=${LIB_FOLDER}
