@@ -1,22 +1,20 @@
 image: mcr.microsoft.com/dotnet/sdk:5.0
 
 variables:
-    LIB_FOLDER: SimpleTrading.MyNoSqlRepositories
+  LIB_FOLDER: SimpleTrading.MyNoSqlRepositories
 
 stages:
-  - publish-nuget
+  - publish
 
-publish-nuget:
+publish:
   tags: [monfex]
-  stage: publish-nuget
-  script:        
-    - cd ${LIB_FOLDER}  
-    - projectfile=${LIB_FOLDER}  
-    - ver=$(cat $projectfile.csproj | grep "<Version>")
-    - ver=${ver//[\/<>Version ]/}
+  stage: publish-myservicebus
+  script:
+    - cd ${LIB_FOLDER}
+    - projectfile=${LIB_FOLDER}
+    - ver=$(cat $projectfile.csproj | grep '<Version>' | awk -F ">" '{print $2}' | awk -F"<" '{print $1}')
     - echo $ver
-    - dotnet pack $projectfile.csproj --configuration Release --output ./out-nuget 
+    - dotnet pack $projectfile.csproj --include-symbols --include-source --configuration Release --output ./out-nuget
     - dotnet nuget push ./out-nuget/$projectfile.$ver.nupkg --api-key ${NUGET_PUBLISH_KEY} --source https://api.nuget.org/v3/index.json
   only:
-    - master    
-#  when: manual
+    - master
