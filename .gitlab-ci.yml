@@ -1,4 +1,4 @@
-image: ${DOCKER_DOTNET_SDK_IMAGE}
+image: mcr.microsoft.com/dotnet/sdk:5.0
 
 variables:
     LIB_FOLDER: SimpleTrading.MyNoSqlRepositories
