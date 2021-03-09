@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.2.60</Version>
+        <TargetFramework>net5.0</TargetFramework>
+        <Version>2.0.0-rc1</Version>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="DotNetCoreDecorators" Version="1.0.20" />
       <PackageReference Include="MyDependencies" Version="1.0.1" />
-      <PackageReference Include="MyNoSqlServer.DataReader" Version="1.2.17" />
-      <PackageReference Include="MyNoSqlServer.DataWriter" Version="1.2.6" />
-      <PackageReference Include="SimpleTrading.Abstraction" Version="1.2.48" />
+      <PackageReference Include="MyNoSqlServer.DataReader" Version="1.3.1" />
+      <PackageReference Include="MyNoSqlServer.DataWriter" Version="1.3.1" />
+      <PackageReference Include="SimpleTrading.Abstraction" Version="1.2.49" />
       <PackageReference Include="SimpleTrading.QuotesFeedRouter.Abstractions" Version="1.0.2" />
     </ItemGroup>
 

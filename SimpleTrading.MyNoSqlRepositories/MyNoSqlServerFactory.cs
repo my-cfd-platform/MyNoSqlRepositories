@@ -42,7 +42,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static CountryMyNoSqlRepository CreateCountryMyNoSqlRepository(Func<string> getUrl)
         {
             return new CountryMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<CountryMyNoSqlTableEntity>(getUrl, CountriesTable));
+                new MyNoSqlServerDataWriter<CountryMyNoSqlTableEntity>(getUrl, CountriesTable, true));
         }
 
         private const string InvestAmountTable = "investamount";
@@ -50,7 +50,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static InvestAmountMyNoSqlRepository CreateInvestAmountMyNoSqlRepository(Func<string> getUrl)
         {
             return new InvestAmountMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<InvestAmountMyNoSqlTableEntity>(getUrl, InvestAmountTable));
+                new MyNoSqlServerDataWriter<InvestAmountMyNoSqlTableEntity>(getUrl, InvestAmountTable, true));
         }
 
         public static IInvestAmountMyNoSqlReader CreateInvestAmountMyNoSqlReader(this MyNoSqlTcpClient connection)
@@ -79,23 +79,25 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new TradingGroupsMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl,
-                    IsLivePrefix(isLive) + TradingGroupsTableName));
+                    IsLivePrefix(isLive) + TradingGroupsTableName, true));
         }
 
         private const string ReportActivePositionsTableName = "reportactivepositions";
 
-        public static ReportActivePositionMyNoSqlRepository CreateReportActivePositionMyNoSqlRepository(Func<string> getUrl,
+        public static ReportActivePositionMyNoSqlRepository CreateReportActivePositionMyNoSqlRepository(
+            Func<string> getUrl,
             bool isLive)
         {
             return new ReportActivePositionMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<ReportActivePositionMyNoSqlEntity>(
                     getUrl,
-                    IsLivePrefix(isLive) + ReportActivePositionsTableName
-                    )
-                );
+                    IsLivePrefix(isLive) + ReportActivePositionsTableName, true
+                )
+            );
         }
 
-        public static ReportActivePositionMyNoSqlReader CreateReportActivePositionMyNoSqlReader(this MyNoSqlTcpClient connection,
+        public static ReportActivePositionMyNoSqlReader CreateReportActivePositionMyNoSqlReader(
+            this MyNoSqlTcpClient connection,
             bool isLive)
         {
             return new ReportActivePositionMyNoSqlReader(
@@ -108,8 +110,8 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static AuthRestrictionMyNoSqlRepository CreateAuthRestrictionMyNoSqlTableRepository(Func<string> getUrl)
         {
             return new AuthRestrictionMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlEntity>(getUrl, AuthRestrictionTableName)
-                );
+                new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlEntity>(getUrl, AuthRestrictionTableName, true)
+            );
         }
 
         public static AuthRestrictionMyNoSqlReader CreateAuthRestrictionMyNoSqlReader(this MyNoSqlTcpClient connection)
@@ -133,7 +135,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new TradingProfilesMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<TradingProfileMyNoSqlEntity>(getUrl,
-                    IsLivePrefix(isLive) + TradingProfilesTableName));
+                    IsLivePrefix(isLive) + TradingProfilesTableName, true));
         }
 
         private const string DefaultsValuesTable = "defaultvalues";
@@ -142,15 +144,17 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static DefaultValuesMyNoSqlWriter CreateDefaultValueMyNoSqlRepository(Func<string> getUrl)
         {
             return new DefaultValuesMyNoSqlWriter(
-                new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable),
-                new MyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity>(getUrl, QuotesFeedRouterBackupTimeoutTable));
+                new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable, true),
+                new MyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity>(getUrl,
+                    QuotesFeedRouterBackupTimeoutTable, true));
         }
 
         public static DefaultValuesMyNoSqlReader CreateDefaultValuesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
             return new DefaultValuesMyNoSqlReader(
                 new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable),
-                new MyNoSqlReadRepository<QuotesFeedRouterBackupTimeoutEntity>(connection, QuotesFeedRouterBackupTimeoutTable));
+                new MyNoSqlReadRepository<QuotesFeedRouterBackupTimeoutEntity>(connection,
+                    QuotesFeedRouterBackupTimeoutTable));
         }
 
         private const string InstrumentsAvatarTable = "instrumentsavatar";
@@ -158,10 +162,12 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static TradingInstrumentMyNoSqlRepository CreateTradingInstrumentMyNoSqlRepository(Func<string> getUrl)
         {
             return new TradingInstrumentMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingInstrumentAvatarMyNoSqlEntity>(getUrl, InstrumentsAvatarTable));
+                new MyNoSqlServerDataWriter<TradingInstrumentAvatarMyNoSqlEntity>(getUrl, InstrumentsAvatarTable,
+                    true));
         }
 
-        public static TradingInstrumentMyNoSqlReadCache CreateTradingInstrumentMyNoSqlReader(this MyNoSqlTcpClient connection)
+        public static TradingInstrumentMyNoSqlReadCache CreateTradingInstrumentMyNoSqlReader(
+            this MyNoSqlTcpClient connection)
         {
             return new TradingInstrumentMyNoSqlReadCache(
                 new MyNoSqlReadRepository<TradingInstrumentAvatarMyNoSqlEntity>(connection, InstrumentsAvatarTable));
@@ -171,12 +177,14 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         public static LanguageMyNoSqlReader CreateLanguagesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
-            return new LanguageMyNoSqlReader(new MyNoSqlReadRepository<LanguageMyNoSqlEntity>(connection, LanguagesTable));
+            return new LanguageMyNoSqlReader(
+                new MyNoSqlReadRepository<LanguageMyNoSqlEntity>(connection, LanguagesTable));
         }
 
         public static LanguageMyNoSqlRepository CreateLanguageMyNoSqlRepository(Func<string> getUrl)
         {
-            return new LanguageMyNoSqlRepository(new MyNoSqlServerDataWriter<LanguageMyNoSqlEntity>(getUrl, LanguagesTable));
+            return new LanguageMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<LanguageMyNoSqlEntity>(getUrl, LanguagesTable, true));
         }
 
         private const string BrandsTable = "brand";
@@ -188,31 +196,36 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         public static BrandMyNoSqlRepository CreateBrandMyNoSqlRepository(Func<string> getUrl)
         {
-            return new BrandMyNoSqlRepository(new MyNoSqlServerDataWriter<BrandMyNoSqlEntity>(getUrl, BrandsTable));
+            return new BrandMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<BrandMyNoSqlEntity>(getUrl, BrandsTable, true));
         }
-        
+
         private const string PlatformsTable = "platforms";
 
         public static PlatformMyNoSqlReader CreatePlatformsMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
-            return new PlatformMyNoSqlReader(new MyNoSqlReadRepository<PlatformMyNoSqlEntity>(connection, PlatformsTable));
+            return new PlatformMyNoSqlReader(
+                new MyNoSqlReadRepository<PlatformMyNoSqlEntity>(connection, PlatformsTable));
         }
 
         public static PlatformMyNoSqlRepository CreatePlatformsMyNoSqlRepository(Func<string> getUrl)
         {
-            return new PlatformMyNoSqlRepository(new MyNoSqlServerDataWriter<PlatformMyNoSqlEntity>(getUrl, PlatformsTable));
+            return new PlatformMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<PlatformMyNoSqlEntity>(getUrl, PlatformsTable, true));
         }
 
         private const string EmailTemplatesTable = "emailtemplates";
 
         public static EmailTemplatesMyNoSqlReader CreateEmailTemplatesMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
-            return new EmailTemplatesMyNoSqlReader(new MyNoSqlReadRepository<EmailTemplatesMyNoSqlEntity>(connection, EmailTemplatesTable));
+            return new EmailTemplatesMyNoSqlReader(
+                new MyNoSqlReadRepository<EmailTemplatesMyNoSqlEntity>(connection, EmailTemplatesTable));
         }
 
         public static EmailTemplatesMyNoSqlRepository CreateEmailTemplatesMyNoSqlRepository(Func<string> getUrl)
         {
-            return new EmailTemplatesMyNoSqlRepository(new MyNoSqlServerDataWriter<EmailTemplatesMyNoSqlEntity>(getUrl, EmailTemplatesTable));
+            return new EmailTemplatesMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<EmailTemplatesMyNoSqlEntity>(getUrl, EmailTemplatesTable, true));
         }
 
         private const string InstrumentsTable = "instruments";
@@ -226,7 +239,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static TradingInstrumentsMyNoSqlRepository CreateTradingInstrumentsMyNoSqlRepository(Func<string> getUrl)
         {
             return new TradingInstrumentsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingInstrumentMyNoSqlEntity>(getUrl, InstrumentsTable));
+                new MyNoSqlServerDataWriter<TradingInstrumentMyNoSqlEntity>(getUrl, InstrumentsTable, true));
         }
 
         private const string InstrumentGroupsTable = "instrumentsgroups";
@@ -234,7 +247,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static InstrumentGroupsMyNoSqlRepository CreateInstrumentGroupsMyNoSqlRepository(Func<string> getUrl)
         {
             return new InstrumentGroupsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<InstrumentGroupMyNoSqlEntity>(getUrl, InstrumentGroupsTable));
+                new MyNoSqlServerDataWriter<InstrumentGroupMyNoSqlEntity>(getUrl, InstrumentGroupsTable, true));
         }
 
         public static InstrumentGroupsMyNoSqlReadCache CreateInstrumentGroupsMyNoSqlReadCache(
@@ -250,7 +263,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             Func<string> getUrl)
         {
             return new PriceChangeWriteRepository(
-                new MyNoSqlServerDataWriter<PriceChangeMyNoSqlEntity>(getUrl, PriceChangesTable));
+                new MyNoSqlServerDataWriter<PriceChangeMyNoSqlEntity>(getUrl, PriceChangesTable, true));
         }
 
         public static PriceChangeReader CreatePriceChangeReader(this MyNoSqlTcpClient client)
@@ -266,7 +279,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             Func<string> getUrl)
         {
             return new SwapScheduleMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<SwapScheduleMyNoSqlEntity>(getUrl, SwapSchedule));
+                new MyNoSqlServerDataWriter<SwapScheduleMyNoSqlEntity>(getUrl, SwapSchedule, true));
         }
 
         public static SwapScheduleMyNoSqlReader CreateSwapScheduleMyNoSqlReader(this MyNoSqlTcpClient client)
@@ -282,7 +295,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             Func<string> getUrl)
         {
             return new SwapProfileMyNoSqlWriter(
-                new MyNoSqlServerDataWriter<SwapProfileMyNoSqlEntity>(getUrl, SwapProfile));
+                new MyNoSqlServerDataWriter<SwapProfileMyNoSqlEntity>(getUrl, SwapProfile, true));
         }
 
         public static SwapProfileMyNoSqlReader CreateSwapProfileMyNoSqlReader(this MyNoSqlTcpClient client)
@@ -304,7 +317,8 @@ namespace SimpleTrading.MyNoSqlRepositories
             Func<string> getUrl)
         {
             return new InstrumentSourcesMapsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<InstrumentSourcesMapsMyNoSqlTableEntity>(getUrl, InstrumentSourceMap));
+                new MyNoSqlServerDataWriter<InstrumentSourcesMapsMyNoSqlTableEntity>(getUrl, InstrumentSourceMap,
+                    true));
         }
 
         private const string MarkupProfiles = "markup-profiles";
@@ -319,7 +333,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static MarkupProfilesMyNoSqlRepository CreateMarkupProfilesNoSqlRepository(Func<string> getUrl)
         {
             return new MarkupProfilesMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles));
+                new MyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles, true));
         }
 
         private const string AccountCache = "engine-accounts-cache";
@@ -328,7 +342,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new AccountsCacheNoSqlWriter(
                 new MyNoSqlServerDataWriter<AccountsCacheNoSqlEntity>(getUrl,
-                    $"{AccountCache}-{prefix}"));
+                    $"{AccountCache}-{prefix}", true));
         }
 
         private const string ExposureReportTableName = "exposure-report";
@@ -338,7 +352,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new ExposureReportMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<InstrumentExposureMyNoSqlEntity>(
                     getUrl,
-                    ExposureReportTableName));
+                    ExposureReportTableName, true));
         }
 
         public static ExposureReportMyNoSqlReader CreateExposureReporMyNoSqlReader(this MyNoSqlTcpClient connection)
