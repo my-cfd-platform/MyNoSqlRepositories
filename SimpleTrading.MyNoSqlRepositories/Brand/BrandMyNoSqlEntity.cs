@@ -20,6 +20,10 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
         public string Id => RowKey;
         public string BaseDomain { get; set; }
         public string CakeRegistrationId { get; set; }
+        public string CakeFtdId { get; set; }
+        public string CakeDepositId { get; set; }
+        public string CakeTradeId { get; set; }
+        public string CakeStatusId { get; set; }
 
         public static BrandMyNoSqlEntity Create(IBrand src)
         {
@@ -28,7 +32,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Brand
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.Id),
                 BaseDomain = src.BaseDomain,
-                CakeRegistrationId = src.CakeRegistrationId
+                CakeRegistrationId = src.CakeRegistrationId,
+                CakeFtdId = src.CakeFtdId,
+                CakeDepositId = src.CakeDepositId,
+                CakeTradeId = src.CakeTradeId,
+                CakeStatusId = src.CakeStatusId
             };
         }
     }
