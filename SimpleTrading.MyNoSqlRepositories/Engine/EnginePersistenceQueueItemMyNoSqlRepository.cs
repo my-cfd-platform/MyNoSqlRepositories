@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 
@@ -27,6 +28,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Engine
             var rk = EnginePersistenceQueueItemMyNoSqlModel.GenerateRowKey(dateTime);
             
             await _table.DeleteAsync(pk, rk);
+        }
+        
+        public async Task BulkInsertOrReplaceAsync(IEnumerable<EnginePersistenceQueueItemMyNoSqlModel> dataToInsert)
+        {
+            await _table.BulkInsertOrReplaceAsync(dataToInsert);
         }
     }
 }
