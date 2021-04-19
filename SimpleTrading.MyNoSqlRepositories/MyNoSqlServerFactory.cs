@@ -65,6 +65,42 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return isLive ? "live-" : "demo-";
         }
+        
+        private const string EnginePersistenceQueueTable = "enginepersistencequeue";
+        
+        private const string EngineToppingUpQueueTable = "enginetoppinngupqueue";
+        
+        public static TradingGroupsMyNoSqlReader CreateEnginePersistenceQueueReader(this MyNoSqlTcpClient connection,
+            bool isLive)
+        {
+            return new TradingGroupsMyNoSqlReader(
+                new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection,
+                    IsLivePrefix(isLive) + EnginePersistenceQueueTable));
+        }
+        
+        public static TradingGroupsMyNoSqlReader CreateEngineToppingUpQueueReader(this MyNoSqlTcpClient connection,
+            bool isLive)
+        {
+            return new TradingGroupsMyNoSqlReader(
+                new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection,
+                    IsLivePrefix(isLive) + EngineToppingUpQueueTable));
+        }
+        
+        public static TradingGroupsMyNoSqlRepository CreateEngineToppingUpQueueRepository(Func<string> getUrl,
+            bool isLive)
+        {
+            return new TradingGroupsMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl,
+                    IsLivePrefix(isLive) + EnginePersistenceQueueTable, true));
+        }
+        
+        public static TradingGroupsMyNoSqlRepository CreateEnginePersistenceQueueRepository(Func<string> getUrl,
+            bool isLive)
+        {
+            return new TradingGroupsMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl,
+                    IsLivePrefix(isLive) + EngineToppingUpQueueTable, true));
+        }
 
         public static TradingGroupsMyNoSqlReader CreateTradingGroupsMyNoSqlReader(this MyNoSqlTcpClient connection,
             bool isLive)
