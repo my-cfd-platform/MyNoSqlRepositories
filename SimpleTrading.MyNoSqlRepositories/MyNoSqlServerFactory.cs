@@ -9,6 +9,7 @@ using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
 using SimpleTrading.MyNoSqlRepositories.Countries;
 using SimpleTrading.MyNoSqlRepositories.DefaultValues;
 using SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate;
+using SimpleTrading.MyNoSqlRepositories.Engine;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Languages;
 using SimpleTrading.MyNoSqlRepositories.Markups;
@@ -86,20 +87,20 @@ namespace SimpleTrading.MyNoSqlRepositories
                     IsLivePrefix(isLive) + EngineToppingUpQueueTable));
         }
         
-        public static TradingGroupsMyNoSqlRepository CreateEngineToppingUpQueueRepository(Func<string> getUrl,
+        public static EnginePersistenceQueueItemMyNoSqlRepository CreateEngineToppingUpQueueRepository(Func<string> getUrl,
             bool isLive)
         {
-            return new TradingGroupsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl,
-                    IsLivePrefix(isLive) + EnginePersistenceQueueTable, true));
+            return new EnginePersistenceQueueItemMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<EnginePersistenceQueueItemMyNoSqlModel>(getUrl,
+                    IsLivePrefix(isLive) + EngineToppingUpQueueTable, true));
         }
         
-        public static TradingGroupsMyNoSqlRepository CreateEnginePersistenceQueueRepository(Func<string> getUrl,
+        public static EnginePersistenceQueueItemMyNoSqlRepository CreateEnginePersistenceQueueRepository(Func<string> getUrl,
             bool isLive)
         {
-            return new TradingGroupsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl,
-                    IsLivePrefix(isLive) + EngineToppingUpQueueTable, true));
+            return new EnginePersistenceQueueItemMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<EnginePersistenceQueueItemMyNoSqlModel>(getUrl,
+                    IsLivePrefix(isLive) + EnginePersistenceQueueTable, true));
         }
 
         public static TradingGroupsMyNoSqlReader CreateTradingGroupsMyNoSqlReader(this MyNoSqlTcpClient connection,
