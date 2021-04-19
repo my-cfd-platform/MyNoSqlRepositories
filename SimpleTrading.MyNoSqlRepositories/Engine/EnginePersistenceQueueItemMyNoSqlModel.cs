@@ -14,11 +14,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Engine
 
         public static string GenerateRowKey(DateTime dateTime)
         {
-            return DateTime.UtcNow.ToString(DateFormat);
+            return dateTime.ToString(DateFormat);
         }
 
         public string AccountId => PartitionKey;
-        public DateTime DateTime => DateTime.Parse(DateFormat);
+        public DateTime DateTime { get; set; }
         public object Data { get; set; }
 
         public T GetData<T>()
@@ -32,7 +32,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Engine
             {
                 PartitionKey = GeneratePartitionKey(accountId),
                 RowKey = GenerateRowKey(dateTime),
-                Data = data
+                Data = data,
+                DateTime = dateTime
             };
         }
     }
