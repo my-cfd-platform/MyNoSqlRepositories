@@ -13,6 +13,7 @@ using SimpleTrading.MyNoSqlRepositories.Engine;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Languages;
 using SimpleTrading.MyNoSqlRepositories.Markups;
+using SimpleTrading.MyNoSqlRepositories.Misc.Onboarding;
 using SimpleTrading.MyNoSqlRepositories.Platform;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
 using SimpleTrading.MyNoSqlRepositories.Reports.Exposure;
@@ -391,6 +392,23 @@ namespace SimpleTrading.MyNoSqlRepositories
                     getUrl,
                     ExposureReportTableName, true));
         }
+
+        private const string OnboardingFlowTableName = "onboarding-flow";
+
+        public static OnboardingMyNoSqlRepository CreateOnboardingMyNoSqlRepository(Func<string> getUrl) => 
+            new OnboardingMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<OnboardingMyNoSqlTableEntity>(
+                    getUrl,
+                    OnboardingFlowTableName, true));
+
+
+        public static OnboardingMyNoSqlReader CreateOnboardingMyNoSqlReader(
+           this MyNoSqlTcpClient client)
+        {
+            return new OnboardingMyNoSqlReader(
+                new MyNoSqlReadRepository<OnboardingMyNoSqlTableEntity>(client, OnboardingFlowTableName));
+        }
+
 
         public static ExposureReportMyNoSqlReader CreateExposureReporMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
