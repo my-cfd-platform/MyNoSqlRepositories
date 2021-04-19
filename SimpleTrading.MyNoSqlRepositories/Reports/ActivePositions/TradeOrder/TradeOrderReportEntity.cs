@@ -48,6 +48,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
         public List<CommissionsEntity> Commissions { get; set; }
         public List<PositionSwapEntity> Swaps { get; set; }
 
+        public double BurnBonus { get; set; }
+
         public static TradeOrderReportEntity Create(ITradeOrder src)
         {
             return new TradeOrderReportEntity
