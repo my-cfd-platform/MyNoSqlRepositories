@@ -17,6 +17,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Misc.Onboarding
         public async Task<IEnumerable<IOnboarding>> GetAsync() =>
            await _writer.GetAsync();
 
+        public async Task<IOnboarding> GetAsync(string brandId, string name) =>
+            await _writer.GetAsync(brandId, name);
+
         public async Task CreateAsync(IOnboarding onboardingFlow)
         {
             var entity = OnboardingMyNoSqlTableEntity.Create(onboardingFlow);

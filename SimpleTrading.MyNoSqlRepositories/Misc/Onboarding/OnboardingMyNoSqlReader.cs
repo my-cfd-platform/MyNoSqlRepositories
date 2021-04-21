@@ -22,8 +22,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Misc.Onboarding
         public IOnboarding Get(string brandId, string name) =>
              _readRepository.Get(brandId, name);
 
-        public IEnumerable<ILottie> GetLotties(string brandId, OnboardingFlowPlatform platform, string countryId) =>
+        public IEnumerable<IOnboardingStep> GetSteps(string brandId, byte deviceId, string countryId) =>
            _readRepository.Get(brandId)
-            .FirstOrDefault(f => f.PlaformId == platform && f.CountryId == countryId)?.Lotties ?? Enumerable.Empty<ILottie>();
+            .FirstOrDefault(f => f.DeviceId == deviceId && f.CountryId == countryId)?.Steps ?? Enumerable.Empty<IOnboardingStep>();
     }
 }
