@@ -11,7 +11,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Misc.Onboarding
 
         public string BrandId => PartitionKey;
 
-        public byte DeviceId { get; set; }
+        public short DeviceId { get; set; }
 
         public string CountryId { get; set; }
 
@@ -36,7 +36,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Misc.Onboarding
 
     public class OnboardingStep : IOnboardingStep
     {
-        public byte Id { get; set; }
+        public short Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public bool FullScreen { get; set; }
@@ -61,7 +61,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Misc.Onboarding
     public class OnboardingStepButton : IOnboardingStepButton
     {
         public string Text { get; set; }
-        public byte Action { get; set; }
+        public short Action { get; set; }
    
         public static OnboardingStepButton Create(IOnboardingStepButton oboardingStepButton) =>
             new OnboardingStepButton

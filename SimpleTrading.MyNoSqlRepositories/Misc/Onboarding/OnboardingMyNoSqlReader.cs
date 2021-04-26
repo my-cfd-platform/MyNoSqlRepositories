@@ -22,7 +22,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Misc.Onboarding
         public IOnboarding Get(string brandId, string name) =>
              _readRepository.Get(brandId, name);
 
-        public IEnumerable<IOnboarding> Get(string brandId, byte deviceId, string countryId) =>
+        public IEnumerable<IOnboarding> Get(string brandId, short deviceId, string countryId) =>
            _readRepository.Get(brandId).Where(o => o.DeviceId == deviceId && o.CountryId == countryId);
     }
 }
