@@ -15,10 +15,15 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
             _table = table;
         }
 
-        public async Task BulkInsertByDatabaseEntities(IEnumerable<ITradingAccount> databaseEntities)
+        public async Task BulkInsertOrReplace(IEnumerable<ITradingAccount> databaseEntities)
         {
             var myNoSqlEntities = databaseEntities.Select(AccountsCacheNoSqlEntity.Create);
             await _table.BulkInsertOrReplaceAsync(myNoSqlEntities);
+        }
+        
+        public async Task InsertOrReplace(ITradingAccount entity)
+        {
+            await _table.InsertOrReplaceAsync(AccountsCacheNoSqlEntity.Create(entity));
         }
 
         public async ValueTask<IEnumerable<AccountsCacheNoSqlEntity>> GetTraderAccountsAsync(string traderId)

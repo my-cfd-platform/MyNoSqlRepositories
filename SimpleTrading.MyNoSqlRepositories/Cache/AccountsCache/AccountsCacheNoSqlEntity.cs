@@ -27,15 +27,14 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
         public string CommissionGroup { get; set; }
         public string ExecutionGroup { get; set; }
         public string LeverageGroup { get; set; }
-        
         public DateTime CreatedAt { get; set; }
-        
-        public DateTime TimeStamp { get; set; }
+        public DateTime DateTime { get; set; }
         public bool TradingDisabled { get; set; }
+        DateTime ITradingAccount.TimeStamp => DateTime;
 
         public static AccountsCacheNoSqlEntity Create(ITradingAccount src)
         {
-            return new AccountsCacheNoSqlEntity
+            return new ()
             {
                 PartitionKey = GeneratePartitionKey(src.TraderId),
                 RowKey = GenerateRowKey(src.Id),
@@ -52,7 +51,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
                 TraderId = src.TraderId,
                 TradingDisabled = src.TradingDisabled,
                 CreatedAt = src.CreatedAt,
-                TimeStamp = src.TimeStamp
+                DateTime = src.TimeStamp
             };
         }
     }
