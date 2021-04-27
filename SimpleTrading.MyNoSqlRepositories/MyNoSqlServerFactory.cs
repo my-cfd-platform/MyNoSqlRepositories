@@ -393,22 +393,29 @@ namespace SimpleTrading.MyNoSqlRepositories
                     ExposureReportTableName, true));
         }
 
-        private const string OnboardingFlowTableName = "onboarding-flow";
+        private const string OnboardingsTableName = "onboardings";
 
         public static OnboardingMyNoSqlRepository CreateOnboardingMyNoSqlRepository(Func<string> getUrl) => 
             new OnboardingMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<OnboardingMyNoSqlTableEntity>(
                     getUrl,
-                    OnboardingFlowTableName, true));
+                    OnboardingsTableName, true));
 
 
         public static OnboardingMyNoSqlReader CreateOnboardingMyNoSqlReader(
            this MyNoSqlTcpClient client)
         {
             return new OnboardingMyNoSqlReader(
-                new MyNoSqlReadRepository<OnboardingMyNoSqlTableEntity>(client, OnboardingFlowTableName));
+                new MyNoSqlReadRepository<OnboardingMyNoSqlTableEntity>(client, OnboardingsTableName));
         }
 
+        private const string TraderOnboardingTableName = "trader-onboarding";
+
+        public static TraderOnboardingMyNoSqlRepository CreateTraderOnboardingMyNoSqlRepository(Func<string> getUrl) =>
+            new TraderOnboardingMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<TraderOnboardingMyNoSqlTableEntity>(
+                    getUrl,
+                    TraderOnboardingTableName, true));
 
         public static ExposureReportMyNoSqlReader CreateExposureReporMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
