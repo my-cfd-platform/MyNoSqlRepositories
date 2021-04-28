@@ -6,7 +6,7 @@ using SimpleTrading.Abstraction.Accounts;
 
 namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
 {
-    public class AccountsCacheNoSqlWriter
+    public class AccountsCacheNoSqlWriter : IAccountCacheWriter
     {
         private readonly IMyNoSqlServerDataWriter<AccountsCacheNoSqlEntity> _table;
 
@@ -26,12 +26,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
             await _table.InsertOrReplaceAsync(AccountsCacheNoSqlEntity.Create(entity));
         }
 
-        public async ValueTask<IEnumerable<AccountsCacheNoSqlEntity>> GetTraderAccountsAsync(string traderId)
+        public async ValueTask<IEnumerable<ITradingAccount>> GetTraderAccountsAsync(string traderId)
         {
             return await _table.GetAsync(traderId);
         }
 
-        public async Task<AccountsCacheNoSqlEntity> GetAccount(string traderId, string accountId)
+        public async Task<ITradingAccount> GetAccount(string traderId, string accountId)
         {
             return await _table.GetAsync(traderId, accountId);
         }
