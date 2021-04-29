@@ -295,6 +295,21 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<InstrumentGroupMyNoSqlEntity>(connection, InstrumentGroupsTable));
         }
 
+        private const string InstrumentSubGroupsTable = "instrumentsubgroups";
+
+        public static InstrumentSubGroupsMyNoSqlRepository CreateInstrumentSubGroupsMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new InstrumentSubGroupsMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<InstrumentSubGroupMyNoSqlEntity>(getUrl, InstrumentGroupsTable, true));
+        }
+
+        public static InstrumentSubGroupsMyNoSqlReadCache CreateInstrumentSubGroupsMyNoSqlReadCache(
+            this MyNoSqlTcpClient connection)
+        {
+            return new InstrumentSubGroupsMyNoSqlReadCache(
+                new MyNoSqlReadRepository<InstrumentSubGroupMyNoSqlEntity>(connection, InstrumentSubGroupsTable));
+        }
+
         private const string PriceChangesTable = "pricechanges";
 
         public static PriceChangeWriteRepository CreatePriceChangeWriteRepository(
