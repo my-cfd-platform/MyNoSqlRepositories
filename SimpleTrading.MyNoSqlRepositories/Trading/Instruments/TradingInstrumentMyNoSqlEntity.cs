@@ -19,13 +19,23 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         }
 
         public string Id => RowKey;
+        
         public string Name { get; set; }
+        
         public int Digits { get; set; }
+        
         public string Base { get; set; }
+        
         public string Quote { get; set; }
+        
         public double TickSize { get; set; }
+        
         public string SwapScheduleId { get; set; }
+        
         public string? GroupId { get; set; }
+        
+        public string? SubGroupId { get; set; }
+
         public int? Weight { get; set; }
 
         IEnumerable<ITradingInstrumentDayOff> ITradingInstrument.DaysOff => DaysOff;
@@ -52,6 +62,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
                 TickSize = src.TickSize,
                 SwapScheduleId = src.SwapScheduleId,
                 GroupId = src.GroupId,
+                SubGroupId = src.SubGroupId,
                 Weight = src.Weight,
                 DayTimeout = src.DayTimeout,
                 NightTimeout = src.NightTimeout,
