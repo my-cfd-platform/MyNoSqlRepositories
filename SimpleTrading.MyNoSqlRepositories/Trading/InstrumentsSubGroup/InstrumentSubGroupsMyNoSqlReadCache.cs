@@ -21,7 +21,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
         public IInstrumentSubGroup GetById(string groupId, string subGroupId)
         {
             var partitionKey = InstrumentSubGroupMyNoSqlEntity.GeneratePartitionKey(groupId);
-            var rowKey = InstrumentGroupMyNoSqlEntity.GenerateRowKey(subGroupId);
+            var rowKey = InstrumentSubGroupMyNoSqlEntity.GenerateRowKey(subGroupId);
             return _readRepository.Get(partitionKey, rowKey);
         }
         public IEnumerable<IInstrumentSubGroup> GetByGroupId(string groupId)

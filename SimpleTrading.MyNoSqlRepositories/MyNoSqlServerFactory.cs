@@ -300,7 +300,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static InstrumentSubGroupsMyNoSqlRepository CreateInstrumentSubGroupsMyNoSqlRepository(Func<string> getUrl)
         {
             return new InstrumentSubGroupsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<InstrumentSubGroupMyNoSqlEntity>(getUrl, InstrumentGroupsTable, true));
+                new MyNoSqlServerDataWriter<InstrumentSubGroupMyNoSqlEntity>(getUrl, InstrumentSubGroupsTable, true));
         }
 
         public static InstrumentSubGroupsMyNoSqlReadCache CreateInstrumentSubGroupsMyNoSqlReadCache(

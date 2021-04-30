@@ -34,7 +34,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
         public async Task DeleteAsync(string groupId, string subGroupId)
         {
             var partitionKey = InstrumentSubGroupMyNoSqlEntity.GeneratePartitionKey(groupId);
-            var rowKey = InstrumentGroupMyNoSqlEntity.GenerateRowKey(subGroupId);
+            var rowKey = InstrumentSubGroupMyNoSqlEntity.GenerateRowKey(subGroupId);
             await _table.DeleteAsync(partitionKey, rowKey);
         }
     }
