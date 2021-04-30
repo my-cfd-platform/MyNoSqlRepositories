@@ -18,8 +18,8 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup
         public string Id => RowKey;
         
         public string Name { get; set; }
-        
-        public string GroupId { get; set; }
+
+        public string GroupId => PartitionKey;
 
         public int Weight { get; set; }
 
