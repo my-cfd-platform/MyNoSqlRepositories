@@ -2,24 +2,15 @@ using System;
 using MyNoSqlServer.Abstractions;
 using MyNoSqlServer.DataReader;
 using MyNoSqlServer.DataWriter;
-using SimpleTrading.MyNoSqlRepositories.Auth.Restriction;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
-using SimpleTrading.MyNoSqlRepositories.Brand;
 using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
-using SimpleTrading.MyNoSqlRepositories.Countries;
-using SimpleTrading.MyNoSqlRepositories.DefaultValues;
-using SimpleTrading.MyNoSqlRepositories.Emails.EmailTemplate;
 using SimpleTrading.MyNoSqlRepositories.Engine;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
-using SimpleTrading.MyNoSqlRepositories.Languages;
 using SimpleTrading.MyNoSqlRepositories.Markups;
-using SimpleTrading.MyNoSqlRepositories.Misc.Onboarding;
-using SimpleTrading.MyNoSqlRepositories.Platform;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
 using SimpleTrading.MyNoSqlRepositories.Reports.Exposure;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
-using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsAvatar;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
@@ -31,20 +22,6 @@ namespace SimpleTrading.MyNoSqlRepositories
         public static BidAskMyNoSqlCache CreateBidAskMyNoSqlCache(this MyNoSqlTcpClient connection)
         {
             return new BidAskMyNoSqlCache(connection.ToMyNoSqlReadRepository<BidAskMyNoSqlTableEntity>("quoteprofile"));
-        }
-
-        private const string CountriesTable = "countries";
-
-        public static CountryMyNoSqlReader CreateCountryMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new CountryMyNoSqlReader(
-                connection.ToMyNoSqlReadRepository<CountryMyNoSqlTableEntity>(CountriesTable));
-        }
-
-        public static CountryMyNoSqlRepository CreateCountryMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new CountryMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<CountryMyNoSqlTableEntity>(getUrl, CountriesTable, true));
         }
 
         private const string InvestAmountTable = "investamount";
@@ -145,18 +122,6 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string AuthRestrictionTableName = "auth-restriction";
 
-        public static AuthRestrictionMyNoSqlRepository CreateAuthRestrictionMyNoSqlTableRepository(Func<string> getUrl)
-        {
-            return new AuthRestrictionMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<AuthRestrictionMyNoSqlEntity>(getUrl, AuthRestrictionTableName, true)
-            );
-        }
-
-        public static AuthRestrictionMyNoSqlReader CreateAuthRestrictionMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new AuthRestrictionMyNoSqlReader(
-                new MyNoSqlReadRepository<AuthRestrictionMyNoSqlEntity>(connection, AuthRestrictionTableName));
-        }
 
         private const string TradingProfilesTableName = "tradingprofiles";
 
@@ -174,96 +139,6 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new TradingProfilesMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<TradingProfileMyNoSqlEntity>(getUrl,
                     IsLivePrefix(isLive) + TradingProfilesTableName, true));
-        }
-
-        private const string DefaultsValuesTable = "defaultvalues";
-        private const string QuotesFeedRouterBackupTimeoutTable = "quotesfeedrouterbackuptimeouttable";
-
-        public static DefaultValuesMyNoSqlWriter CreateDefaultValueMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new DefaultValuesMyNoSqlWriter(
-                new MyNoSqlServerDataWriter<DefaultValueMyNoSqlTableEntity>(getUrl, DefaultsValuesTable, true),
-                new MyNoSqlServerDataWriter<QuotesFeedRouterBackupTimeoutEntity>(getUrl,
-                    QuotesFeedRouterBackupTimeoutTable, true));
-        }
-
-        public static DefaultValuesMyNoSqlReader CreateDefaultValuesMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new DefaultValuesMyNoSqlReader(
-                new MyNoSqlReadRepository<DefaultValueMyNoSqlTableEntity>(connection, DefaultsValuesTable),
-                new MyNoSqlReadRepository<QuotesFeedRouterBackupTimeoutEntity>(connection,
-                    QuotesFeedRouterBackupTimeoutTable));
-        }
-
-        private const string InstrumentsAvatarTable = "instrumentsavatar";
-
-        public static TradingInstrumentMyNoSqlRepository CreateTradingInstrumentMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new TradingInstrumentMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingInstrumentAvatarMyNoSqlEntity>(getUrl, InstrumentsAvatarTable,
-                    true));
-        }
-
-        public static TradingInstrumentMyNoSqlReadCache CreateTradingInstrumentMyNoSqlReader(
-            this MyNoSqlTcpClient connection)
-        {
-            return new TradingInstrumentMyNoSqlReadCache(
-                new MyNoSqlReadRepository<TradingInstrumentAvatarMyNoSqlEntity>(connection, InstrumentsAvatarTable));
-        }
-
-        private const string LanguagesTable = "languages";
-
-        public static LanguageMyNoSqlReader CreateLanguagesMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new LanguageMyNoSqlReader(
-                new MyNoSqlReadRepository<LanguageMyNoSqlEntity>(connection, LanguagesTable));
-        }
-
-        public static LanguageMyNoSqlRepository CreateLanguageMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new LanguageMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<LanguageMyNoSqlEntity>(getUrl, LanguagesTable, true));
-        }
-
-        private const string BrandsTable = "brand";
-
-        public static BrandMyNoSqlReader CreateBrandMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new BrandMyNoSqlReader(new MyNoSqlReadRepository<BrandMyNoSqlEntity>(connection, BrandsTable));
-        }
-
-        public static BrandMyNoSqlRepository CreateBrandMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new BrandMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<BrandMyNoSqlEntity>(getUrl, BrandsTable, true));
-        }
-
-        private const string PlatformsTable = "platforms";
-
-        public static PlatformMyNoSqlReader CreatePlatformsMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new PlatformMyNoSqlReader(
-                new MyNoSqlReadRepository<PlatformMyNoSqlEntity>(connection, PlatformsTable));
-        }
-
-        public static PlatformMyNoSqlRepository CreatePlatformsMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new PlatformMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<PlatformMyNoSqlEntity>(getUrl, PlatformsTable, true));
-        }
-
-        private const string EmailTemplatesTable = "emailtemplates";
-
-        public static EmailTemplatesMyNoSqlReader CreateEmailTemplatesMyNoSqlReader(this MyNoSqlTcpClient connection)
-        {
-            return new EmailTemplatesMyNoSqlReader(
-                new MyNoSqlReadRepository<EmailTemplatesMyNoSqlEntity>(connection, EmailTemplatesTable));
-        }
-
-        public static EmailTemplatesMyNoSqlRepository CreateEmailTemplatesMyNoSqlRepository(Func<string> getUrl)
-        {
-            return new EmailTemplatesMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<EmailTemplatesMyNoSqlEntity>(getUrl, EmailTemplatesTable, true));
         }
 
         private const string InstrumentsTable = "instruments";
@@ -392,30 +267,6 @@ namespace SimpleTrading.MyNoSqlRepositories
                     getUrl,
                     ExposureReportTableName, true));
         }
-
-        private const string OnboardingsTableName = "onboardings";
-
-        public static OnboardingMyNoSqlRepository CreateOnboardingMyNoSqlRepository(Func<string> getUrl) => 
-            new OnboardingMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<OnboardingMyNoSqlTableEntity>(
-                    getUrl,
-                    OnboardingsTableName, true));
-
-
-        public static OnboardingMyNoSqlReader CreateOnboardingMyNoSqlReader(
-           this MyNoSqlTcpClient client)
-        {
-            return new OnboardingMyNoSqlReader(
-                new MyNoSqlReadRepository<OnboardingMyNoSqlTableEntity>(client, OnboardingsTableName));
-        }
-
-        private const string TraderOnboardingTableName = "trader-onboarding";
-
-        public static TraderOnboardingMyNoSqlRepository CreateTraderOnboardingMyNoSqlRepository(Func<string> getUrl) =>
-            new TraderOnboardingMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TraderOnboardingMyNoSqlTableEntity>(
-                    getUrl,
-                    TraderOnboardingTableName, true));
 
         public static ExposureReportMyNoSqlReader CreateExposureReporMyNoSqlReader(this MyNoSqlTcpClient connection)
         {
