@@ -12,6 +12,7 @@ using SimpleTrading.MyNoSqlRepositories.Reports.Exposure;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
 using SimpleTrading.MyNoSqlRepositories.Trading.Instruments;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
+using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsSubGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
 
@@ -168,6 +169,21 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new InstrumentGroupsMyNoSqlReadCache(
                 new MyNoSqlReadRepository<InstrumentGroupMyNoSqlEntity>(connection, InstrumentGroupsTable));
+        }
+
+        private const string InstrumentSubGroupsTable = "instrumentsubgroups";
+
+        public static InstrumentSubGroupsMyNoSqlRepository CreateInstrumentSubGroupsMyNoSqlRepository(Func<string> getUrl)
+        {
+            return new InstrumentSubGroupsMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<InstrumentSubGroupMyNoSqlEntity>(getUrl, InstrumentSubGroupsTable, true));
+        }
+
+        public static InstrumentSubGroupsMyNoSqlReadCache CreateInstrumentSubGroupsMyNoSqlReadCache(
+            this MyNoSqlTcpClient connection)
+        {
+            return new InstrumentSubGroupsMyNoSqlReadCache(
+                new MyNoSqlReadRepository<InstrumentSubGroupMyNoSqlEntity>(connection, InstrumentSubGroupsTable));
         }
 
         private const string PriceChangesTable = "pricechanges";
