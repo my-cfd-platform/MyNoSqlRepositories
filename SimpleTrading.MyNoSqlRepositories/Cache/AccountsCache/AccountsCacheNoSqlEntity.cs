@@ -34,7 +34,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
 
         public static AccountsCacheNoSqlEntity Create(ITradingAccount src)
         {
-            return new ()
+            return new AccountsCacheNoSqlEntity()
             {
                 PartitionKey = GeneratePartitionKey(src.TraderId),
                 RowKey = GenerateRowKey(src.Id),
