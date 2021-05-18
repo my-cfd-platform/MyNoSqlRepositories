@@ -45,11 +45,11 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return isLive ? "live-" : "demo-";
         }
-        
+
         private const string EnginePersistenceQueueTable = "enginepersistencequeue";
-        
+
         private const string EngineToppingUpQueueTable = "enginetoppinngupqueue";
-        
+
         public static TradingGroupsMyNoSqlReader CreateEnginePersistenceQueueReader(this MyNoSqlTcpClient connection,
             bool isLive)
         {
@@ -57,7 +57,7 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection,
                     IsLivePrefix(isLive) + EnginePersistenceQueueTable));
         }
-        
+
         public static TradingGroupsMyNoSqlReader CreateEngineToppingUpQueueReader(this MyNoSqlTcpClient connection,
             bool isLive)
         {
@@ -65,16 +65,18 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(connection,
                     IsLivePrefix(isLive) + EngineToppingUpQueueTable));
         }
-        
-        public static EnginePersistenceQueueItemMyNoSqlRepository CreateEngineToppingUpQueueRepository(Func<string> getUrl,
+
+        public static EnginePersistenceQueueItemMyNoSqlRepository CreateEngineToppingUpQueueRepository(
+            Func<string> getUrl,
             bool isLive)
         {
             return new EnginePersistenceQueueItemMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<EnginePersistenceQueueItemMyNoSqlModel>(getUrl,
                     IsLivePrefix(isLive) + EngineToppingUpQueueTable, true));
         }
-        
-        public static EnginePersistenceQueueItemMyNoSqlRepository CreateEnginePersistenceQueueRepository(Func<string> getUrl,
+
+        public static EnginePersistenceQueueItemMyNoSqlRepository CreateEnginePersistenceQueueRepository(
+            Func<string> getUrl,
             bool isLive)
         {
             return new EnginePersistenceQueueItemMyNoSqlRepository(
@@ -173,7 +175,8 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string InstrumentSubGroupsTable = "instrumentsubgroups";
 
-        public static InstrumentSubGroupsMyNoSqlRepository CreateInstrumentSubGroupsMyNoSqlRepository(Func<string> getUrl)
+        public static InstrumentSubGroupsMyNoSqlRepository CreateInstrumentSubGroupsMyNoSqlRepository(
+            Func<string> getUrl)
         {
             return new InstrumentSubGroupsMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<InstrumentSubGroupMyNoSqlEntity>(getUrl, InstrumentSubGroupsTable, true));
@@ -272,6 +275,14 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new AccountsCacheNoSqlWriter(
                 new MyNoSqlServerDataWriter<AccountsCacheNoSqlEntity>(getUrl,
                     $"{AccountCache}-{prefix}", true));
+        }
+
+        public static AccountCacheNoSqlReader CreateAccountCacheMyNoSqlReader(this MyNoSqlTcpClient connection,
+            string prefix)
+        {
+            return new AccountCacheNoSqlReader(
+                new MyNoSqlReadRepository<AccountsCacheNoSqlEntity>(connection,
+                    $"{AccountCache}-{prefix}"));
         }
 
         private const string ExposureReportTableName = "exposure-report";
