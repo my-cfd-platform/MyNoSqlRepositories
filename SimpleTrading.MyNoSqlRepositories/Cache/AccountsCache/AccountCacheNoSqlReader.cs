@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Accounts;
+using SimpleTrading.Abstraction.Caches.Accounts;
 using SimpleTrading.MyNoSqlRepositories.Engine;
 
 namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Accounts;
+using SimpleTrading.Abstraction.Caches.Accounts;
 
 namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
 {
@@ -20,7 +21,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
             var myNoSqlEntities = databaseEntities.Select(AccountsCacheNoSqlEntity.Create);
             await _table.BulkInsertOrReplaceAsync(myNoSqlEntities);
         }
-        
+
         public async Task InsertOrReplace(ITradingAccount entity)
         {
             await _table.InsertOrReplaceAsync(AccountsCacheNoSqlEntity.Create(entity));
