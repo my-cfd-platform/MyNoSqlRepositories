@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Trading.Positions;
@@ -32,6 +33,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.PendingOrders
             var rk = PendingOrderNoSqlEntity.GenerateRowKey(id);
             
             return _reader.Get(pk, rk);
+        }
+        
+        public void BindEventSubscribers(Action<IReadOnlyList<ITradeOrder>> updateCallback, Action<IReadOnlyList<ITradeOrder>> deleteCallback)
+        {
+            _reader.SubscribeToUpdateEvents(updateCallback, deleteCallback);
         }
     }
 }
