@@ -12,6 +12,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions.TradeOrder
 
         public static BidAskEntity Create(IBidAsk src)
         {
+            if (src == null)
+                return null;
+            
             return new BidAskEntity
             {
                 Id = src.Id,
