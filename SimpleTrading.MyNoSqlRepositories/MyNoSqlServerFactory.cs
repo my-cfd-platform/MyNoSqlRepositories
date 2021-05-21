@@ -4,6 +4,8 @@ using MyNoSqlServer.DataReader;
 using MyNoSqlServer.DataWriter;
 using SimpleTrading.MyNoSqlRepositories.BidAsk;
 using SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache;
+using SimpleTrading.MyNoSqlRepositories.Cache.ActiveOrders;
+using SimpleTrading.MyNoSqlRepositories.Cache.PendingOrders;
 using SimpleTrading.MyNoSqlRepositories.Engine;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Markups;
@@ -122,9 +124,55 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlReadRepository<ReportActivePositionMyNoSqlEntity>(connection,
                     IsLivePrefix(isLive) + ReportActivePositionsTableName));
         }
+        
+        
+        
+        private const string PendingOrdersCache = "pending-orders-cache";
 
-        private const string AuthRestrictionTableName = "auth-restriction";
+        public static PendingOrdersNoSqlWriter CreatePendingOrdersCacheRepository(
+            Func<string> getUrl,
+            bool isLive)
+        {
+            return new PendingOrdersNoSqlWriter(
+                new MyNoSqlServerDataWriter<PendingOrderNoSqlEntity>(
+                    getUrl,
+                     PendingOrdersCache + IsLivePrefix(isLive), true
+                )
+            );
+        }
 
+        public static PendingOrdersCacheNoSqlReader CreatePendingOrdersCacheReader(
+            this MyNoSqlTcpClient connection,
+            bool isLive)
+        {
+            return new PendingOrdersCacheNoSqlReader(
+                new MyNoSqlReadRepository<PendingOrderNoSqlEntity>(connection,
+                     PendingOrdersCache + IsLivePrefix(isLive)));
+        }
+        
+        
+        private const string ActiveOrdersCache = "active-orders-cache";
+
+        public static ActiveOrdersCacheNoSqlWriter CreateActiveOrdersCacheRepository(
+            Func<string> getUrl,
+            bool isLive)
+        {
+            return new ActiveOrdersCacheNoSqlWriter(
+                new MyNoSqlServerDataWriter<ActiveOrderMyNoSqlEntity>(
+                    getUrl,
+                    ActiveOrdersCache + IsLivePrefix(isLive), true
+                )
+            );
+        }
+
+        public static ActiveOrdersCacheNoSqlReader CreateActiveOrdersCacheReader(
+            this MyNoSqlTcpClient connection,
+            bool isLive)
+        {
+            return new ActiveOrdersCacheNoSqlReader(
+                new MyNoSqlReadRepository<ActiveOrderMyNoSqlEntity>(connection,
+                    ActiveOrdersCache + IsLivePrefix(isLive)));
+        }
 
         private const string TradingProfilesTableName = "tradingprofiles";
 
