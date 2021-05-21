@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Caches.PendingOrders;
+using SimpleTrading.Abstraction.Caches.ActiveOrders;
 using SimpleTrading.Abstraction.Trading.Positions;
 using SimpleTrading.MyNoSqlRepositories.Cache.PendingOrders;
 
 namespace SimpleTrading.MyNoSqlRepositories.Cache.ActiveOrders
 {
-    public class ActiveOrdersCacheNoSqlReader : IPendingOrdersCacheReader
+    public class ActiveOrdersCacheNoSqlReader : IActiveOrdersCacheReader
     {
         private readonly IMyNoSqlServerDataReader<ActiveOrderMyNoSqlEntity> _reader;
 

@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Caches.PendingOrders;
+using SimpleTrading.Abstraction.Caches.ActiveOrders;
 using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace SimpleTrading.MyNoSqlRepositories.Cache.ActiveOrders
 {
-    public class ActiveOrdersCacheNoSqlWriter : IPendingOrdersWriter
+    public class ActiveOrdersCacheNoSqlWriter : IActiveOrdersWriter
     {
         private readonly IMyNoSqlServerDataWriter<ActiveOrderMyNoSqlEntity> _table;
 
