@@ -21,6 +21,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.ActiveOrders
             await _table.BulkInsertOrReplaceAsync(src.Select(ActiveOrderMyNoSqlEntity.Create));
         }
 
+        public async ValueTask InsertOrReplace(ITradeOrder src)
+        {
+            await _table.InsertOrReplaceAsync(ActiveOrderMyNoSqlEntity.Create(src));
+        }
+
         public async ValueTask UpdateTraderPendingOrder(string accountId, IEnumerable<ITradeOrder> src)
         {
             await _table.CleanAndBulkInsertAsync(accountId, src.Select(ActiveOrderMyNoSqlEntity.Create));
