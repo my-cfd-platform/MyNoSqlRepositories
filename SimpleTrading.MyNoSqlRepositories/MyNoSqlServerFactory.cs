@@ -136,7 +136,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new PendingOrdersNoSqlWriter(
                 new MyNoSqlServerDataWriter<PendingOrderNoSqlEntity>(
                     getUrl,
-                     PendingOrdersCache + IsLivePrefix(isLive), true
+                    IsLivePrefix(isLive) + PendingOrdersCache, true
                 )
             );
         }
@@ -147,7 +147,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new PendingOrdersCacheNoSqlReader(
                 new MyNoSqlReadRepository<PendingOrderNoSqlEntity>(connection,
-                     PendingOrdersCache + IsLivePrefix(isLive)));
+                    IsLivePrefix(isLive) + PendingOrdersCache));
         }
         
         
@@ -160,7 +160,7 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new ActiveOrdersCacheNoSqlWriter(
                 new MyNoSqlServerDataWriter<ActiveOrderMyNoSqlEntity>(
                     getUrl,
-                    ActiveOrdersCache + IsLivePrefix(isLive), true
+                    IsLivePrefix(isLive) + ActiveOrdersCache, true
                 )
             );
         }
@@ -171,7 +171,7 @@ namespace SimpleTrading.MyNoSqlRepositories
         {
             return new ActiveOrdersCacheNoSqlReader(
                 new MyNoSqlReadRepository<ActiveOrderMyNoSqlEntity>(connection,
-                    ActiveOrdersCache + IsLivePrefix(isLive)));
+                    IsLivePrefix(isLive) + ActiveOrdersCache));
         }
 
         private const string TradingProfilesTableName = "tradingprofiles";
