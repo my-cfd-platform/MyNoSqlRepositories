@@ -16,6 +16,13 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.PendingOrders
             _table = table;
         }
 
+        public async ValueTask Delete(string accountId, string orderId)
+        {
+            var pk = PendingOrderNoSqlEntity.GeneratePartitionKey(accountId);
+            var rk = PendingOrderNoSqlEntity.GeneratePartitionKey(orderId);
+            await _table.DeleteAsync(pk, rk);
+        }
+        
         public async ValueTask BulkInsertOrReplace(IEnumerable<ITradeOrder> src)
         {
             await _table.BulkInsertOrReplaceAsync(src.Select(PendingOrderNoSqlEntity.Create));
