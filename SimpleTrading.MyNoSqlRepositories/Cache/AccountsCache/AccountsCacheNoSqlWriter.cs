@@ -27,6 +27,11 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
             await _table.InsertOrReplaceAsync(AccountsCacheNoSqlEntity.Create(entity));
         }
 
+        public async ValueTask<IEnumerable<ITradingAccount>> GetTraderAccountsAsync()
+        {
+            return await _table.GetAsync();
+        }
+
         public async ValueTask<IEnumerable<ITradingAccount>> GetTraderAccountsAsync(string traderId)
         {
             return await _table.GetAsync(traderId);
