@@ -240,16 +240,16 @@ namespace SimpleTrading.MyNoSqlRepositories
         private const string PriceChangesTable = "pricechanges";
 
         public static PriceChangeWriteRepository CreatePriceChangeWriteRepository(
-            Func<string> getUrl)
+            Func<string> getUrl, string platformPrefix)
         {
             return new PriceChangeWriteRepository(
-                new MyNoSqlServerDataWriter<PriceChangeMyNoSqlEntity>(getUrl, PriceChangesTable, true));
+                new MyNoSqlServerDataWriter<PriceChangeMyNoSqlEntity>(getUrl, platformPrefix + PriceChangesTable, true));
         }
 
-        public static PriceChangeReader CreatePriceChangeReader(this MyNoSqlTcpClient client)
+        public static PriceChangeReader CreatePriceChangeReader(this MyNoSqlTcpClient client, string platformPrefix)
         {
             return new PriceChangeReader(
-                new MyNoSqlReadRepository<PriceChangeMyNoSqlEntity>(client, PriceChangesTable));
+                new MyNoSqlReadRepository<PriceChangeMyNoSqlEntity>(client, platformPrefix + PriceChangesTable));
         }
 
         private const string SwapSchedule = "swap-schedule";
