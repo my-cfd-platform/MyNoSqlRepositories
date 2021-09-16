@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.Markups;
+using SimpleTrading.Abstraction.Markups.TradingGroupMarkupProfiles;
 
-namespace SimpleTrading.MyNoSqlRepositories.Markups
+namespace SimpleTrading.MyNoSqlRepositories.Markups.TradingGroupsMarkups
 {
-    public class MarkupItem : IMarkupItem
+     public class MarkupItem : IMarkupItem
     {
         public string InstrumentId { get; set; }
         public int MarkupBid { get; set; }
@@ -22,7 +23,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
         }
     }
 
-    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlDbEntity, IMarkupProfile
+    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlDbEntity, ITradingGroupMarkupProfile
     {
         public static string GeneratePartitionKey()
         {
@@ -59,7 +60,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups
         
         IReadOnlyDictionary<string, IMarkupItem> IIMarkupProfileBase.MarkupInstruments => _item ?? GetMarkupInstrument();
 
-        public static MarkupProfileMyNoSqlTableEntity Create(IMarkupProfile src)
+        public static MarkupProfileMyNoSqlTableEntity Create(ITradingGroupMarkupProfile src)
         {
             return new MarkupProfileMyNoSqlTableEntity
             {

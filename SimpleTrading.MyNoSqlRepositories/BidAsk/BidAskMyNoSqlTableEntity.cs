@@ -19,8 +19,12 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
         
         public DateTime DateTime { get; set; }
         
-        public string Id => RowKey;
-        
+        public string Id
+        {
+            get => RowKey;
+            set => RowKey = value;
+        }
+
         public double Bid { get; set; }
         
         public double Ask { get; set; }
