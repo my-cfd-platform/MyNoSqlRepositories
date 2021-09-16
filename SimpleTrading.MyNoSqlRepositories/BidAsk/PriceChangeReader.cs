@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MyNoSqlServer.Abstractions;
 using SimpleTrading.Abstraction.BidAsk;
@@ -27,6 +28,9 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
             var partitionKey = PriceChangeMyNoSqlEntity.GeneratePartitionKey();
             return _readRepository.Get(partitionKey);
         }
+
+        public void BindEventSubscribers(Action<IReadOnlyList<IPriceChange>> updateCallback,
+            Action<IReadOnlyList<IPriceChange>> deleteCallback) =>
+            _readRepository.SubscribeToUpdateEvents(updateCallback, deleteCallback);
     }
-    
 }
