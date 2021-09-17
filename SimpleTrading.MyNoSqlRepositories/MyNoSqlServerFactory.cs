@@ -318,16 +318,16 @@ namespace SimpleTrading.MyNoSqlRepositories
         }
         
         public static TradingGroupsMyNoSqlReader CreateTradingGroupsMarkupProfilesMyNoSqlReader(
-            this MyNoSqlTcpClient client)
+            this MyNoSqlTcpClient client, bool isLive)
         {
             return new TradingGroupsMyNoSqlReader(
-                new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(client, TradingGroupsMarkupProfiles));
+                new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(client, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles));
         }
 
-        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMarkupProfilesNoSqlRepository(Func<string> getUrl)
+        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMarkupProfilesNoSqlRepository(Func<string> getUrl, bool isLive)
         {
             return new TradingGroupsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl, TradingGroupsMarkupProfiles, true));
+                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles, true));
         }
 
         private const string AccountCache = "engine-accounts-cache";
