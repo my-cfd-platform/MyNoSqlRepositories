@@ -23,7 +23,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups.TradingGroupsMarkups
         }
     }
 
-    public class MarkupProfileMyNoSqlTableEntity : MyNoSqlDbEntity, ITradingGroupMarkupProfile
+    public class TradingGroupMarkupProfileMyNoSqlTableEntity : MyNoSqlDbEntity, ITradingGroupMarkupProfile
     {
         public static string GeneratePartitionKey()
         {
@@ -60,9 +60,9 @@ namespace SimpleTrading.MyNoSqlRepositories.Markups.TradingGroupsMarkups
         
         IReadOnlyDictionary<string, IMarkupItem> IIMarkupProfileBase.MarkupInstruments => _item ?? GetMarkupInstrument();
 
-        public static MarkupProfileMyNoSqlTableEntity Create(ITradingGroupMarkupProfile src)
+        public static TradingGroupMarkupProfileMyNoSqlTableEntity Create(ITradingGroupMarkupProfile src)
         {
-            return new MarkupProfileMyNoSqlTableEntity
+            return new TradingGroupMarkupProfileMyNoSqlTableEntity
             {
                 PartitionKey = GeneratePartitionKey(),
                 RowKey = GenerateRowKey(src.ProfileId),

@@ -9,6 +9,7 @@ using SimpleTrading.MyNoSqlRepositories.Cache.PendingOrders;
 using SimpleTrading.MyNoSqlRepositories.Engine;
 using SimpleTrading.MyNoSqlRepositories.InstrumentSourcesMaps;
 using SimpleTrading.MyNoSqlRepositories.Markups;
+using SimpleTrading.MyNoSqlRepositories.Markups.TradingGroupsMarkups;
 using SimpleTrading.MyNoSqlRepositories.Reports.ActivePositions;
 using SimpleTrading.MyNoSqlRepositories.Reports.Exposure;
 using SimpleTrading.MyNoSqlRepositories.Swaps;
@@ -17,6 +18,7 @@ using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InstrumentsSubGroup;
 using SimpleTrading.MyNoSqlRepositories.Trading.InvestAmount;
 using SimpleTrading.MyNoSqlRepositories.Trading.Profiles;
+using MarkupProfileMyNoSqlTableEntity = SimpleTrading.MyNoSqlRepositories.Markups.MarkupProfileMyNoSqlTableEntity;
 
 namespace SimpleTrading.MyNoSqlRepositories
 {
@@ -317,17 +319,17 @@ namespace SimpleTrading.MyNoSqlRepositories
                 new MyNoSqlServerDataWriter<MarkupProfileMyNoSqlTableEntity>(getUrl, MarkupProfiles, true));
         }
         
-        public static TradingGroupsMyNoSqlReader CreateTradingGroupsMarkupProfilesMyNoSqlReader(
+        public static TradingGroupMarkupProfilesMyNoSqlReader CreateTradingGroupsMarkupProfilesMyNoSqlReader(
             this MyNoSqlTcpClient client, bool isLive)
         {
-            return new TradingGroupsMyNoSqlReader(
-                new MyNoSqlReadRepository<TradingGroupMyNoSqlEntity>(client, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles));
+            return new TradingGroupMarkupProfilesMyNoSqlReader(
+                new MyNoSqlReadRepository<TradingGroupMarkupProfileMyNoSqlTableEntity>(client, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles));
         }
 
-        public static TradingGroupsMyNoSqlRepository CreateTradingGroupsMarkupProfilesNoSqlRepository(Func<string> getUrl, bool isLive)
+        public static TradingGroupMarkupProfilesMyNoSqlRepository CreateTradingGroupsMarkupProfilesNoSqlRepository(Func<string> getUrl, bool isLive)
         {
-            return new TradingGroupsMyNoSqlRepository(
-                new MyNoSqlServerDataWriter<TradingGroupMyNoSqlEntity>(getUrl, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles, true));
+            return new TradingGroupMarkupProfilesMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<TradingGroupMarkupProfileMyNoSqlTableEntity>(getUrl, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles, true));
         }
 
         private const string AccountCache = "engine-accounts-cache";
