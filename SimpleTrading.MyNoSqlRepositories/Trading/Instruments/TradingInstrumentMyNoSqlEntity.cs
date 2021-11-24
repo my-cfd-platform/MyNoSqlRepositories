@@ -44,6 +44,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Trading.Instruments
         public int? DayTimeout { get; set; } = 30;
 
         public int? NightTimeout { get; set; } = 30;
+        public int? MarginCallPercent { get; set; } = 0;
 
         public bool TradingDisabled { get; set; }
 
