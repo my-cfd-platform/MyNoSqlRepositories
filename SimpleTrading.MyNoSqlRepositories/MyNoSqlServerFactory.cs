@@ -305,6 +305,7 @@ namespace SimpleTrading.MyNoSqlRepositories
 
         private const string MarkupProfiles = "markup-profiles";
         private const string TradingGroupsMarkupProfiles = "trading-groups-markup-profiles";
+        private const string TradingGroupsMarkupProfileProperties = "trading-groups-markup-profiles-properties";
 
         public static MarkupProfilesMyNoSqlReader CreateMarkupProfilesMyNoSqlReader(
             this MyNoSqlTcpClient client)
@@ -331,6 +332,14 @@ namespace SimpleTrading.MyNoSqlRepositories
             return new TradingGroupMarkupProfilesMyNoSqlRepository(
                 new MyNoSqlServerDataWriter<TradingGroupMarkupProfileMyNoSqlTableEntity>(getUrl, IsLivePrefix(isLive) +TradingGroupsMarkupProfiles, true));
         }
+
+        public static TradingGroupMarkupProfilePropertiesMyNoSqlRepository CreateTradingGroupMarkupProfilePropertiesMyNoSqlRepository(
+            Func<string> getUrl,
+            bool isLive)
+        {
+            return new TradingGroupMarkupProfilePropertiesMyNoSqlRepository(
+                new MyNoSqlServerDataWriter<TradingGroupMarkupProfilePropertiesMyNoSqlTableEntity>(getUrl, IsLivePrefix(isLive) + TradingGroupsMarkupProfileProperties, true));
+        }        
 
         private const string AccountCache = "engine-accounts-cache";
 
