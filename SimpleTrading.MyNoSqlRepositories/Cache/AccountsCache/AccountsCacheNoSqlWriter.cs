@@ -19,7 +19,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.AccountsCache
         public async Task BulkInsertOrReplace(IEnumerable<ITradingAccount> databaseEntities)
         {
             var myNoSqlEntities = databaseEntities.Select(AccountsCacheNoSqlEntity.Create);
-            await _table.BulkInsertOrReplaceAsync(myNoSqlEntities);
+            await _table.BulkInsertOrReplaceAsync(myNoSqlEntities.ToArray());
         }
 
         public async Task InsertOrReplace(ITradingAccount entity)

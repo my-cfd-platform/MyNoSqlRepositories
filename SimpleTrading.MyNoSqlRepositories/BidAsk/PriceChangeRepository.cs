@@ -18,7 +18,7 @@ namespace SimpleTrading.MyNoSqlRepositories.BidAsk
         public async Task SaveAsync(IEnumerable<IPriceChange> changes)
         {
             var entities = changes.Select(PriceChangeMyNoSqlEntity.Create);
-            await _table.BulkInsertOrReplaceAsync(entities);
+            await _table.BulkInsertOrReplaceAsync(entities.ToArray());
         }
     }
 }

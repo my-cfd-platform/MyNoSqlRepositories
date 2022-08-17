@@ -25,12 +25,12 @@ namespace SimpleTrading.MyNoSqlRepositories.Cache.PendingOrders
         
         public async ValueTask BulkInsertOrReplace(IEnumerable<ITradeOrder> src)
         {
-            await _table.BulkInsertOrReplaceAsync(src.Select(PendingOrderNoSqlEntity.Create));
+            await _table.BulkInsertOrReplaceAsync(src.Select(PendingOrderNoSqlEntity.Create).ToArray());
         }
 
         public async ValueTask UpdateTraderPendingOrder(string accountId, IEnumerable<ITradeOrder> src)
         {
-            await _table.CleanAndBulkInsertAsync(accountId, src.Select(PendingOrderNoSqlEntity.Create));
+            await _table.CleanAndBulkInsertAsync(accountId, src.Select(PendingOrderNoSqlEntity.Create).ToArray());
         }
     } 
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MyNoSqlServer.Abstractions;
 
@@ -32,7 +33,7 @@ namespace SimpleTrading.MyNoSqlRepositories.Engine
         
         public async Task BulkInsertOrReplaceAsync(IEnumerable<EnginePersistenceQueueItemMyNoSqlModel> dataToInsert)
         {
-            await _table.BulkInsertOrReplaceAsync(dataToInsert);
+            await _table.BulkInsertOrReplaceAsync(dataToInsert.ToArray());
         }
     }
 }
