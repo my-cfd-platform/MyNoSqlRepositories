@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Orderbook.MyNoSql.Abstractions;
+using SimpleTrading.Orderbook.Abstractions;
 
 namespace SimpleTrading.Orderbook.MyNoSql
 {
@@ -13,17 +14,17 @@ namespace SimpleTrading.Orderbook.MyNoSql
             _reader = reader;
         }
         
-        public IEnumerable<OrderbookMyNoSqlEntity> Get()
+        public IEnumerable<OrderbookModel> Get()
         {
-            return _reader.Get();
+            return _reader.Get().Select(x => x.Value);
         }
 
-        public OrderbookMyNoSqlEntity GetByMarket(string market)
+        public OrderbookModel GetByMarket(string market)
         {
             var pk = OrderbookMyNoSqlEntity.GeneratePartitionKey();
             var rk = OrderbookMyNoSqlEntity.GenerateRowKey(market);
 
-            return _reader.Get(pk, rk);
+            return _reader.Get(pk, rk)?.Value;
         }
     }
 }

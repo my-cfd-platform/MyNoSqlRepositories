@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpleTrading.Orderbook.MyNoSql.Abstractions
+namespace SimpleTrading.Orderbook.Abstractions
 {
     public interface IOrderbooksReader
     {
-        IEnumerable<OrderbookMyNoSqlEntity> Get();
-        OrderbookMyNoSqlEntity GetByMarket(string market);
+        IEnumerable<OrderbookModel> Get();
+        OrderbookModel GetByMarket(string market);
     }
 }
