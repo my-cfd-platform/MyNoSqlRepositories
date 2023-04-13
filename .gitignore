@@ -3,10 +3,9 @@
 .vs
 .DS_Store
 *.user
-**/*.min.css
-**/*.js.css
 
 **/bin
 **/obj
 **/app
 **/node_modules
+.settings.yaml
