@@ -9,7 +9,6 @@ using MyNoSqlRepositories.Markups.TradingGroupsMarkups;
 using MyNoSqlRepositories.Reports.ActivePositions;
 using MyNoSqlRepositories.Reports.Exposure;
 using MyNoSqlRepositories.Swaps;
-using MyNoSqlRepositories.Trading.Instruments;
 using MyNoSqlRepositories.Trading.InstrumentsGroup;
 using MyNoSqlRepositories.Trading.InstrumentsSubGroup;
 using MyNoSqlRepositories.Trading.InvestAmount;
@@ -193,7 +192,7 @@ public static class MyNoSqlServerFactory
     }
 
     private const string InstrumentsTable = "instruments";
-
+    /*
     public static InstrumentsMyNoSqlReadCache CreateInstrumentsMyNoSqlReadCache(this MyNoSqlTcpClient connection)
     {
         return new InstrumentsMyNoSqlReadCache(
@@ -205,7 +204,7 @@ public static class MyNoSqlServerFactory
         return new TradingInstrumentsMyNoSqlRepository(
             new MyNoSqlServerDataWriter<TradingInstrumentMyNoSqlEntity>(getUrl, InstrumentsTable, true));
     }
-
+    */
     private const string InstrumentGroupsTable = "instrumentsgroups";
 
     public static InstrumentGroupsMyNoSqlRepository CreateInstrumentGroupsMyNoSqlRepository(Func<string> getUrl)
