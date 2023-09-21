@@ -1,6 +1,6 @@
+using MyNoSqlRepositories.Abstraction.Markups;
+using MyNoSqlRepositories.Abstraction.Markups.TradingGroupMarkupProfiles;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Markups;
-using SimpleTrading.Abstraction.Markups.TradingGroupMarkupProfiles;
 
 namespace MyNoSqlRepositories.Markups.TradingGroupsMarkups;
 

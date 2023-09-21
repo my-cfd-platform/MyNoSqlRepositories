@@ -1,5 +1,5 @@
-using SimpleTrading.Abstraction.BidAsk;
-using SimpleTrading.Abstraction.Trading.Positions;
+using MyNoSqlRepositories.Abstraction.BidAsk;
+using MyNoSqlRepositories.Abstraction.Trading.Positions;
 
 namespace MyNoSqlRepositories.Reports.ActivePositions.TradeOrder;
 

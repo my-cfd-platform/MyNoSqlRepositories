@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.Markups;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Markups;
 
 namespace MyNoSqlRepositories.Markups;
 

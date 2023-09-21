@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.BidAsk;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.BidAsk;
 
 namespace MyNoSqlRepositories.BidAsk;
 

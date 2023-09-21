@@ -1,4 +1,4 @@
-using SimpleTrading.Abstraction.Trading.Positions;
+using MyNoSqlRepositories.Abstraction.Trading.Positions;
 
 namespace MyNoSqlRepositories.Reports.ActivePositions.TradeOrder;
 

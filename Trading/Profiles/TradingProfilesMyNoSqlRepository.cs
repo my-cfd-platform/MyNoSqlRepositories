@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.Trading.Profiles;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Trading.Profiles;
 
 namespace MyNoSqlRepositories.Trading.Profiles;
 

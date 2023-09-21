@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.Trading.InstrumentsSubGroup;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Trading.InstrumentsGroup;
 
 namespace MyNoSqlRepositories.Trading.InstrumentsSubGroup;
 

@@ -1,7 +1,7 @@
 using DotNetCoreDecorators;
+using MyNoSqlRepositories.Abstraction.Reports.ActivePositions;
+using MyNoSqlRepositories.Abstraction.Trading.Positions;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Reports.ActivePositions;
-using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace MyNoSqlRepositories.Reports.ActivePositions;
 

@@ -1,7 +1,7 @@
+using MyNoSqlRepositories.Abstraction.Accounts;
+using MyNoSqlRepositories.Abstraction.Caches.Accounts;
 using MyNoSqlRepositories.Engine;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Accounts;
-using SimpleTrading.Abstraction.Caches.Accounts;
 
 namespace MyNoSqlRepositories.Cache.AccountsCache;
 

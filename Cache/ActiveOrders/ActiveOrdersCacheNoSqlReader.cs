@@ -1,7 +1,7 @@
+using MyNoSqlRepositories.Abstraction.Caches.ActiveOrders;
+using MyNoSqlRepositories.Abstraction.Trading.Positions;
 using MyNoSqlRepositories.Cache.PendingOrders;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Caches.ActiveOrders;
-using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace MyNoSqlRepositories.Cache.ActiveOrders;
 

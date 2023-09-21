@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.Reports.ActivePositions;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Reports.ActivePositions;
 
 namespace MyNoSqlRepositories.Reports.ActivePositions;
 

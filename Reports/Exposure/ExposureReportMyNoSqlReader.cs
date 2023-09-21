@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.Reports.Exposure;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Reports.Exposure;
 
 namespace MyNoSqlRepositories.Reports.Exposure;
 

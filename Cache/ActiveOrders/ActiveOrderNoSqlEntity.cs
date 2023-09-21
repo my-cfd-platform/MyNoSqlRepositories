@@ -1,7 +1,7 @@
+using MyNoSqlRepositories.Abstraction.BidAsk;
+using MyNoSqlRepositories.Abstraction.Trading.Positions;
 using MyNoSqlRepositories.Reports.ActivePositions.TradeOrder;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.BidAsk;
-using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace MyNoSqlRepositories.Cache.ActiveOrders;
 

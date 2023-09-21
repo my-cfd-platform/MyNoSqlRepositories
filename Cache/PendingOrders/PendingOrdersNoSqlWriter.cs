@@ -1,6 +1,6 @@
+using MyNoSqlRepositories.Abstraction.Caches.PendingOrders;
+using MyNoSqlRepositories.Abstraction.Trading.Positions;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Caches.PendingOrders;
-using SimpleTrading.Abstraction.Trading.Positions;
 
 namespace MyNoSqlRepositories.Cache.PendingOrders;
 

@@ -1,5 +1,5 @@
+using MyNoSqlRepositories.Abstraction.Accounts;
 using MyNoSqlServer.Abstractions;
-using SimpleTrading.Abstraction.Accounts;
 
 namespace MyNoSqlRepositories.Cache.AccountsCache;
 
