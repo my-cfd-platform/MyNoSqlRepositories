@@ -8,7 +8,6 @@ using MyNoSqlRepositories.Markups;
 using MyNoSqlRepositories.Markups.TradingGroupsMarkups;
 using MyNoSqlRepositories.Reports.ActivePositions;
 using MyNoSqlRepositories.Reports.Exposure;
-using MyNoSqlRepositories.Swaps;
 using MyNoSqlRepositories.Trading.InstrumentsGroup;
 using MyNoSqlRepositories.Trading.InstrumentsSubGroup;
 using MyNoSqlRepositories.Trading.InvestAmount;
@@ -249,38 +248,6 @@ public static class MyNoSqlServerFactory
     {
         return new PriceChangeReader(
             new MyNoSqlReadRepository<PriceChangeMyNoSqlEntity>(client, platformPrefix + PriceChangesTable));
-    }
-
-    private const string SwapSchedule = "swap-schedule";
-
-
-    public static SwapScheduleMyNoSqlRepository CreateSwapScheduleMyNoSqlRepository(
-        Func<string> getUrl)
-    {
-        return new SwapScheduleMyNoSqlRepository(
-            new MyNoSqlServerDataWriter<SwapScheduleMyNoSqlEntity>(getUrl, SwapSchedule, true));
-    }
-
-    public static SwapScheduleMyNoSqlReader CreateSwapScheduleMyNoSqlReader(this MyNoSqlTcpClient client)
-    {
-        return new SwapScheduleMyNoSqlReader(
-            new MyNoSqlReadRepository<SwapScheduleMyNoSqlEntity>(client, SwapSchedule));
-    }
-
-    private const string SwapProfile = "swap-profile";
-
-
-    public static SwapProfileMyNoSqlWriter CreateSwapProfileMyNoSqlWriter(
-        Func<string> getUrl)
-    {
-        return new SwapProfileMyNoSqlWriter(
-            new MyNoSqlServerDataWriter<SwapProfileMyNoSqlEntity>(getUrl, SwapProfile, true));
-    }
-
-    public static SwapProfileMyNoSqlReader CreateSwapProfileMyNoSqlReader(this MyNoSqlTcpClient client)
-    {
-        return new SwapProfileMyNoSqlReader(
-            new MyNoSqlReadRepository<SwapProfileMyNoSqlEntity>(client, SwapProfile));
     }
 
     private const string InstrumentSourceMap = "instrument-sources";
